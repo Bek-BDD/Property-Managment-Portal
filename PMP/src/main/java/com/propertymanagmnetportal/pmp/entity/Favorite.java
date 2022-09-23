@@ -9,7 +9,7 @@ public class Favorite {
 
     @ManyToOne
     @MapsId("user_id")
-    private Customer customer;
+    private User user;
 
     @ManyToOne
     @MapsId("property_id")

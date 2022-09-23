@@ -34,6 +34,10 @@ public class Property {
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
+    @ManyToOne
+    @JoinColumn(name="owner_id")
+    private User user;
+
 
 
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,8 +28,10 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
-    @OneToOne
-    @JoinColumn(name="role_id")
-    private Role role;
+    @ManyToMany
+    private List<Role> role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Property> properties;
 
 }

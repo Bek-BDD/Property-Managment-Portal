@@ -1,13 +1,27 @@
 spring:
   application:
-    name: spring-data-demo
+    name: Property-Management-Portal
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    username: <>
+    password: <>
+    port: 587
+    properties:
+      mail.smtp:
+        auth: true
+        starttls.enable: true
+    protocol: smtp
+    test-connection: false
+
+
   datasource:
     password: Incorrect@7
     url: jdbc:postgresql://localhost:9090/pmpDB
     username: postgres
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
 
     properties:
       hibernate:
@@ -20,3 +34,5 @@ spring:
       mode: always
 server:
   port: 8080
+
+
