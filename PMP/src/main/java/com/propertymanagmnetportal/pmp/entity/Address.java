@@ -19,4 +19,10 @@ public class Address {
     int zip;
     String street;
 
+    public Address(String state, String city, int zip, String street) {
+        this.state = state;
+        this.city = city;
+        this.zip = zip;
+        this.street = street;
+    }
 }
