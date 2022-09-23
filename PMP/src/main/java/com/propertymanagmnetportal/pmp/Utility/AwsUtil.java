@@ -1,4 +1,4 @@
-package com.propertymanagmnetportal.pmp.util;
+package com.propertymanagmnetportal.pmp.Utility;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;

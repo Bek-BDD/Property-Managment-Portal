@@ -1,19 +1,15 @@
 package com.propertymanagmnetportal.pmp.service.propertyImp;
 
-import com.propertymanagmnetportal.pmp.entity.Address;
 import com.propertymanagmnetportal.pmp.entity.Image;
 import com.propertymanagmnetportal.pmp.entity.Property;
 import com.propertymanagmnetportal.pmp.repository.PropertyRepo;
 import com.propertymanagmnetportal.pmp.service.PropertyService;
-import com.propertymanagmnetportal.pmp.util.AwsUtil;
+import com.propertymanagmnetportal.pmp.Utility.AwsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Service
