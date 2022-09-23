@@ -19,7 +19,7 @@ public class Property {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    double price;
+    private double price;
     private String description;
     private double area;
     private int numberOfRoom;
@@ -34,6 +34,15 @@ public class Property {
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
-
-
+    public Property(String name, double price, String description, double area, int numberOfRoom, String type, Address address, boolean status) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.area = area;
+        this.numberOfRoom = numberOfRoom;
+        this.type = type;
+        this.imageUrls = imageUrls;
+        this.address = address;
+        this.status = status;
+    }
 }

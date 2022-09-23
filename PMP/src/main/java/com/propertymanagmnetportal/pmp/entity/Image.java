@@ -19,6 +19,7 @@ public class Image {
     private int id;
     private String url;
 
-
-
+    public Image(String url) {
+        this.url = url;
+    }
 }
