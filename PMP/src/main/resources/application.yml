@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: Property-Management-Portal
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    username: <>
+    password: <>
+    port: 587
+    properties:
+      mail.smtp:
+        auth: true
+        starttls.enable: true
+    protocol: smtp
+    test-connection: false
+
+
+  datasource:
+    password: 1234
+    url: jdbc:postgresql://localhost:5432/pmpDB
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+server:
+  port: 8080
+
+
