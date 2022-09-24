@@ -23,6 +23,9 @@ import { useState } from "react";
 const theme = createTheme();
 
 export default function () {
+ function test(){
+  
+ }
 
     const[userState,setUserState] = useState({
         firstName: "Zedagem",
@@ -85,45 +88,25 @@ export default function () {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  required
+                  defaultValue={userState.lastName}
                   fullWidth
                   id="lastName"
-                  label={userState.lastName}
+                  label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
+                  defaultValue={userState.email}
                   fullWidth
                   id="email"
-                  label={userState.email}
+                  label="Email"
                   name="email"
                   autoComplete="email"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="oldpassword"
-                  label="Old Password"
-                  type="password"
-                  id="oldpassword"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="newpassword"
-                  label="New Password"
-                  type="password"
-                  id="newpassword"
-                  autoComplete="new-password"
-                />
-              </Grid>
+              
             </Grid>
             <Button
               variant="outlined"
