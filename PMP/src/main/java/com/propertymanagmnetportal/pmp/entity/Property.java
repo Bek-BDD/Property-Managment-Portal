@@ -1,5 +1,7 @@
 package com.propertymanagmnetportal.pmp.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,6 +40,7 @@ public class Property {
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="owner_id")
     private User user;
