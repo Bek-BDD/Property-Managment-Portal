@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class Application {
     @EmbeddedId
     private ApplicationCompositeKey compositeKey;
-    private LocalDateTime Date;
+    private LocalDate Date;
 
     @ManyToOne
     @MapsId("user_id")
