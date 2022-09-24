@@ -29,15 +29,25 @@ public class User {
     private String password;
     private String imageurl;
     private boolean deleted = Boolean.FALSE;
-    private String user_type;
     private String resetpasswordtoken;
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Role> role;
     @JsonManagedReference
     @OneToMany(mappedBy = "user")
     private List<Property> properties;
 
+
+    public User(String firstname,String lastname,String email,String password,String imageurl,Address address,List<Role> role){
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.imageurl = imageurl;
+
+        this.email = email;
+        this.address = address;
+        this.password= password;
+        this.role = role;
+    }
 }

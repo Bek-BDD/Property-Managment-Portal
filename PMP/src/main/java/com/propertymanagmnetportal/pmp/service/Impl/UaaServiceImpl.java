@@ -16,6 +16,7 @@ import com.propertymanagmnetportal.pmp.security.entity.LoginResponse;
 import com.propertymanagmnetportal.pmp.service.UaaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -49,14 +50,14 @@ public class UaaServiceImpl implements UaaService {
     @Autowired
     EmailService emailService;
 
-    public LoginResponse login(LoginRequest request){
+    private List<String> blackList;
 
+    public LoginResponse login(LoginRequest request){
             System.out.println(request.getPassword());
            authenticationManager.authenticate(
                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
             SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetails userDetail = myUserDetailService.loadUserByUsername(request.getEmail());
-        System.out.println(userDetail != null);
         String jwtToken = jwtUtil.generateToken(userDetail);
         String refereshToken = jwtUtil.generateRefereshToken(request.getEmail());
         return new LoginResponse(jwtToken,refereshToken);
@@ -96,8 +97,18 @@ public class UaaServiceImpl implements UaaService {
     }
 
     @Override
-    public void logout() {
+   // @Cacheable(())
+    public String logout(HttpServletRequest request) {
+        String header = request.getHeader("Authorization");
+        String token = header.split(" ")[1].trim();
+        blackList.add(token);
+        return "done";
+    }
 
+    @Override
+    public String signUpImg(User user) {
+        userBaseRepository.save(user);
+        return "saved";
     }
 
     public void updatePassword(User user ,String newPassword){
