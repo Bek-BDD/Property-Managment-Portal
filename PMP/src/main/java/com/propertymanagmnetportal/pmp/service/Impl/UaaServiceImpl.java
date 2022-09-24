@@ -2,6 +2,7 @@ package com.propertymanagmnetportal.pmp.service.Impl;
 
 import com.propertymanagmnetportal.pmp.Exceptions.CredentialException;
 import com.propertymanagmnetportal.pmp.Exceptions.EmailExistException;
+import com.propertymanagmnetportal.pmp.Utility.EmailService;
 import com.propertymanagmnetportal.pmp.Utility.SiteUrl;
 import com.propertymanagmnetportal.pmp.dto.UserDTO;
 import com.propertymanagmnetportal.pmp.entity.Role;
@@ -45,6 +46,9 @@ public class UaaServiceImpl implements UaaService {
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
+    EmailService emailService;
+
     public LoginResponse login(LoginRequest request){
 
             System.out.println(request.getPassword());
@@ -78,6 +82,7 @@ public class UaaServiceImpl implements UaaService {
             user.setResetpasswordtoken(token);
             userBaseRepository.save(user);
             String resetURL = SiteUrl.getSiteURL(request) + "/reset_pwd?token="+token;
+            emailService.sendEmail(user.getEmail(),"Password reset Link",resetURL);
             return resetURL;
         }else{
             throw new CredentialException("We can not find this customer!!");
@@ -88,6 +93,11 @@ public class UaaServiceImpl implements UaaService {
 
        // System.out.println(userBaseRepository.findByResetpasswordtoken(resetPasswordToken).getFirstname());
         return userBaseRepository.findByResetpasswordtoken(resetPasswordToken);
+    }
+
+    @Override
+    public void logout() {
+
     }
 
     public void updatePassword(User user ,String newPassword){
