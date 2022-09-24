@@ -2,6 +2,7 @@ package com.propertymanagmnetportal.pmp.service.Impl;
 
 import com.propertymanagmnetportal.pmp.Exceptions.CredentialException;
 import com.propertymanagmnetportal.pmp.Exceptions.EmailExistException;
+import com.propertymanagmnetportal.pmp.Utility.SiteUrl;
 import com.propertymanagmnetportal.pmp.dto.UserDTO;
 import com.propertymanagmnetportal.pmp.entity.Role;
 import com.propertymanagmnetportal.pmp.entity.User;
@@ -21,6 +22,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.http.HttpRequest;
 import java.util.List;
 
 @Service
@@ -65,6 +68,35 @@ public class UaaServiceImpl implements UaaService {
         userBaseRepository.save(user);
         return  new LoginRequest(userDTO.getEmail(),userDTO.getPassword());
     }
+
+
+    @Override
+    public String updateResetPasswordToken(String token , String email, HttpServletRequest request) {
+
+        if(emailExist(email)){
+            User user = userBaseRepository.findByEmail(email);
+            user.setResetpasswordtoken(token);
+            userBaseRepository.save(user);
+            String resetURL = SiteUrl.getSiteURL(request) + "/reset_pwd?token="+token;
+            return resetURL;
+        }else{
+            throw new CredentialException("We can not find this customer!!");
+        }
+    }
+
+    public User getUserFromResetToken(String resetPasswordToken){
+
+       // System.out.println(userBaseRepository.findByResetpasswordtoken(resetPasswordToken).getFirstname());
+        return userBaseRepository.findByResetpasswordtoken(resetPasswordToken);
+    }
+
+    public void updatePassword(User user ,String newPassword){
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        user.setPassword(encodedPassword);
+        user.setResetpasswordtoken(null);
+        userBaseRepository.save(user);
+    }
+
     public boolean emailExist(String email){
         if(userBaseRepository.findByEmail(email) != null)
             return true;
