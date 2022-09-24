@@ -6,7 +6,9 @@ import com.propertymanagmnetportal.pmp.security.entity.LoginRequest;
 import com.propertymanagmnetportal.pmp.security.entity.LoginResponse;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.http.HttpRequest;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface UaaService {
     public LoginResponse login(LoginRequest request);
@@ -17,5 +19,19 @@ public interface UaaService {
 
     User getUserFromResetToken(String resetPasswordToken);
 
-    void logout();
+    String logout(HttpServletRequest request);
+
+    String signUpImg(User user);
+
+    public List<User> findAllCustomers();
+
+    public Optional<User> findAllCustomersById(int id);
+
+    public void deleteCustomerById(int id);
+
+    public List<User> findAllOwners();
+
+    public Optional<User> findAllOwnersById(int id);
+
+    public void deleteOwnerById(int id);
 }

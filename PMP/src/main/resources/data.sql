@@ -1,27 +1,16 @@
 insert into address (id, state, city, zip, street) values (1, 'Iowa', 'Waterloo', '50706', '1 Buhler Plaza');
-insert into address (id, state, city, zip, street) values (2, 'California', 'Stockton', '95219', '766 Talisman Trail');
-insert into address (id, state, city, zip, street) values (3, 'Ohio', 'Cincinnati', '45243', '7650 Pennsylvania Park');
-insert into address (id, state, city, zip, street) values (4, 'California', 'San Francisco', '94177', '5496 Anhalt Point');
-insert into address (id, state, city, zip, street) values (5, 'New Hampshire', 'Portsmouth', '00214', '93613 Brickson Park Way');
-insert into address (id, state, city, zip, street) values (6, 'Michigan', 'Saginaw', '48604', '00884 Waxwing Crossing');
-insert into address (id, state, city, zip, street) values (7, 'California', 'Fresno', '93726', '97039 Erie Crossing');
-insert into address (id, state, city, zip, street) values (8, 'Tennessee', 'Nashville', '37245', '42 Judy Way');
-insert into address (id, state, city, zip, street) values (9, 'Florida', 'Jacksonville', '32244', '7550 Oriole Terrace');
-insert into address (id, state, city, zip, street) values (10, 'Delaware', 'Wilmington', '19886', '371 Hallows Alley');
 
 
 
-insert into users ( id, email, firstname, lastname, imageurl, password) values ( '6', 'vdecastelain0@newsvine.com', 'Virginia', 'de Castelain', 'http://dummyimage.com/219x100.png/5fa2dd/ffffff', 'YcnhkCbr9tM');
-insert into users ( id, email, firstname, lastname, imageurl, password) values ( '5', 'kzapata1@gov.uk', 'Kora', 'Zapata', 'http://dummyimage.com/242x100.png/ff4444/ffffff', 'bt5ne5OTF');
-insert into users ( id, email, firstname, lastname, imageurl, password) values ( '2', 'rpandya2@spotify.com', 'Ruth', 'Pandya', 'http://dummyimage.com/216x100.png/dddddd/000000', 'pH8CAtrR0');
-insert into users ( id, email, firstname, lastname, imageurl, password) values ( '1', 'gmagson3@taobao.com', 'Gordy', 'Magson', 'http://dummyimage.com/159x100.png/ff4444/ffffff', 'pggAgm5');
-insert into users ( id, email, firstname, lastname, imageurl, password) values ( '7', 'jbrymner4@latimes.com', 'Jackquelin', 'Brymner', 'http://dummyimage.com/194x100.png/cc0000/ffffff', 'uV5EebzVaYAR');
-insert into users ( id, email, firstname, lastname, imageurl, password) values ( '3', 'bknox5@gizmodo.com', 'Baxy', 'Knox', 'http://dummyimage.com/131x100.png/dddddd/000000', 'n4b2BoWoGno');
-insert into users ( id, email, firstname, lastname, imageurl, password) values ( '8', 'jrigglesford6@bigcartel.com', 'Jenelle', 'Rigglesford', 'http://dummyimage.com/226x100.png/ff4444/ffffff', 'vcXXaziCVwMe');
-insert into users ( id, email, firstname, lastname, imageurl, password) values ( '4', 'eburgwin7@amazon.de', 'Else', 'Burgwin', 'http://dummyimage.com/236x100.png/dddddd/000000', 'SKDOZiTJ494C');
-insert into users ( id, email, firstname, lastname, imageurl, password) values ( '9', 'aromanet8@php.net', 'Amata', 'Romanet', 'http://dummyimage.com/185x100.png/dddddd/000000', 'o1sYI9');
-insert into users ( id, email, firstname, lastname, imageurl, password) values ( '10', 'cjoska9@comcast.net', 'Cly', 'Joska', 'http://dummyimage.com/212x100.png/5fa2dd/ffffff', 'JbMS8ef');
 
+insert into users ( id, email, firstname, lastname, imageurl, password,deleted) values ( '6', 'hiwot.alemayehu@miu.edu', 'Virginia', 'de Castelain', 'http://dummyimage.com/219x100.png/5fa2dd/ffffff', '$2a$12$uPTgn0ayVBmHvobGv6..h.dU45mHqHa4pmblU7ch3eaXm1EtY1azC',false);
+insert into users ( id, email, firstname, lastname, imageurl, password, deleted) values ( '1', 'vdecastelain0@newsvine.com', 'Virginia', 'de Castelain', 'http://dummyimage.com/219x100.png/5fa2dd/ffffff', 'YcnhkCbr9tM', false);
+
+insert into role (id, role) values (1, 'admin');
+insert into role (id, role) values (2, 'customer');
+
+insert into users_role (user_id, role_id) values (6, 1);
+insert into users_role (user_id, role_id) values (1, 2);
 
 insert into property (id, area, description, name, number_of_room, price,status,type) values ( '1', 76, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 'Safe Harbor', 1, 143,false,'Sell');
 insert into property (id, area, description, name, number_of_room, price,status,type)  values ('2', 68, 'Aenean lectus. Pellentesque eget nunc.  condimentum.', 'Mills LLC', 3,  174,false,'Sell');

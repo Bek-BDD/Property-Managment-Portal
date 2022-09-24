@@ -16,6 +16,7 @@ import com.propertymanagmnetportal.pmp.security.entity.LoginResponse;
 import com.propertymanagmnetportal.pmp.service.UaaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,6 +27,8 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.net.http.HttpRequest;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UaaServiceImpl implements UaaService {
@@ -49,14 +52,14 @@ public class UaaServiceImpl implements UaaService {
     @Autowired
     EmailService emailService;
 
-    public LoginResponse login(LoginRequest request){
+    private List<String> blackList;
 
+    public LoginResponse login(LoginRequest request){
             System.out.println(request.getPassword());
            authenticationManager.authenticate(
                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
             SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetails userDetail = myUserDetailService.loadUserByUsername(request.getEmail());
-        System.out.println(userDetail != null);
         String jwtToken = jwtUtil.generateToken(userDetail);
         String refereshToken = jwtUtil.generateRefereshToken(request.getEmail());
         return new LoginResponse(jwtToken,refereshToken);
@@ -96,9 +99,88 @@ public class UaaServiceImpl implements UaaService {
     }
 
     @Override
-    public void logout() {
+   // @Cacheable(())
+    public String logout(HttpServletRequest request) {
+        String header = request.getHeader("Authorization");
+        String token = header.split(" ")[1].trim();
+        blackList.add(token);
+        return "done";
+    }
+
+    @Override
+    public String signUpImg(User user) {
+        userBaseRepository.save(user);
+        return "saved";
+    }
+
+    @Override
+    public List<User> findAllCustomers() {
+        return userBaseRepository.findAll()
+                .stream()
+                .filter(user -> user.getRole()
+                        .stream()
+                        .filter(role -> role.getRole().equals("customer")) != null)
+                .collect(Collectors.toList());
 
     }
+
+    @Override
+    public Optional<User> findAllCustomersById(int id) {
+        List<User> users = userBaseRepository.findAll()
+                .stream()
+                .filter(user->user.getRole()
+                        .stream()
+                        .filter(role -> role.getRole().equals("customer"))!=null)
+                .collect(Collectors.toList());
+        return Optional.of(users.stream().filter(user -> user.getId() == id).findAny().get());
+    }
+
+    @Override
+    public void deleteCustomerById(int id) {
+        List<User> users = userBaseRepository.findAll()
+                .stream()
+                .filter(user->user.getRole()
+                        .stream()
+                        .filter(role -> role.getRole().equals("customer"))!=null)
+                .collect(Collectors.toList());
+        User us = (User) users.stream().filter(user->user.getId()==id).findAny().get();
+        userBaseRepository.delete(us);
+    }
+
+    @Override
+    public List<User> findAllOwners() {
+
+        return userBaseRepository.findAll()
+                .stream()
+                .filter(user -> user.getRole()
+                        .stream()
+                        .filter(role -> role.getRole().equals("owner")) != null)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<User> findAllOwnersById(int id) {
+        List<User> users = userBaseRepository.findAll()
+                .stream()
+                .filter(user->user.getRole()
+                        .stream()
+                        .filter(role -> role.getRole().equals("owner"))!=null)
+                .collect(Collectors.toList());
+        return Optional.of(users.stream().filter(user -> user.getId() == id).findAny().get());
+    }
+
+    @Override
+    public void deleteOwnerById(int id) {
+        List<User> users = userBaseRepository.findAll()
+                .stream()
+                .filter(user->user.getRole()
+                        .stream()
+                        .filter(role -> role.getRole().equals("owner"))!=null)
+                .collect(Collectors.toList());
+        User us = (User) users.stream().filter(user->user.getId()==id).findAny().get();
+        userBaseRepository.delete(us);
+    }
+
 
     public void updatePassword(User user ,String newPassword){
         String encodedPassword = passwordEncoder.encode(newPassword);
