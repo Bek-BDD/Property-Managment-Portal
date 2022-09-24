@@ -1,10 +1,12 @@
 package com.propertymanagmnetportal.pmp.configuration;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 
+import javax.annotation.ManagedBean;
 import javax.mail.internet.MimeMessage;
 import java.io.InputStream;
 
@@ -19,4 +21,6 @@ public class AppConfig {
 
         return javaMailSender;
     }
+
+
 }
