@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aebf7e37-468a-48b9-977e-dfe06f3fda50" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/PMP/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/PMP/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/controller/PropertyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/controller/PropertyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/entity/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/entity/Property.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/repository/PropertyRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/repository/PropertyRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/service/Impl/PropertyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/service/Impl/PropertyServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/service/PropertyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/service/PropertyService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +20,22 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -32,24 +54,11 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/hiwir/Documents/MIU/WAA/W/Property-Managment-Portal",
+    "last_opened_file_path": "D:/Work Related/MIU Related/WAA/Project/Property-Managment-Portal",
     "spring.configuration.checksum": "aa9ca8e8b056c747be98bd8d23a4b7d9"
   }
 }]]></component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="PMP" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="PMP" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="PmpApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="PMP" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.propertymanagmnetportal.pmp.PmpApplication" />
@@ -68,6 +77,7 @@
       <updated>1663971483403</updated>
       <workItem from="1663971485334" duration="635000" />
       <workItem from="1663972159820" duration="50000" />
+      <workItem from="1663998326391" duration="764000" />
     </task>
     <servers />
   </component>
