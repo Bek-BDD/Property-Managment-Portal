@@ -16,8 +16,8 @@ spring:
 
 
   datasource:
-    password: Incorrect@7
-    url: jdbc:postgresql://localhost:9090/pmpDB
+    password: 123
+    url: jdbc:postgresql://localhost:5432/pmpDB
     username: postgres
   jpa:
     hibernate:
@@ -33,6 +33,6 @@ spring:
     init:
       mode: always
 server:
-  port: 8080
+  port: 9090
 
 

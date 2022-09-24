@@ -11,7 +11,7 @@ insert into address (id, state, city, zip, street) values (10, 'Delaware', 'Wilm
 
 
 
-insert into users (user_type, id, email, firstname, lastname, imageurl, password) values ('admin', '6', 'vdecastelain0@newsvine.com', 'Virginia', 'de Castelain', 'http://dummyimage.com/219x100.png/5fa2dd/ffffff', 'YcnhkCbr9tM');
+insert into users (user_type, id, email, firstname, lastname, imageurl, password) values ('admin', '6', 'hiwot.alemayehu@miu.edu', 'Virginia', 'de Castelain', 'http://dummyimage.com/219x100.png/5fa2dd/ffffff', '$2a$12$uPTgn0ayVBmHvobGv6..h.dU45mHqHa4pmblU7ch3eaXm1EtY1azC');
 insert into users (user_type, id, email, firstname, lastname, imageurl, password) values ('owner', '5', 'kzapata1@gov.uk', 'Kora', 'Zapata', 'http://dummyimage.com/242x100.png/ff4444/ffffff', 'bt5ne5OTF');
 insert into users (user_type, id, email, firstname, lastname, imageurl, password) values ('customer', '2', 'rpandya2@spotify.com', 'Ruth', 'Pandya', 'http://dummyimage.com/216x100.png/dddddd/000000', 'pH8CAtrR0');
 insert into users (user_type, id, email, firstname, lastname, imageurl, password) values ('customer', '1', 'gmagson3@taobao.com', 'Gordy', 'Magson', 'http://dummyimage.com/159x100.png/ff4444/ffffff', 'pggAgm5');
@@ -27,6 +27,8 @@ insert into users (user_type, id, email, firstname, lastname, imageurl, password
 insert into role (id, role) values ('1', 'owner');
 insert into role (id, role) values ('2', 'customer');
 insert into role (id, role) values ('3', 'Admin');
+
+insert into users_role(user_id, role_id) values (6,1);
 
 
 

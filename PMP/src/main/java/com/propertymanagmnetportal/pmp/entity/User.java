@@ -21,16 +21,14 @@ public class User {
     private Integer id;
     private String firstname;
     private String lastname;
+    @Column(unique = true)
     private String email;
     private String password;
     private String imageurl;
-
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
-
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> role;
-
     @OneToMany(mappedBy = "user")
     private List<Property> properties;
 
