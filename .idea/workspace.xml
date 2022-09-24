@@ -5,15 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aebf7e37-468a-48b9-977e-dfe06f3fda50" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_jsonwebtoken_jjwt_0_9_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_modelmapper_modelmapper_3_1_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_mail_2_7_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_security_2_7_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_config_5_7_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_core_5_7_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_crypto_5_7_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_web_5_7_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PMP/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/PMP/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/controller/PropertyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/controller/PropertyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/entity/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/entity/Property.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/repository/PropertyRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/repository/PropertyRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/service/Impl/PropertyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/service/Impl/PropertyServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/service/PropertyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/service/PropertyService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,11 +19,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JpbToolWindowState">
@@ -39,8 +32,8 @@
     <option name="myId2Visible">
       <map>
         <entry key="com.haulmont.jpb.jpaInspector" value="true" />
-        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
-        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
       </map>
     </option>
   </component>
@@ -52,19 +45,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Work Related/MIU Related/WAA/Project/Property-Managment-Portal&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;aa9ca8e8b056c747be98bd8d23a4b7d9&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Work Related/MIU Related/WAA/Project/Property-Managment-Portal",
+    "spring.configuration.checksum": "aa9ca8e8b056c747be98bd8d23a4b7d9"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="PmpApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="PMP" />
@@ -90,17 +83,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ID_ORDER">
-      <list>
-        <option value="Default.Root" />
-        <option value="Default.Author" />
-        <option value="Default.Date" />
-        <option value="Default.Subject" />
-        <option value="Space.CommitStatus" />
-      </list>
-    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
