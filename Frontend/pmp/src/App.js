@@ -9,6 +9,7 @@ import LoginPage from "./component/LoginPage";
 import Signup from "./component/Signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PageNotFound from "./component/PageNotFound";
+import EditAccount from "./component/EditAccount";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
      
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/editaccount" element={<EditAccount/>} />
+        <Route path="/changeaccount" element={<PageNotFound/>} />
         <Route path="/" element={<SplashScreen />} />
         <Route path="*" element={<PageNotFound/>} />
       
