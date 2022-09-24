@@ -16,4 +16,6 @@ public interface UaaService {
     String updateResetPasswordToken(String token, String email, HttpServletRequest request);
 
     User getUserFromResetToken(String resetPasswordToken);
+
+    void logout();
 }

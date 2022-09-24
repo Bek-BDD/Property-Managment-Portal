@@ -53,7 +53,7 @@ public class UaaController {
     }
 
     @GetMapping("/test")
-    @PreAuthorize("hasAuthority('customer')")
+    //@PreAuthorize("hasAuthority('owner')")
     public List<User> test(){
         return userBaseRepository.findAll();
     }
@@ -71,6 +71,12 @@ public class UaaController {
                 throw new ResponseStatusException(
                         HttpStatus.NOT_FOUND,"token not found",new TokenDoesnotExsist("ex"));
             return "verified";
+        }
+
+        @PostMapping("/uaa/logout")
+    public String logout(){
+            uaaService.logout();
+            return null;
         }
 
     }
