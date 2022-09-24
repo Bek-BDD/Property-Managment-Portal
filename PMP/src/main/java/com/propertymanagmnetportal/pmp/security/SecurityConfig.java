@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -22,6 +23,7 @@ import java.net.http.HttpRequest;
         securedEnabled = true
 )
 @Configuration
+
 public class SecurityConfig{
 
     @Autowired
@@ -38,10 +40,13 @@ public class SecurityConfig{
                     .csrf()
                     .disable()
                     .authorizeRequests()
-                    .antMatchers("/uaa/**").permitAll()
-                    //.antMatchers("/test").hasAuthority("owner")
+                    .antMatchers("/**").permitAll()
+                    //.antMatchers("/test/**")
                     .anyRequest()
-                    .authenticated();
+                    .authenticated()
+                    .and()
+                    .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
                     httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
