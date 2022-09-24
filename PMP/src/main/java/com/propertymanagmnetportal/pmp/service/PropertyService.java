@@ -1,5 +1,6 @@
 package com.propertymanagmnetportal.pmp.service;
 
+import com.propertymanagmnetportal.pmp.entity.Application;
 import com.propertymanagmnetportal.pmp.entity.Property;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,5 +15,11 @@ public interface PropertyService {
 
     Property saveProperty(Property property);
 
-    Property createProperty(Property property, List<MultipartFile> images);
+    Property createProperty(Property property, List<MultipartFile> images, String userId);
+
+    List<Property> search(String keyWord);
+
+    List<Application> getPropertiesRented(int number);
+
+    List<Property> getPropertiesByOwnerId(int id);
 }

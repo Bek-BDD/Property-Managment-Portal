@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.awt.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class Property {
     private int numberOfRoom;
     private String type;
 
-    private LocalDateTime datePosted;
+    private LocalDate datePosted;
     private Boolean status;
 
 

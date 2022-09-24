@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="IU-222.3739.54">
-    <data-source name="postgres@localhost" uuid="5dce455a-fe72-4eb7-9a25-fd6192ffae04">
+  <component name="dataSourceStorageLocal" created-in="IU-221.5921.22">
+    <data-source name="pmpDB@localhost" uuid="bd119e5b-592a-446c-a253-232de60a4421">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" exact-version="0" />
-      <secret-storage>forget</secret-storage>
-      <schema-mapping />
-    </data-source>
-    <data-source name="pmpDB@localhost" uuid="87a316bd-e66c-400e-b097-cd41a1fc6db9">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" exact-version="0" />
-      <secret-storage>forget</secret-storage>
       <schema-mapping />
     </data-source>
   </component>
