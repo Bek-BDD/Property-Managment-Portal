@@ -7,6 +7,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -37,7 +38,6 @@ public class Configurations {
         );
         return credentials;
     }
-
     @Bean
     public AmazonS3 amazonS3() {
         AmazonS3 s3client = AmazonS3ClientBuilder
@@ -47,6 +47,12 @@ public class Configurations {
                 .build();
         return s3client;
     }
+
+    @Bean
+    public ModelMapper mapper(){
+        return new ModelMapper();
+    }
+
 
 
 
