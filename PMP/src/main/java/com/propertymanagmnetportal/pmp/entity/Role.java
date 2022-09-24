@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import com.propertymanagmnetportal.pmp.Utility.RoleType;
 import javax.persistence.*;
 
 @Entity
@@ -15,7 +16,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String role;
+    private RoleType roleType;
 
 
 
