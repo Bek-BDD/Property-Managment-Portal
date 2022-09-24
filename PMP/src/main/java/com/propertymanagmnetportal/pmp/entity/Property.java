@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,8 @@ public class Property {
     private int numberOfRoom;
     private String type;
     private Boolean status;
+    private LocalDate datePosted;
+    private LocalDate rentedDate;
 
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -33,6 +36,10 @@ public class Property {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
+
+    @ManyToOne
+    @JoinColumn(name="owner_id")
+    private User user;
 
     public Property(String name, double price, String description, double area, int numberOfRoom, String type, Address address, boolean status) {
         this.name = name;

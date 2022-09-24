@@ -14,5 +14,11 @@ public interface PropertyService {
 
     Property saveProperty(Property property);
 
-    Property createProperty(Property property, List<MultipartFile> images);
+    Property createProperty(Property property, List<MultipartFile> images, String userId);
+
+    List<Property> search(String keyWord);
+
+    List<Property> getPropertiesRented(int number);
+
+    List<Property> getPropertiesByOwnerId(int id);
 }

@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 @CrossOrigin
-@RequestMapping("/property")
+@RequestMapping("/properties")
 @RestController
 public class PropertyController {
     private PropertyService propertyService;
@@ -23,7 +23,7 @@ public class PropertyController {
         this.propertyService = propertyService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<Property> getAllProperty(){
         return propertyService.getAllProperty();
     }
@@ -48,6 +48,8 @@ public class PropertyController {
             ,@RequestPart(value = "state", required = false) String state
             ,@RequestPart(value = "street_number", required = false) String street_number
             ,@RequestPart(value = "zip_code", required = false) String zip_code
+            ,@RequestPart(value = "zip_code", required = false) String owner_id
+
 
 
     ) throws IOException {
@@ -56,6 +58,34 @@ public class PropertyController {
         Property property = new Property(name,Double.parseDouble(price),description,Double.parseDouble(area)
                 ,Integer.parseInt(numberOfRoom),type,address, false);
 
-       return propertyService.createProperty(property, images);
+       return propertyService.createProperty(property, images, owner_id);
     }
+
+    @PostMapping("/search")
+    public List<Property> search(@RequestParam String keyword){
+        return propertyService.search(keyword);
+    }
+
+    @GetMapping("/rented")
+    public List<Property> propertiesRented(@PathVariable int number){
+        return propertyService.getPropertiesRented(number);
+    }
+
+    @GetMapping("/owner")
+    public List<Property> getPropertiesByOwner() {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+//            String currentUserName = authentication.getName();
+//            return currentUserName;
+//        }
+
+     //find user Id by userName;
+        int id = 1;
+       return propertyService.getPropertiesByOwnerId(id);
+
+
+
+
+    }
+
 }
