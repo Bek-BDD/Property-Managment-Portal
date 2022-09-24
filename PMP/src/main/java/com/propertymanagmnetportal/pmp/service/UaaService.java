@@ -17,7 +17,7 @@ public interface UaaService {
 
     User getUserFromResetToken(String resetPasswordToken);
 
-    String logout(HttpServletRequest request);
+    String logout(String request);
 
-    String signUpImg(User user);
+    String signUpImg(UserDTO userDTO);
 }

@@ -74,7 +74,7 @@ public class UaaController {
 
     @PostMapping(path = "/uaa/signupimg",consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})
     public String signUpImg(
-             @RequestPart("images") List<MultipartFile> images
+             @RequestPart("images") MultipartFile images
             ,@RequestPart("firstname") String firstname
             ,@RequestPart("lastname") String lastname
             ,@RequestPart("password") String password
@@ -88,22 +88,24 @@ public class UaaController {
             ,@RequestPart(value = "zip_code", required = false) String zip_code
             ) throws IOException {
 //        System.out.println("hello");
-        Address address = new Address(state,city,Integer.parseInt(zip_code),street_number);
-        Role role;
-        if(roletype == "owner"){
-            role = new Role("owner");
-        }else if(roletype == "customer"){
-            role = new Role("customer");
-        }else{
-            role = new Role("admin");
-        }
+
+        UserDTO userDTO = new UserDTO(images,firstname,lastname,password,email,roletype,city,state,street_number,zip_code);
+//        Address address = new Address(state,city,Integer.parseInt(zip_code),street_number);
+//        Role role;
+//        if(roletype == "owner"){
+//            role = new Role("owner");
+//        }else if(roletype == "customer"){
+//            role = new Role("customer");
+//        }else{
+//            role = new Role("admin");
+//        }
 
 
         //call dagis method here
 
-        User user = new User( firstname,lastname,email,passwordEncoder.encode(password),"XXXXX",address,List.of(role));
+        //User user = new User( firstname,lastname,email,passwordEncoder.encode(password),"XXXXX",address,List.of(role));
 
-        return uaaService.signUpImg(user);
+        return uaaService.signUpImg(userDTO);
     }
     @GetMapping("/reset_pwd")
     public String validateToken(@Param(value = "token") String token, HttpServletResponse response){
@@ -116,7 +118,7 @@ public class UaaController {
 
         @PostMapping("/uaa/logout")
     public String logout(HttpServletRequest request){
-            uaaService.logout(request);
+            uaaService.logout(request.getHeader("Authorization"));
             return null;
         }
 

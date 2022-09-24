@@ -2,11 +2,14 @@ package com.propertymanagmnetportal.pmp.service.Impl;
 
 import com.propertymanagmnetportal.pmp.Exceptions.CredentialException;
 import com.propertymanagmnetportal.pmp.Exceptions.EmailExistException;
+import com.propertymanagmnetportal.pmp.Utility.AwsUtil;
 import com.propertymanagmnetportal.pmp.Utility.EmailService;
 import com.propertymanagmnetportal.pmp.Utility.SiteUrl;
 import com.propertymanagmnetportal.pmp.dto.UserDTO;
+import com.propertymanagmnetportal.pmp.entity.Address;
 import com.propertymanagmnetportal.pmp.entity.Role;
 import com.propertymanagmnetportal.pmp.entity.User;
+import com.propertymanagmnetportal.pmp.repository.RoleRepository;
 import com.propertymanagmnetportal.pmp.repository.UserBaseRepository;
 import com.propertymanagmnetportal.pmp.security.JwtUtil;
 import com.propertymanagmnetportal.pmp.security.MyUserDetailService;
@@ -25,7 +28,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import java.net.http.HttpRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -50,7 +55,13 @@ public class UaaServiceImpl implements UaaService {
     @Autowired
     EmailService emailService;
 
-    private List<String> blackList;
+    @Autowired
+    RoleRepository roleRepository;
+
+    @Autowired
+    AwsUtil awsUtil;
+
+    private List<String> blackList = new ArrayList<>();
 
     public LoginResponse login(LoginRequest request){
             System.out.println(request.getPassword());
@@ -97,17 +108,37 @@ public class UaaServiceImpl implements UaaService {
     }
 
     @Override
-   // @Cacheable(())
-    public String logout(HttpServletRequest request) {
-        String header = request.getHeader("Authorization");
-        String token = header.split(" ")[1].trim();
+    @Cacheable(cacheNames = {"blacklist"},key = "#request")
+    public String logout(String request) {
+       // String header = request.getHeader("Authorization");
+        String token = request.split(" ")[1].trim();
         blackList.add(token);
         return "done";
     }
 
     @Override
-    public String signUpImg(User user) {
-        userBaseRepository.save(user);
+    @Transactional
+    public String signUpImg(UserDTO userDTO) {
+        User newUser = new User();
+        newUser.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        newUser.setEmail(userDTO.getEmail());
+        newUser.setFirstname(userDTO.getFirstname());
+        newUser.setLastname(userDTO.getLastname());
+
+        Address address  = new Address();
+        address.setCity(userDTO.getCity());
+        address.setStreet(userDTO.getStreet_number());
+        address.setZip(Integer.parseInt(userDTO.getZip_code()));
+        address.setState(userDTO.getState());
+
+        //Image
+        newUser.setImageurl(awsUtil.uploadFile(userDTO.getImages()));
+
+        Role role = roleRepository.findByRole(userDTO.getRoletype());
+        role.setRole(userDTO.getRoletype());
+        newUser.setRole(List.of(role));
+        userBaseRepository.save(newUser);
+
         return "saved";
     }
 
@@ -123,6 +154,7 @@ public class UaaServiceImpl implements UaaService {
             return true;
         return false;
     }
+
 
 
 }

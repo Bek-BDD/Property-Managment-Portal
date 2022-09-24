@@ -30,3 +30,8 @@ insert into image (id, url) values ('7', 'http://dummyimage.com/112x100.png/dddd
 insert into image (id, url) values ('8', 'http://dummyimage.com/217x100.png/dddddd/000000');
 insert into image (id, url) values ('9', 'http://dummyimage.com/115x100.png/dddddd/000000');
 insert into image (id, url) values ('10', 'http://dummyimage.com/237x100.png/cc0000/ffffff');
+
+
+insert into role (id,role) values (1,'owner');
+insert into role(id,role) values (2,'customer');
+insert into role (id,role) values (3,'admin');
