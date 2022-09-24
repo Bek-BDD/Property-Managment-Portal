@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aebf7e37-468a-48b9-977e-dfe06f3fda50" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/controller/PropertyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/controller/PropertyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/entity/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/entity/Property.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/repository/PropertyRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/repository/PropertyRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/service/Impl/PropertyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/service/Impl/PropertyServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/service/PropertyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/PMP/src/main/java/com/propertymanagmnetportal/pmp/service/PropertyService.java" afterDir="false" />
-    </list>
+    <list default="true" id="246441af-4693-4293-bce6-525f5d8687d6" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,8 +23,8 @@
     </option>
     <option name="myId2Visible">
       <map>
-        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
-        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
         <entry key="com.haulmont.jpb.jpaStructure" value="true" />
       </map>
     </option>
@@ -40,21 +32,24 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2FBhet9sSJczxSKJmqxPcCs0Yra" />
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2FBdHtdfLtVeYmx28NVW1P5lGU6" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Work Related/MIU Related/WAA/Project/Property-Managment-Portal",
+    "last_opened_file_path": "/Users/dawitmeketa/Documents/GitHub/Property-Managment-Portal",
     "spring.configuration.checksum": "aa9ca8e8b056c747be98bd8d23a4b7d9"
   }
 }]]></component>
@@ -70,14 +65,13 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="aebf7e37-468a-48b9-977e-dfe06f3fda50" name="Changes" comment="" />
-      <created>1663971483403</created>
+      <changelist id="246441af-4693-4293-bce6-525f5d8687d6" name="Changes" comment="" />
+      <created>1663969326658</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1663971483403</updated>
-      <workItem from="1663971485334" duration="635000" />
-      <workItem from="1663972159820" duration="50000" />
-      <workItem from="1663998326391" duration="764000" />
+      <updated>1663969326658</updated>
+      <workItem from="1663969328202" duration="341000" />
+      <workItem from="1664040757491" duration="137000" />
     </task>
     <servers />
   </component>
