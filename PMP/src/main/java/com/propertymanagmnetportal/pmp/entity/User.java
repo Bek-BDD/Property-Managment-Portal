@@ -30,6 +30,7 @@ public class User {
     private String imageurl;
     private boolean deleted = Boolean.FALSE;
     private String resetpasswordtoken;
+    private boolean active = Boolean.TRUE;
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
