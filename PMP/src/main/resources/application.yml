@@ -16,7 +16,7 @@ spring:
     protocol: smtp
     test-connection: false
   datasource:
-    password: 123
+    password: 1234
     url: jdbc:postgresql://localhost:5432/pmpDB
     username: postgres
   jpa:
@@ -33,6 +33,6 @@ spring:
     init:
       mode: always
 server:
-  port: 9090
+  port: 8080
 
 

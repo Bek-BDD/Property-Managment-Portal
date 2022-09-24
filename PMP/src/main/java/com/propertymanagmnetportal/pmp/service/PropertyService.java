@@ -21,5 +21,9 @@ public interface PropertyService {
 
     List<Application> getPropertiesRented(int number);
 
-    List<Property> getPropertiesByOwnerId(int id);
+    List<Property> getPropertiesByOwnerId();
+
+    Property UpdateProperty(Property property, List<MultipartFile> images, String owner_id);
+
+    Property deleteProperty(int id);
 }
