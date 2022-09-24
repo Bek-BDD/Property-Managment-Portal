@@ -4,20 +4,20 @@ spring:
   mail:
     default-encoding: UTF-8
     host: smtp.gmail.com
-    username: <>
-    password: <>
+    username: pmanagement.cs545@gmail.com
+    password: kwlfrnzpnjqganim
     port: 587
     properties:
-      mail.smtp:
-        auth: true
-        starttls.enable: true
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
     protocol: smtp
     test-connection: false
-
-
   datasource:
-    password: 1234
-    url: jdbc:postgresql://localhost:5432/pmpDB
+    password: Incorrect@7
+    url: jdbc:postgresql://localhost:9090/pmpDB
     username: postgres
   jpa:
     hibernate:

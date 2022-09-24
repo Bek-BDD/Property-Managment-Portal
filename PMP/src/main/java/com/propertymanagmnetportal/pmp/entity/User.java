@@ -11,9 +11,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Inheritance(strategy =InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="user_type")
-
 @Table(name="users")
 public class User {
     @Id

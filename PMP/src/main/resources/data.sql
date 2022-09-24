@@ -11,25 +11,16 @@ insert into address (id, state, city, zip, street) values (10, 'Delaware', 'Wilm
 
 
 
-insert into users (user_type, id, email, firstname, lastname, imageurl, password) values ('admin', '6', 'vdecastelain0@newsvine.com', 'Virginia', 'de Castelain', 'http://dummyimage.com/219x100.png/5fa2dd/ffffff', 'YcnhkCbr9tM');
-insert into users (user_type, id, email, firstname, lastname, imageurl, password) values ('owner', '5', 'kzapata1@gov.uk', 'Kora', 'Zapata', 'http://dummyimage.com/242x100.png/ff4444/ffffff', 'bt5ne5OTF');
-insert into users (user_type, id, email, firstname, lastname, imageurl, password) values ('customer', '2', 'rpandya2@spotify.com', 'Ruth', 'Pandya', 'http://dummyimage.com/216x100.png/dddddd/000000', 'pH8CAtrR0');
-insert into users (user_type, id, email, firstname, lastname, imageurl, password) values ('customer', '1', 'gmagson3@taobao.com', 'Gordy', 'Magson', 'http://dummyimage.com/159x100.png/ff4444/ffffff', 'pggAgm5');
-insert into users (user_type, id, email, firstname, lastname, imageurl, password) values ('customer', '7', 'jbrymner4@latimes.com', 'Jackquelin', 'Brymner', 'http://dummyimage.com/194x100.png/cc0000/ffffff', 'uV5EebzVaYAR');
-insert into users (user_type, id, email, firstname, lastname, imageurl, password) values ('owner', '3', 'bknox5@gizmodo.com', 'Baxy', 'Knox', 'http://dummyimage.com/131x100.png/dddddd/000000', 'n4b2BoWoGno');
-insert into users (user_type, id, email, firstname, lastname, imageurl, password) values ('owner', '8', 'jrigglesford6@bigcartel.com', 'Jenelle', 'Rigglesford', 'http://dummyimage.com/226x100.png/ff4444/ffffff', 'vcXXaziCVwMe');
-insert into users (user_type, id, email, firstname, lastname, imageurl, password) values ('customer', '4', 'eburgwin7@amazon.de', 'Else', 'Burgwin', 'http://dummyimage.com/236x100.png/dddddd/000000', 'SKDOZiTJ494C');
-insert into users (user_type, id, email, firstname, lastname, imageurl, password) values ('customer', '9', 'aromanet8@php.net', 'Amata', 'Romanet', 'http://dummyimage.com/185x100.png/dddddd/000000', 'o1sYI9');
-insert into users (user_type, id, email, firstname, lastname, imageurl, password) values ('customer', '10', 'cjoska9@comcast.net', 'Cly', 'Joska', 'http://dummyimage.com/212x100.png/5fa2dd/ffffff', 'JbMS8ef');
-
-
-
-insert into role (id, role) values ('1', 'owner');
-insert into role (id, role) values ('2', 'customer');
-insert into role (id, role) values ('3', 'Admin');
-
-
-
+insert into users ( id, email, firstname, lastname, imageurl, password) values ( '6', 'vdecastelain0@newsvine.com', 'Virginia', 'de Castelain', 'http://dummyimage.com/219x100.png/5fa2dd/ffffff', 'YcnhkCbr9tM');
+insert into users ( id, email, firstname, lastname, imageurl, password) values ( '5', 'kzapata1@gov.uk', 'Kora', 'Zapata', 'http://dummyimage.com/242x100.png/ff4444/ffffff', 'bt5ne5OTF');
+insert into users ( id, email, firstname, lastname, imageurl, password) values ( '2', 'rpandya2@spotify.com', 'Ruth', 'Pandya', 'http://dummyimage.com/216x100.png/dddddd/000000', 'pH8CAtrR0');
+insert into users ( id, email, firstname, lastname, imageurl, password) values ( '1', 'gmagson3@taobao.com', 'Gordy', 'Magson', 'http://dummyimage.com/159x100.png/ff4444/ffffff', 'pggAgm5');
+insert into users ( id, email, firstname, lastname, imageurl, password) values ( '7', 'jbrymner4@latimes.com', 'Jackquelin', 'Brymner', 'http://dummyimage.com/194x100.png/cc0000/ffffff', 'uV5EebzVaYAR');
+insert into users ( id, email, firstname, lastname, imageurl, password) values ( '3', 'bknox5@gizmodo.com', 'Baxy', 'Knox', 'http://dummyimage.com/131x100.png/dddddd/000000', 'n4b2BoWoGno');
+insert into users ( id, email, firstname, lastname, imageurl, password) values ( '8', 'jrigglesford6@bigcartel.com', 'Jenelle', 'Rigglesford', 'http://dummyimage.com/226x100.png/ff4444/ffffff', 'vcXXaziCVwMe');
+insert into users ( id, email, firstname, lastname, imageurl, password) values ( '4', 'eburgwin7@amazon.de', 'Else', 'Burgwin', 'http://dummyimage.com/236x100.png/dddddd/000000', 'SKDOZiTJ494C');
+insert into users ( id, email, firstname, lastname, imageurl, password) values ( '9', 'aromanet8@php.net', 'Amata', 'Romanet', 'http://dummyimage.com/185x100.png/dddddd/000000', 'o1sYI9');
+insert into users ( id, email, firstname, lastname, imageurl, password) values ( '10', 'cjoska9@comcast.net', 'Cly', 'Joska', 'http://dummyimage.com/212x100.png/5fa2dd/ffffff', 'JbMS8ef');
 
 
 insert into property (id, area, description, name, number_of_room, price,status,type) values ( '1', 76, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 'Safe Harbor', 1, 143,false,'Sell');

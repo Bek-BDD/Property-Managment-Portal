@@ -1,4 +1,4 @@
-package com.propertymanagmnetportal.pmp.service.propertyImp;
+package com.propertymanagmnetportal.pmp.service.Impl;
 
 import com.propertymanagmnetportal.pmp.entity.Image;
 import com.propertymanagmnetportal.pmp.entity.Property;
