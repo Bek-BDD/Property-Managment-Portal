@@ -3,7 +3,7 @@ insert into address (id, state, city, zip, street) values (1, 'Iowa', 'Waterloo'
 
 
 
-insert into users ( id, email, firstname, lastname, imageurl, password,deleted) values ( '6', 'hiwot.alemayehu@miu.edu', 'Virginia', 'de Castelain', 'http://dummyimage.com/219x100.png/5fa2dd/ffffff', '$2a$12$uPTgn0ayVBmHvobGv6..h.dU45mHqHa4pmblU7ch3eaXm1EtY1azC',false);
+insert into users ( id, email, firstname, lastname, imageurl, password,deleted,active) values ( '6', 'hiwot.alemayehu@miu.edu', 'Virginia', 'de Castelain', 'http://dummyimage.com/219x100.png/5fa2dd/ffffff', '$2a$12$uPTgn0ayVBmHvobGv6..h.dU45mHqHa4pmblU7ch3eaXm1EtY1azC',false,true);
 
 
 
