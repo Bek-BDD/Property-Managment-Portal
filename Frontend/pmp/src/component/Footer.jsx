@@ -79,7 +79,7 @@ export default function () {
         <ListItemAvatar>
           <Avatar
             alt="Hiwot"
-            // src="https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975644694_jpeg"
+            src="https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1664134331536_jpg"
             sx={{ width: 56, height: 56, marginRight:1}} 
           ></Avatar>
         </ListItemAvatar>
@@ -93,7 +93,7 @@ export default function () {
         <ListItemAvatar>
           <Avatar
             alt="Dawit"
-            // src="https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975644694_jpeg"
+            src="https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1664134386359_jpg"
             sx={{ width: 56, height: 56, marginRight:1}} 
           ></Avatar>
         </ListItemAvatar>

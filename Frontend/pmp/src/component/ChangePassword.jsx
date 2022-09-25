@@ -3,8 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -14,25 +12,25 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
 import { instance } from "../index";
 import { useState } from "react";
-import { validateEmail } from "../validation";
+import { Alert, AlertTitle } from "@mui/material";
 
 const theme = createTheme();
 
 export default function () {
   const navigator = useNavigate();
   const [isValid, setIsValid] = useState(true);
+  const [successState, setSuccessState] = useState(false)
 
   const inValidInput = (
     <TextField
       error
-      helperText="Incorrect email format."
+      helperText="Old password does not match"
       margin="normal"
       required
       fullWidth
-      id="email"
-      label="Email Address"
-      name="email"
-      autoComplete="email"
+      id="oldPassword"
+      label="Old Password"
+      name="oldPassword"
     />
   );
   const validInput = (
@@ -40,33 +38,22 @@ export default function () {
       margin="normal"
       required
       fullWidth
-      id="email"
-      label="Email Address"
-      name="email"
-      autoComplete="email"
-      autoFocus
+      id="oldPassword"
+      label="Old Password"
+      name="oldPassword"
     />
   );
+  const alert = ( <Alert severity="success">
+  <AlertTitle>Success</AlertTitle>
+  You have successfuly changed password 
+</Alert>)
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    if (validateEmail(data.get("email"))) {
-      setIsValid(true);
-      instance
-        .post("/uaa/login", {
-          email: data.get("email"),
-          password: data.get("password"),
-        })
-        .then((response) => {
-          localStorage.setItem("token", response.data.jwtToken);
-          localStorage.setItem("refereshToken", response.data.refereshToken);
-          navigator("/");
-        })
-        .catch((err) => console.log(err));
-    } else {
-      setIsValid(false);
-    }
+
+    // fetch api check if old password matches
+    // true store new password
   };
 
   return (
@@ -85,7 +72,7 @@ export default function () {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Change password
           </Typography>
           <Box
             component="form"
@@ -94,50 +81,27 @@ export default function () {
             sx={{ mt: 1 }}
           >
             {isValid ? validInput : inValidInput}
-            {/* <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            /> */}
+
             <TextField
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Password"
+              name="newPassword"
+              label="New Password"
               type="password"
-              id="password"
-              autoComplete="current-password"
+              id="newPassword"
             />
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
+            {successState ? alert : null }
+           
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Change password
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link to="/forgetpassword" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link to="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
       </Container>
