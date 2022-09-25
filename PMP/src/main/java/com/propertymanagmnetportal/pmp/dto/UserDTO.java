@@ -13,7 +13,11 @@ import java.util.List;
 @NoArgsConstructor
 public class UserDTO {
 
+<<<<<<< HEAD
     private List<MultipartFile> images;
+=======
+    private MultipartFile images;
+>>>>>>> origin/main
     private String firstname;
     private String lastname;
     private String email;
