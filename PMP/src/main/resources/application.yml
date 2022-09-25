@@ -16,12 +16,12 @@ spring:
     protocol: smtp
     test-connection: false
   datasource:
-    password: 1234
+    password: root
     url: jdbc:postgresql://localhost:5432/pmpDB
     username: postgres
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
 
     properties:
       hibernate:

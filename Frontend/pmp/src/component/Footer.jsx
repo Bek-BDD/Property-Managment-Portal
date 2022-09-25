@@ -56,7 +56,7 @@ export default function () {
             sx={{ width: 56, height: 56, marginRight:1}} 
           ></Avatar>
         </ListItemAvatar>
-        <ListItemText primary="Abdu Eado" secondary="Database " />
+        <ListItemText primary="Abdu Edao" secondary="Database " />
       </ListItem>
         </div>
 
