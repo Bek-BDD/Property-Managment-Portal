@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React,{useState,useEffect} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -15,11 +15,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { userActions } from './Redux/UserSlice';
 import axios from 'axios';
-//import { useNavigate } from 'react-router-dom';
+
 
 const theme = createTheme();
 
 export default function() {
+  const[isLoggedIn,setIsLoggedIn] = useState(false)
+
+useEffect(()=>{
+  if(localStorage.getItem("tokens") != null){setIsLoggedIn(true)
+}},[])
   const state = useSelector((state)=> state)
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -50,11 +55,14 @@ export default function() {
                       localStorage.setItem("loggedUser",JSON.stringify(response.data))
                       })
                  dispatch(userActions.login("selam"));
-                 navigate("/customer")
+                 window.location.reload(false);
+                 navigate("/")
              });
   }
 
   return (
+    <>
+    { (!isLoggedIn) ? 
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -122,5 +130,7 @@ export default function() {
         </Box>
       </Container>
     </ThemeProvider>
+    :<>{navigate("/")}</> }
+    </>
   );
 }
