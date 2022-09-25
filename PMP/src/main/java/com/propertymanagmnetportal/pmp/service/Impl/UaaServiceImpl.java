@@ -32,6 +32,7 @@ import javax.transaction.Transactional;
 import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UaaServiceImpl implements UaaService {
@@ -153,6 +154,73 @@ public class UaaServiceImpl implements UaaService {
         if(userBaseRepository.findByEmail(email) != null)
             return true;
         return false;
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userBaseRepository.findAll();
+    }
+
+    @Override
+    public List<User> findAllCustomers() {
+
+        return userBaseRepository.findAll()
+                .stream()
+                .filter(user->user.getRole()
+                        .contains( new Role("customer")))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public User findCustomerById(int id) {
+        return userBaseRepository.findAll()
+                .stream()
+                .filter(s->s.getId()==id)
+                .filter(user->user.getRole()
+                        .contains( new Role("customer")))
+                .collect(Collectors.toList()).stream().findAny().get();
+
+//        return Optional.of(users.stream().filter(user -> user.getId() == id).findAny().get());
+    }
+
+    @Override
+    public void deleteCustomerById(int id) {
+        User u = userBaseRepository.findAll()
+                .stream()
+                .filter(s->s.getId()==id)
+                .filter(user->user.getRole()
+                        .contains( new Role("customer")))
+                .collect(Collectors.toList()).stream().findAny().get();
+        userBaseRepository.delete(u);
+    }
+
+    @Override
+    public List<User> findAllOwners() {
+        return (List<User>) userBaseRepository.findAll()
+                .stream()
+                .filter(user->user.getRole()
+                        .contains( new Role("owner")))
+                .collect(Collectors.toList());
+    }
+    @Override
+    public User findOwnerById(int id) {
+        return userBaseRepository.findAll()
+                .stream()
+                .filter(s->s.getId()==id)
+                .filter(user->user.getRole()
+                        .contains( new Role("owner")))
+                .collect(Collectors.toList()).stream().findAny().get();
+    }
+
+    @Override
+    public void deleteOwnerById(int id) {
+        User u = userBaseRepository.findAll()
+                .stream()
+                .filter(s->s.getId()==id)
+                .filter(user->user.getRole()
+                        .contains( new Role("owner")))
+                .collect(Collectors.toList()).stream().findAny().get();
+        userBaseRepository.delete(u);
     }
 
 
