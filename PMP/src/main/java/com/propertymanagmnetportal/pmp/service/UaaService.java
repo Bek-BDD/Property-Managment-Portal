@@ -20,4 +20,8 @@ public interface UaaService {
     String logout(String request);
 
     String signUpImg(UserDTO userDTO);
+
+     User getUserByEmail(String email);
+
+    User changePassword(String email, String password);
 }

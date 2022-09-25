@@ -13,45 +13,34 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
+import { useState } from 'react';
 import { userActions } from './Redux/UserSlice';
 import axios from 'axios';
 //import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
-export default function() {
+export default function(){
   const state = useSelector((state)=> state)
+  const [sentEmail,setSentEmail] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
     loginRequest(data);
 
   };
   const loginRequest = (data)=>{
+    localStorage.setItem("resetPwd",data.get('email'))
     const loginRequestObj = {
-      "email" : data.get('email'),
-      "password" : data.get('password')
+        email    : data.get('email'),
+        password : ""
     }
-      axios.post("http://localhost:9090/uaa/login",loginRequestObj)
+      axios.post("http://localhost:9090/uaa/resetpassword",loginRequestObj)
             .then((response)=>{
-                  localStorage.setItem("tokens",JSON.stringify(response.data))
-                  axios.get(`http://localhost:9090/users/${data.get('email')}`,{
-                   headers : {
-                       'Authorization' : 'Bearer ' +JSON.parse(localStorage.getItem('tokens')).jwtToken
-                     }
-                    })
-                  .then((response)=> {
-                      localStorage.setItem("loggedUser",JSON.stringify(response.data))
-                      })
-                 dispatch(userActions.login("selam"));
-                 navigate("/customer")
-             });
+                setSentEmail(true);
+            });
   }
 
   return (
@@ -70,8 +59,9 @@ export default function() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Forgot password
           </Typography>
+          {sentEmail && <div style={{color:'red'}}> reset link email sent </div>}
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -83,38 +73,18 @@ export default function() {
               autoComplete="email"
               autoFocus
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              
+              sx={{ mt: 3, mb: 2 }} 
             >
-              Sign In
+               Reset password
             </Button>
             <Grid container>
             <Grid item xs>
-                <Link to="/forgotpassword" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link to="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link to="/login" variant="body2">
+                    Back
                 </Link>
               </Grid>
             </Grid>

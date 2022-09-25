@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 //@RequestMapping("/uaa")
 public class UaaController {
     @Autowired
@@ -55,6 +56,7 @@ public class UaaController {
     }
 
     @PostMapping("/uaa/signup")
+
     public LoginRequest signup(@RequestBody UserDTO userDTO) throws EmailExistException {
         return uaaService.signup(userDTO);
     }
@@ -66,45 +68,30 @@ public class UaaController {
     }
 
     @PostMapping("/uaa/resetpassword")
-    public String resetPassword(HttpServletRequest request, @RequestBody String email){
+    public String resetPassword(HttpServletRequest request, @RequestBody LoginRequest email){
+        System.out.println(email.getEmail());
        String emailToken = RandomString.make(45);
-       String resetURL =uaaService.updateResetPasswordToken(emailToken,email,request);
+       String resetURL =uaaService.updateResetPasswordToken(emailToken,email.getEmail(),request);
        return resetURL;
     }
 
     @PostMapping(path = "/uaa/signupimg",consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})
     public String signUpImg(
-             @RequestPart("images") MultipartFile images
+             @RequestPart(value = "images",required = false) MultipartFile images
             ,@RequestPart("firstname") String firstname
             ,@RequestPart("lastname") String lastname
             ,@RequestPart("password") String password
             ,@RequestPart("email") String email
             ,@RequestPart("roletype") String roletype
-//
+
 ////      Address fields
-            ,@RequestPart("city") String city
+            ,@RequestPart(value = "city" ,required = false) String city
             ,@RequestPart(value = "state", required = false) String state
             ,@RequestPart(value = "street_number", required = false) String street_number
             ,@RequestPart(value = "zip_code", required = false) String zip_code
             ) throws IOException {
-//        System.out.println("hello");
 
-        UserDTO userDTO = new UserDTO(images,firstname,lastname,password,email,roletype,city,state,street_number,zip_code);
-//        Address address = new Address(state,city,Integer.parseInt(zip_code),street_number);
-//        Role role;
-//        if(roletype == "owner"){
-//            role = new Role("owner");
-//        }else if(roletype == "customer"){
-//            role = new Role("customer");
-//        }else{
-//            role = new Role("admin");
-//        }
-
-
-        //call dagis method here
-
-        //User user = new User( firstname,lastname,email,passwordEncoder.encode(password),"XXXXX",address,List.of(role));
-
+        UserDTO userDTO = new UserDTO(images,firstname,lastname,email,password,roletype,city,state,street_number,zip_code);
         return uaaService.signUpImg(userDTO);
     }
     @GetMapping("/reset_pwd")
@@ -116,12 +103,17 @@ public class UaaController {
             return "verified";
         }
 
+     @PostMapping("/uaa/changePassword")
+     @CrossOrigin
+     public User changePassword(@RequestBody LoginRequest request){
+        return uaaService.changePassword(request.getEmail(),request.getPassword());
+     }
+
         @PostMapping("/uaa/logout")
     public String logout(HttpServletRequest request){
             uaaService.logout(request.getHeader("Authorization"));
             return null;
         }
-
     }
 
 

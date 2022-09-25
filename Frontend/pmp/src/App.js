@@ -10,11 +10,17 @@ import Signup from "./component/Signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PageNotFound from "./component/PageNotFound";
 import EditAccount from "./component/EditAccount";
-
+import CustomerDashBoard from "./component/Customer/CustomerDashBoard";
+import CustomerHeader from "./component/Customer/CustomerHeader";
+import ForgotPassword from "./component/ForgotPassword";
+import ChangePassword from "./component/ChangePassword";
 function App() {
   return (
     <BrowserRouter>
-       <Header />
+       {localStorage.getItem("tokens") == null ? 
+       <Header /> : 
+       <CustomerHeader />
+      }
       <Routes>
      
         <Route path="/login" element={<LoginPage />} />
@@ -23,6 +29,9 @@ function App() {
         <Route path="/changeaccount" element={<PageNotFound/>} />
         <Route path="/" element={<SplashScreen />} />
         <Route path="*" element={<PageNotFound/>} />
+        <Route path="/customer" element={<CustomerDashBoard/>}/>
+        <Route path="/forgotpassword" element={<ForgotPassword />}/>
+        <Route path="/changePassword/reset_pwd" element={<ChangePassword/>}/>
       
       </Routes>
       <Footer />

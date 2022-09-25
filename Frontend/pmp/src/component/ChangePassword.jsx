@@ -15,46 +15,45 @@ import { Link, useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { userActions } from './Redux/UserSlice';
 import axios from 'axios';
+import { useState,useEffect } from 'react';
 //import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
 export default function() {
-  const state = useSelector((state)=> state)
-  const dispatch = useDispatch();
+const [ verify,setVerify]= useState(false);
+    useEffect(()=>{
+        const queryParams = new URLSearchParams(window.location.search)
+        const token = queryParams.get("token")
+        axios.get(`http://localhost:9090/reset_pwd?token=${token}`)
+             .then((response)=>{
+                setVerify(true);
+             })
+        
+    },[])
+
+
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    loginRequest(data);
-
+    changePassword(data);
   };
-  const loginRequest = (data)=>{
-    const loginRequestObj = {
-      "email" : data.get('email'),
-      "password" : data.get('password')
+  const changePassword = (data)=>{
+    const newPass = {
+        password : data.get('password'),
+        email : localStorage.getItem('resetPwd')
     }
-      axios.post("http://localhost:9090/uaa/login",loginRequestObj)
+
+      axios.post("http://localhost:9090/uaa/changePassword",newPass)
             .then((response)=>{
-                  localStorage.setItem("tokens",JSON.stringify(response.data))
-                  axios.get(`http://localhost:9090/users/${data.get('email')}`,{
-                   headers : {
-                       'Authorization' : 'Bearer ' +JSON.parse(localStorage.getItem('tokens')).jwtToken
-                     }
-                    })
-                  .then((response)=> {
-                      localStorage.setItem("loggedUser",JSON.stringify(response.data))
-                      })
-                 dispatch(userActions.login("selam"));
+                localStorage.setItem("loggedUser",JSON.stringify(response.data))
                  navigate("/customer")
              });
   }
 
   return (
+    
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -65,62 +64,49 @@ export default function() {
             flexDirection: 'column',
             alignItems: 'center',
           }}
-        >
+        > 
           <Avatar sx={{ m: 1, bgcolor: '#304EF2' }}>
             <LockOutlinedIcon />
           </Avatar>
+         
           <Typography component="h1" variant="h5">
-            Sign in
+                  Change Password
           </Typography>
+          { (verify) ? 
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="password"
+              label="new Password"
+              name="password"
+              //autoComplete="email"
               autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
+              name="confirmpassword"
+              label="Confirm Password"
+              type="confirmpassword"
+              id="confirmpassword"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              
             >
-              Sign In
+              Confirm Password
             </Button>
-            <Grid container>
-            <Grid item xs>
-                <Link to="/forgotpassword" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link to="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
+          </Box> :<div> Invalid token </div> }
+
         </Box>
       </Container>
     </ThemeProvider>
+    
   );
 }
