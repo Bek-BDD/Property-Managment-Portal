@@ -1,16 +1,11 @@
 import MyCard from './MyCard'
 import '../App.css'
-export default function(){
+export default function(props){
     return(
         <div className='card-container' style={{marginTop:30}}>
-            <MyCard/>
-            <MyCard/>
-            <MyCard/>
-            <MyCard/>
-            <MyCard/>
-            <MyCard/>
-            <MyCard/>
-            here
+            {
+                props.value.map(obj => <MyCard key={obj.id} value={obj}/>)
+            }
         </div>
     )
 }

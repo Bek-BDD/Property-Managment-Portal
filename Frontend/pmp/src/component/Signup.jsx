@@ -1,4 +1,5 @@
 import * as React from "react";
+import { instance } from "../index";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -21,63 +22,71 @@ import {
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { validateEmail } from "../validation";
+import axios from "axios";
 
 const theme = createTheme();
 
-export default function () {
-  const [userType, setUserType] = useState("");
-  const [validEmail, setValidEmail] = useState(true);
-  const[userInput, setUserInput] = useState({
-    firstName:"",
-    lastName:"",
-    email:"",
-    password:"",
-    userType:""
-  })
 
-  const inValidInput = (<TextField
-  error
-  helperText="Incorrect email format."
-  required
-  fullWidth
-  id="email"
-  label="Email Address"
-  name="email"
-  autoComplete="email"
-/>)
-const validInput =( <TextField
-  required
-  fullWidth
-  id="email"
-  label="Email Address"
-  name="email"
-  autoComplete="email"
-/>)
+export default function () {
+
+  const [validEmail, setValidEmail] = useState(true);
+  const [selectedFile,setSelectedFile] =useState();
+
+  const inValidInput = (
+    <TextField
+      error
+      helperText="Incorrect email format."
+      required
+      fullWidth
+      id="email"
+      label="Email Address"
+      name="email"
+      autoComplete="email"
+    />
+  );
+  const validInput = (
+    <TextField
+      required
+      fullWidth
+      id="email"
+      label="Email Address"
+      name="email"
+      autoComplete="email"
+    />
+  );
+  const changeHandler = (event) => {
+		setSelectedFile(event.target.files[0]);
+	};
 
   const handleSubmit = (event) => {
+
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
 
-    // console.log(event);
+    data.append("city","Fairfield")
+    data.append("state","Fairfield")
+    data.append("street_number","123")
+    data.append("zip_code","52557")
 
-    if (validateEmail(data.get("email"))) {
-      setValidEmail(true)
-      console.log({
-        email: data.get("email"),
-        password: data.get("password"),
-        firstName: data.get("firstName"),
-        lastName: data.get("lastName"),
-        file: data.get("file"),
-        userType: userType,
-      });
+    
+    const config = {
+      headers: { "content-type": "multipart/form-data" }
+    };
+  
+   
+
+    if (validateEmail(data.get('email'))) {
+      setValidEmail(true);
+      instance
+        .post("/uaa/signupimg",data,config)
+        .then((response) => console.log(response.data))
+        .catch((err) => console.log(err));
     } else {
-      setValidEmail(false)
+      setValidEmail(false);
     }
   };
 
-  function handleChange(event) {
-    setUserType(event.target.value);
-  }
 
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -118,7 +127,7 @@ const validInput =( <TextField
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="firstname"
                   required
                   fullWidth
                   id="firstName"
@@ -130,14 +139,14 @@ const validInput =( <TextField
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
+                  id="lastname"
                   label="Last Name"
-                  name="lastName"
+                  name="lastname"
                   autoComplete="family-name"
                 />
               </Grid>
               <Grid item xs={12}>
-              {validEmail ? validInput : inValidInput}
+                {validEmail ? validInput : inValidInput}
                 {/* <TextField
                   error
                   helperText="Incorrect email format."
@@ -166,14 +175,15 @@ const validInput =( <TextField
                   <Select
                     labelId="select-user-type-label"
                     id="user-type"
-                    value={userType}
-                    name="userType"
-                    onChange={handleChange}
+                    defaultValue={"customer"}
+                    // value={userType}
+                    name="roletype"
+                    // onChange={handleChange}
                     input={<OutlinedInput label="User Type" />}
                     MenuProps={MenuProps}
                   >
-                    <MenuItem value="OWNER">OWNER</MenuItem>
-                    <MenuItem value="CUSTOMER">CUSTOMER</MenuItem>
+                    <MenuItem value="owner">OWNER</MenuItem>
+                    <MenuItem value="customer">CUSTOMER</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -184,9 +194,10 @@ const validInput =( <TextField
               fullWidth
               sx={{ mt: 2 }}
             >
-              Upload File
-              <input type="file" hidden name="file" />
+              Upload Image
+              <input type="file" hidden name="images" onChange={changeHandler} />
             </Button>
+        
             <Button
               type="submit"
               fullWidth
