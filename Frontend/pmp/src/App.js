@@ -10,6 +10,7 @@ import Signup from "./component/Signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PageNotFound from "./component/PageNotFound";
 import EditAccount from "./component/EditAccount";
+import PropertyStepper from "./component/Property/PropertyStepper";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/changeaccount" element={<PageNotFound/>} />
         <Route path="/" element={<SplashScreen />} />
         <Route path="*" element={<PageNotFound/>} />
+        <Route path="/createProperty" element={<PropertyStepper />} />
       
       </Routes>
       <Footer />
