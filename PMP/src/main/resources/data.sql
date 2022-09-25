@@ -5,12 +5,20 @@ insert into address (id, state, city, zip, street) values (1, 'Iowa', 'Waterloo'
 
 insert into users ( id, email, firstname, lastname, imageurl, password,deleted) values ( '6', 'hiwot.alemayehu@miu.edu', 'Virginia', 'de Castelain', 'http://dummyimage.com/219x100.png/5fa2dd/ffffff', '$2a$12$uPTgn0ayVBmHvobGv6..h.dU45mHqHa4pmblU7ch3eaXm1EtY1azC',false);
 insert into users ( id, email, firstname, lastname, imageurl, password, deleted) values ( '1', 'vdecastelain0@newsvine.com', 'Virginia', 'de Castelain', 'http://dummyimage.com/219x100.png/5fa2dd/ffffff', 'YcnhkCbr9tM', false);
+insert into users ( id, email, firstname, lastname, imageurl, password,deleted) values ( '4', 'hiwot.alemayehued@miu.edu', 'Iowa', 'de Castelain', 'http://dummyimage.com/219x100.png/5fa2dd/ffffff', '$2a$12$uPTgn0ayVBmHvobGv6..h.dU45mHqHa4pmblU7ch3eaXm1EtY1azC',false);
+insert into users ( id, email, firstname, lastname, imageurl, password, deleted) values ( '5', 'vdecastelainasd0@newsvine.com', 'Fairfield', 'de Castelain', 'http://dummyimage.com/219x100.png/5fa2dd/ffffff', 'YcnhkCbr9tM', false);
 
 insert into role (id, role) values (1, 'admin');
 insert into role (id, role) values (2, 'customer');
+insert into role (id, role) values (3, 'owner');
+
 
 insert into users_role (user_id, role_id) values (6, 1);
 insert into users_role (user_id, role_id) values (1, 2);
+insert into users_role (user_id, role_id) values (4, 3);
+insert into users_role (user_id, role_id) values (5, 3);
+
+
 
 insert into property (id, area, description, name, number_of_room, price,status,type) values ( '1', 76, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 'Safe Harbor', 1, 143,false,'Sell');
 insert into property (id, area, description, name, number_of_room, price,status,type)  values ('2', 68, 'Aenean lectus. Pellentesque eget nunc.  condimentum.', 'Mills LLC', 3,  174,false,'Sell');

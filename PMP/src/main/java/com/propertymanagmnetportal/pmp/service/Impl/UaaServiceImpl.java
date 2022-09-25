@@ -10,13 +10,11 @@ import com.propertymanagmnetportal.pmp.entity.User;
 import com.propertymanagmnetportal.pmp.repository.UserBaseRepository;
 import com.propertymanagmnetportal.pmp.security.JwtUtil;
 import com.propertymanagmnetportal.pmp.security.MyUserDetailService;
-import com.propertymanagmnetportal.pmp.security.MyUserDetails;
 import com.propertymanagmnetportal.pmp.security.entity.LoginRequest;
 import com.propertymanagmnetportal.pmp.security.entity.LoginResponse;
 import com.propertymanagmnetportal.pmp.service.UaaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,9 +23,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.http.HttpRequest;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -114,71 +110,70 @@ public class UaaServiceImpl implements UaaService {
     }
 
     @Override
-    public List<User> findAllCustomers() {
-        return userBaseRepository.findAll()
-                .stream()
-                .filter(user -> user.getRole()
-                        .stream()
-                        .filter(role -> role.getRole().equals("customer")) != null)
-                .collect(Collectors.toList());
-
+    public List<User> findAll() {
+        return userBaseRepository.findAll();
     }
 
     @Override
-    public Optional<User> findAllCustomersById(int id) {
-        List<User> users = userBaseRepository.findAll()
+    public List<User> findAllCustomers() {
+
+        return (List<User>) userBaseRepository.findAll()
                 .stream()
                 .filter(user->user.getRole()
-                        .stream()
-                        .filter(role -> role.getRole().equals("customer"))!=null)
+                        .contains( new Role("customer")))
                 .collect(Collectors.toList());
-        return Optional.of(users.stream().filter(user -> user.getId() == id).findAny().get());
+    }
+
+    @Override
+    public User findCustomerById(int id) {
+        return userBaseRepository.findAll()
+                .stream()
+                .filter(s->s.getId()==id)
+                .filter(user->user.getRole()
+                        .contains( new Role("customer")))
+                .collect(Collectors.toList()).stream().findAny().get();
+
+//        return Optional.of(users.stream().filter(user -> user.getId() == id).findAny().get());
     }
 
     @Override
     public void deleteCustomerById(int id) {
-        List<User> users = userBaseRepository.findAll()
+        User u = userBaseRepository.findAll()
                 .stream()
+                .filter(s->s.getId()==id)
                 .filter(user->user.getRole()
-                        .stream()
-                        .filter(role -> role.getRole().equals("customer"))!=null)
-                .collect(Collectors.toList());
-        User us = (User) users.stream().filter(user->user.getId()==id).findAny().get();
-        userBaseRepository.delete(us);
+                        .contains( new Role("customer")))
+                .collect(Collectors.toList()).stream().findAny().get();
+        userBaseRepository.delete(u);
     }
 
     @Override
     public List<User> findAllOwners() {
-
-        return userBaseRepository.findAll()
-                .stream()
-                .filter(user -> user.getRole()
-                        .stream()
-                        .filter(role -> role.getRole().equals("owner")) != null)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public Optional<User> findAllOwnersById(int id) {
-        List<User> users = userBaseRepository.findAll()
+        return (List<User>) userBaseRepository.findAll()
                 .stream()
                 .filter(user->user.getRole()
-                        .stream()
-                        .filter(role -> role.getRole().equals("owner"))!=null)
+                        .contains( new Role("owner")))
                 .collect(Collectors.toList());
-        return Optional.of(users.stream().filter(user -> user.getId() == id).findAny().get());
+    }
+    @Override
+    public User findOwnerById(int id) {
+        return userBaseRepository.findAll()
+                .stream()
+                .filter(s->s.getId()==id)
+                .filter(user->user.getRole()
+                        .contains( new Role("owner")))
+                .collect(Collectors.toList()).stream().findAny().get();
     }
 
     @Override
     public void deleteOwnerById(int id) {
-        List<User> users = userBaseRepository.findAll()
+        User u = userBaseRepository.findAll()
                 .stream()
+                .filter(s->s.getId()==id)
                 .filter(user->user.getRole()
-                        .stream()
-                        .filter(role -> role.getRole().equals("owner"))!=null)
-                .collect(Collectors.toList());
-        User us = (User) users.stream().filter(user->user.getId()==id).findAny().get();
-        userBaseRepository.delete(us);
+                        .contains( new Role("owner")))
+                .collect(Collectors.toList()).stream().findAny().get();
+        userBaseRepository.delete(u);
     }
 
 

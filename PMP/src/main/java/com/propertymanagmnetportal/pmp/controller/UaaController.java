@@ -74,8 +74,8 @@ public class UaaController {
 
     @GetMapping("/customers/{id}")
 //    @PreAuthorize("hasAuthority('admin')")
-    public Optional<User> findAllCustomersById(@PathVariable int id){
-        return uaaService.findAllCustomersById(id);
+    public User findCustomerById(@PathVariable int id){
+        return uaaService.findCustomerById(id);
     }
 
     @DeleteMapping("/customers/{id}")
@@ -93,8 +93,8 @@ public class UaaController {
 
     @GetMapping("/owners/{id}")
 //    @PreAuthorize("hasAuthority('admin')")
-    public Optional<User> findAllOwnersById(@PathVariable int id){
-        return uaaService.findAllOwnersById(id);
+    public User findAllOwnersById(@PathVariable int id){
+        return uaaService.findOwnerById(id);
     }
 
     @DeleteMapping("/owners/{id}")

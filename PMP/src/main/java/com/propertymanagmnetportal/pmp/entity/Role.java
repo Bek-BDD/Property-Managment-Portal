@@ -23,5 +23,15 @@ public class Role {
     }
 
 
+    @Override
+    public boolean equals(Object o){
+
+
+        Role objectRole= (Role) o;
+
+    return  objectRole.getRole().equals(this.role);
+    }
+
+
 
 }
