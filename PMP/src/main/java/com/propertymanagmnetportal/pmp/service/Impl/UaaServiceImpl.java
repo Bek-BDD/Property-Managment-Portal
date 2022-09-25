@@ -158,7 +158,10 @@ public class UaaServiceImpl implements UaaService {
 
     @Override
     public List<User> findAll() {
-        return userBaseRepository.findAll();
+        return userBaseRepository.findAll()
+                .stream()
+                .filter(us->us.isDeleted()==false)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -168,6 +171,7 @@ public class UaaServiceImpl implements UaaService {
                 .stream()
                 .filter(user->user.getRole()
                         .contains( new Role("customer")))
+                .filter(us->us.isDeleted()==false)
                 .collect(Collectors.toList());
     }
 
@@ -178,6 +182,7 @@ public class UaaServiceImpl implements UaaService {
                 .filter(s->s.getId()==id)
                 .filter(user->user.getRole()
                         .contains( new Role("customer")))
+                .filter(us->us.isDeleted()==false)
                 .collect(Collectors.toList()).stream().findAny().get();
 
 //        return Optional.of(users.stream().filter(user -> user.getId() == id).findAny().get());
@@ -191,7 +196,9 @@ public class UaaServiceImpl implements UaaService {
                 .filter(user->user.getRole()
                         .contains( new Role("customer")))
                 .collect(Collectors.toList()).stream().findAny().get();
-        userBaseRepository.delete(u);
+        userBaseRepository.updateDeleteStatus(id);
+//        userBaseRepository.delete(u);
+
     }
 
     @Override
@@ -200,6 +207,7 @@ public class UaaServiceImpl implements UaaService {
                 .stream()
                 .filter(user->user.getRole()
                         .contains( new Role("owner")))
+                .filter(us->us.isDeleted()==false)
                 .collect(Collectors.toList());
     }
     @Override
@@ -209,6 +217,7 @@ public class UaaServiceImpl implements UaaService {
                 .filter(s->s.getId()==id)
                 .filter(user->user.getRole()
                         .contains( new Role("owner")))
+                .filter(us->us.isDeleted()==false)
                 .collect(Collectors.toList()).stream().findAny().get();
     }
 
@@ -220,7 +229,8 @@ public class UaaServiceImpl implements UaaService {
                 .filter(user->user.getRole()
                         .contains( new Role("owner")))
                 .collect(Collectors.toList()).stream().findAny().get();
-        userBaseRepository.delete(u);
+        userBaseRepository.updateDeleteStatus(id);
+//        userBaseRepository.delete(u);
     }
 
 

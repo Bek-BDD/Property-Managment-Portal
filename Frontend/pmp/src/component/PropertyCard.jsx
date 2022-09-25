@@ -18,6 +18,7 @@ import Stack from '@mui/material/Stack';
 import '../App.css'
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {render} from "@testing-library/react";
 
 export default function PropertyCard() {
 
@@ -39,120 +40,80 @@ export default function PropertyCard() {
         }
     ]
 
-    const [selectedPropertyId, setSelectedPropertyId] = useState(1);
-    const [expanded, setExpanded] = React.useState(false);
-    const [liked, setLiked] = React.useState(false)
-
-
     const [PropertyData, setPropertyData] = useState(initialState);
-
-    const property_id = initialState[0].id;
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
-    };
-    // function DeleteButton(props) {
-    //
-    //             console.log(props[0].id);
-    //             return (
-    //                 <Stack direction="row" spacing={2}>
-    //                     <Button variant="contained" endIcon={<SendIcon/>}>
-    //                         Edit
-    //                     </Button>
-    //                     <Button variant="outlined" startIcon={<DeleteIcon/>} onClick={DeleteProperty} {...props}>
-    //                         Delete
-    //                     </Button>
-    //                 </Stack>
-    //         )
-    // }
 
     const getProperty = async () => {
         const result = await axios.get('http://localhost:8080/properties');
         setPropertyData(result.data);
-
-
     }
-
-
-
-    // console.log(PropertyData.id);
 
     function showDetails() {
         // console.log("click");
     }
 
-
-    const [propertyId, setPropertyId] = useState(1);
-
-
     const DeleteProperty = async (id, e) => {
 
-        // const delete_id = props.;
-        // console.log(props.id);
         const result = await axios.delete("http://localhost:8080/properties/"+`${id}`);
-        // getProperty();
+        getProperty();
     }
 
     useEffect(() => {
-        DeleteProperty();
-        getProperty();
-    }, [PropertyData])
 
-    // useEffect(() => {
-    //     getProperty();
-    // }, [])
-    // console.log(property_id);
+        getProperty();
+        DeleteProperty();
+    },  [null])
+
 
     return (
 
-        PropertyData.map((item) => {
-                // console.log(item.name);
-                // const del_id = item.id;
-                // console.log(del_id);
-            return(
+            PropertyData.map((item) => {
 
-            <Card sx={{maxWidth: 360}} onClick={showDetails} className="card-hover" {...item}>
-            <CardHeader
-            avatar={
-            <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
-            R
-            </Avatar>
-        }
-            title = {item.name}
-            subheader={item.description}
-            />
+                return (
 
-            <CardMedia
-            component="img"
-            height="194"
-            image="https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg"
-            alt="Paella dish"
-            />
-            <CardContent>
-            <Typography variant="body2" color="text.secondary">
+                    <Card sx={{maxWidth: 360}} onClick={showDetails} className="card-hover" {...item}>
+                        <CardHeader
+                            avatar={
+                                <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
+                                    R
+                                </Avatar>
+                            }
+                            title={item.name}
+                            subheader={item.description}
+                        />
 
-                {PropertyData.description}
+                        <CardMedia
+                            component="img"
+                            height="194"
+                            image="https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg"
+                            alt="Paella dish"
+                        />
+                        <CardContent>
+                            <Typography variant="body2" color="text.secondary">
 
-            </Typography>
-            </CardContent>
-            <CardActions disableSpacing {...item}>
+                                {PropertyData.description}
 
-                {/*<DeleteButton {...item}/>*/}
-                <Stack direction="row" spacing={2}>
-                    <Button variant="contained" endIcon={<SendIcon/>}>
-                        Edit
-                    </Button>
-                    <Button variant="outlined" startIcon={<DeleteIcon/>} onClick = { (e) => DeleteProperty(item.id, e)}>
-                        Delete
-                    </Button>
-                </Stack>
+                            </Typography>
+                        </CardContent>
+                        <CardActions disableSpacing {...item}>
 
-        {/*<EditProperty/>*/}
+                            {/*<DeleteButton {...item}/>*/}
+                            <Stack direction="row" spacing={2}>
+                                <Button variant="contained" endIcon={<SendIcon/>}>
+                                    Edit
+                                </Button>
+                                <Button variant="outlined" startIcon={<DeleteIcon/>}
+                                        onClick={(e) => DeleteProperty(item.id, e)}>
+                                    Delete
+                                </Button>
+                            </Stack>
 
-            </CardActions>
+                            {/*<EditProperty/>*/}
 
-            </Card>
-            )
-        })
+                        </CardActions>
 
-    );
+                    </Card>
+                )
+            })
+
+        );
 }
