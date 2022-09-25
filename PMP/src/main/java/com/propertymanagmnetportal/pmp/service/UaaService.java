@@ -7,6 +7,7 @@ import com.propertymanagmnetportal.pmp.security.entity.LoginResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.http.HttpRequest;
+import java.util.List;
 
 public interface UaaService {
     public LoginResponse login(LoginRequest request);
@@ -20,4 +21,17 @@ public interface UaaService {
     String logout(String request);
 
     String signUpImg(UserDTO userDTO);
+
+    public List<User> findAll();
+    public List<User> findAllCustomers();
+
+    public User findCustomerById(int id);
+
+    public void deleteCustomerById(int id);
+
+    public List<User> findAllOwners();
+
+    public User findOwnerById(int id);
+
+    public void deleteOwnerById(int id);
 }
