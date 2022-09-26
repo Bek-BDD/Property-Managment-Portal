@@ -29,27 +29,26 @@ useEffect(()=>{
 }},[])
   return (
     <BrowserRouter>
-       {!(isLoggedIn)? 
-          <Header /> : 
-       <CustomerHeader />
-      }
-      
+      {!isLoggedIn ? <Header /> : <CustomerHeader />}
+
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/editaccount" element={ <NewEditAccount/> } />
-        <Route path="/changeaccount" element={<PageNotFound/>} />
+        <Route path="/editaccount" element={<NewEditAccount />} />
+        <Route path="/change-account" element={<PageNotFound />} />
         <Route path="/" element={<SplashScreen />} />
-        <Route path="apply/" element={<PropertyDetails />} />
+        <Route path="/property-detail" element={<PropertyDetails />} />
         <Route path="*" element={<PageNotFound />} />
-        <Route path="*" element={<PageNotFound/>} />
-        <Route path="/createProperty" element={<PropertyStepper />} />
-          <Route path="/properties" element={<ManageProperties/>} />
-        <Route path="/customer" element={<CustomerDashBoard/>}/>
-        <Route path="/forgotpassword" element={<ForgotPassword />}/>
-        <Route path="/changePassword/reset_pwd" element={<ChangePassword/>}/>
-        <Route path="/customerapplications" element={<CustomerApplications/>}/>
-      
+        <Route path="*" element={<PageNotFound />} />
+        <Route path="/create-property" element={<PropertyStepper />} />
+        <Route path="/properties" element={<ManageProperties />} />
+        <Route path="/customer" element={<CustomerDashBoard />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/changePassword/reset_pwd" element={<ChangePassword />} />
+        <Route
+          path="/customerapplications"
+          element={<CustomerApplications />}
+        />
       </Routes>
       <Footer />
     </BrowserRouter>

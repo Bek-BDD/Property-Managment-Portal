@@ -21,7 +21,7 @@ import axios from "axios";
 import {render} from "@testing-library/react";
 
 export default function PropertyCard() {
-debugger
+
 
 
     const initialState = [
@@ -69,7 +69,7 @@ debugger
 
                 return (
 
-                    <Card sx={{maxWidth: 360}} onClick={showDetails} className="card-hover" {...item} key={item.id}>
+                    <Card sx={{maxWidth: 360}} onClick={showDetails} className="card-hover" key={item.id}>
                         <CardHeader
                             avatar={
                                 <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
@@ -93,9 +93,9 @@ debugger
 
                             </Typography>
                         </CardContent>
-                        <CardActions disableSpacing {...item}>
+                        <CardActions disableSpacing >
 
-                            {/*<DeleteButton {...item}/>*/}
+                            {/*<DeleteButton />*/}
                             <Stack direction="row" spacing={2}>
                                 <Button variant="contained" endIcon={<SendIcon/>}>
                                     Edit
