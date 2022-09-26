@@ -22,6 +22,9 @@ public interface UaaService {
 
     String signUpImg(UserDTO userDTO);
 
+     User getUserByEmail(String email);
+
+    User changePassword(String email, String password);
     public List<User> findAll();
     public List<User> findAllCustomers();
 

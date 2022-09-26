@@ -3,6 +3,9 @@
     justify-content: space-between;
     margin: 20px;
 }
+body {
+    font-family: "Poppins";
+}
 .splashContainer{
     background-image: url('https://wp-tid.zillowstatic.com/bedrock/app/uploads/sites/5/2022/08/ZG_Brand_LA_0322_Harvard-_ExtFront_1504_4936px_NO-PPL_desktopImg2x-scaled.webp');
     background-position-y: center;
@@ -40,4 +43,74 @@
 }
 a{
     text-decoration: none;
+}
+
+.customerHeader{
+    display: flex;
+    justify-content: space-between;
+}
+}
+.mid-container {
+    width: 70vw;
+    margin: 100px auto;
+    grid-template-columns: 2.5fr 1fr;
+    justify-content: flex-start;
+    gap: 1px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.fr3 {
+    width:100%
+}
+
+.fr1 {
+    width: 100%;
+}
+
+.banner, .detail {
+    width: 100%;
+    margin: 5px;
+    height: 500px;
+}
+
+.banner img, .img-cards img {
+    width: 100%;
+    height: 100%;
+    object-fit:cover
+}
+
+.img-cards {
+    gap: 1px; 
+    width: 100%;
+    height: 200px;
+}
+.text-card{
+    width: 95%;
+    margin: auto;
+    color:rgb(52, 50, 50)
+}
+.top-bar{
+    display: grid; 
+    grid-template-columns: auto auto;   
+    justify-content: space-between;
+}
+.mg-10{
+    margin:10px;
+}
+
+.hr-line{
+    width: 95%;
+    margin:  auto;
+    margin-bottom: 10px;
+    border: 1px solid rgb(235, 231, 231);
+}
+.action-button{
+    margin: 5px;
+    text-align: start;
+}
+.center{
+    text-align: center;
+}
+.properties, .values{
+    text-align: start;
 }
