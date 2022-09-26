@@ -16,6 +16,7 @@ import ForgotPassword from "./component/ForgotPassword";
 import ChangePassword from "./component/ChangePassword";
 import CustomerApplications from "./component/Customer/CustomerApplications";
 import { useEffect,useState } from "react";
+import { ImageTable } from "./component/Customer/FavoritesTable";
 function App() {
   const[isLoggedIn,setIsLoggedIn] = useState(false)
 useEffect(()=>{

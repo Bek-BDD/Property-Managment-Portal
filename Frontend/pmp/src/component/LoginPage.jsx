@@ -21,6 +21,7 @@ const theme = createTheme();
 
 export default function() {
   const[isLoggedIn,setIsLoggedIn] = useState(false)
+  const[loginError,setLoginError] = useState(false)
 
 useEffect(()=>{
   if(localStorage.getItem("tokens") != null){setIsLoggedIn(true)
@@ -57,7 +58,10 @@ useEffect(()=>{
                  dispatch(userActions.login("selam"));
                  window.location.reload(false);
                  navigate("/")
-             });
+             })
+            .catch((error) =>{
+                setLoginError(true);
+            });
   }
 
   return (
@@ -78,8 +82,11 @@ useEffect(()=>{
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
+            
             Sign in
+           
           </Typography>
+          { loginError && <p style={{color : 'red'}}>Username or Password incorrect !</p>}
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
