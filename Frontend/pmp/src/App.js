@@ -12,6 +12,7 @@ import LoginPage from "./component/LoginPage";
 import Signup from "./component/Signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PageNotFound from "./component/PageNotFound";
+import ManageProperties from "./component/ManageProperties";
 import CustomerDashBoard from "./component/Customer/CustomerDashBoard";
 import ForgotPassword from "./component/ForgotPassword";
 import CustomerHeader from "./component/Customer/CustomerHeader";
@@ -41,6 +42,7 @@ useEffect(()=>{
         <Route path="apply/" element={<PropertyDetails />} />
         <Route path="*" element={<PageNotFound />} />
         <Route path="*" element={<PageNotFound/>} />
+          <Route path="/properties" element={<ManageProperties/>} />
         <Route path="/customer" element={<CustomerDashBoard/>}/>
         <Route path="/forgotpassword" element={<ForgotPassword />}/>
         <Route path="/changePassword/reset_pwd" element={<ChangePassword/>}/>
