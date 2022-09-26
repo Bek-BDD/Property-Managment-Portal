@@ -13,6 +13,10 @@ public class UserController {
     UaaService uaaService;
     @GetMapping("/{email}")
     public User getUserByEmail(@PathVariable String email){
-       return uaaService.getUserByEmail(email);
+
+        System.out.println(email);
+        User result = uaaService.getUserByEmail(email);
+        System.out.println(result.getEmail());
+        return result;
     }
 }

@@ -9,7 +9,7 @@ import axios from 'axios'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 export const instance = axios.create({
-baseURL:"http://localhost:8080"
+baseURL:"http://localhost:9090"
 }
 );
 root.render(

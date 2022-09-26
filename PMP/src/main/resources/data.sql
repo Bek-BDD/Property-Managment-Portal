@@ -44,3 +44,17 @@ insert into role (id,role) values (3,'admin');
 insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
             (10,false,'hiwot.alemayehu@miu.edu','a','a','a','$2a$10$Sq3je4VID3xAQvL7z9.aw.oxsi0qpFiHJMhOM1CZMjZmhjy8BIug2','',true);
 --             (10,false,'hiwot.alemayehu@miu.edu','a','a','a','$2a$10$Sq3je4VID3xAQvL7z9.aw.oxsi0qpFiHJMhOM1CZMjZmhjy8BIug2','',true);
+insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
+    (15,false,'hiwot@miu.edu','a','a','a','$2a$10$Sq3je4VID3xAQvL7z9.aw.oxsi0qpFiHJMhOM1CZMjZmhjy8BIug2','',true);
+
+insert into users_role(user_id,role_id) values (15,1);
+
+insert into property (id, area, description, name, number_of_room, price,status,type,address_id,owner_id) values ( '100', 76, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 'Safe Harbor', 1, 143,false,'Sell',1,15);
+insert into property (id, area, description, name, number_of_room, price,status,type,address_id,owner_id) values ( '110', 76, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 'Studio', 1, 143,false,'Sell',2,15);
+insert into property (id, area, description, name, number_of_room, price,status,type,address_id,owner_id) values ( '120', 76, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 'pent house', 1, 143,false,'Sell',3,15);
+
+insert into application(date,user_id,property_id) values('2020-10-11',10,100);
+insert into application(date,user_id,property_id) values('2021-11-11',10,110);
+insert into application(date,user_id,property_id) values('2022-12-11',10,120);
+
+

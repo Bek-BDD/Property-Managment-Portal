@@ -14,6 +14,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { userActions } from './Redux/UserSlice';
 import axios from 'axios';
+import { instance } from '../index';
 
 
 const theme = createTheme();
@@ -43,18 +44,18 @@ useEffect(()=>{
       "email" : data.get('email'),
       "password" : data.get('password')
     }
-      axios.post("http://localhost:8080/uaa/login",loginRequestObj)
+      instance.post("/uaa/login",loginRequestObj)
             .then((response)=>{
+              debugger;
                   localStorage.setItem("tokens",JSON.stringify(response.data))
-                  axios.get(`http://localhost:8080/users/${data.get('email')}`,{
-                   headers : {
-                       'Authorization' : 'Bearer ' +JSON.parse(localStorage.getItem('tokens')).jwtToken
-                     }
-                    })
-                  .then((response)=> {
+                  axios.get(`http://localhost:9090/users/${data.get('email')}`)
+                     .then(response=> {
+                      console.log(response);
                       localStorage.setItem("loggedUser",JSON.stringify(response.data))
                       })
-                 dispatch(userActions.login("selam"));
+                      .catch(error=>{
+                        console.log(error);
+                      })
                  window.location.reload(false);
                  navigate("/")
              })

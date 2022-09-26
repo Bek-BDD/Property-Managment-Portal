@@ -24,6 +24,10 @@ public class ApplicationController {
         return ResponseEntity.ok().body(applicationService.findAll());
     }
 
+    //////////////////
+    /////api fetch by user id
+    //////////////////
+
 
 
 

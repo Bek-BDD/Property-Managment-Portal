@@ -60,7 +60,7 @@ function ApplicationDetail(props) {
                     {props.row.history.map((historyRow) => (
                       <TableRow key={historyRow.date}>
                         <TableCell >
-                        <img
+                            <img
                                    style={{width: '120px', height: '30%'}}
                                    src='https://engineering.fb.com/wp-content/uploads/2016/04/yearinreview.jpg'
                             />

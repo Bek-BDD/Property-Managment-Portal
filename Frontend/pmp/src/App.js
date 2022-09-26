@@ -5,7 +5,7 @@ import Header from "./component/Header";
 import SplashScreen from "./component/SplashScreen";
 import AccountMenu from "./component/Customer/ProfileDropDown";
 import PropertyDetails from "./component/PropertyDetails";
-
+import OwnerAppDashBoard from "./component/Owner/OwnerAppDashBoard";
 import Cards from "./component/Cards";
 import Footer from "./component/Footer";
 import LoginPage from "./component/LoginPage";
@@ -22,6 +22,7 @@ import { useEffect,useState } from "react";
 import { ImageTable } from "./component/Customer/FavoritesTable";
 import NewEditAccount from "./component/NewEditAccount";
 import PropertyStepper from "./component/Property/PropertyStepper";
+import OwnerApplication from "./component/Owner/OwnerApplications";
 function App() {
   const[isLoggedIn,setIsLoggedIn] = useState(false)
 useEffect(()=>{
@@ -45,6 +46,7 @@ useEffect(()=>{
         <Route path="/customer" element={<CustomerDashBoard />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/changePassword/reset_pwd" element={<ChangePassword />} />
+        <Route path="ownerapplications" element={<OwnerAppDashBoard/>}/>
         <Route
           path="/customerapplications"
           element={<CustomerApplications />}
