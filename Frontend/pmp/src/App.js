@@ -1,16 +1,13 @@
-import logo from "./logo.svg";
+
 import "./App.css";
 import Header from "./component/Header";
 import SplashScreen from "./component/SplashScreen";
-
-import Cards from "./component/Cards";
 import Footer from "./component/Footer";
 import LoginPage from "./component/LoginPage";
 import Signup from "./component/Signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PageNotFound from "./component/PageNotFound";
-import EditAccount from "./component/EditAccount";
-import ChangePassword from "./component/ChangePassword";
+import ChangePassword from "./component/ProflieChangePassword";
 import NewEditAccount from "./component/NewEditAccount";
 import ForgetPassword from "./component/ForgetPassword";
 
