@@ -3,17 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import axios from 'axios'
-
-export const instance = axios.create({
-     baseURL:"http://localhost:8080",
 })
+import { store } from './Redux/store'
+import { Provider } from 'react-redux'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    
-       <App />
-     
+     <Provider store={store}>
+     <App />
+   </Provider>
+     baseURL:"http://localhost:8080",
+export const instance = axios.create({
+
+import axios from 'axios'
 );
 
 // If you want to start measuring performance in your app, pass a function
