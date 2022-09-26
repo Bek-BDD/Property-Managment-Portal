@@ -21,23 +21,23 @@ import axios from "axios";
 import {render} from "@testing-library/react";
 
 export default function PropertyCard() {
-
+debugger
 
 
     const initialState = [
-        {
-            "id": 1,
-            "name": "Safe Harbor",
-            "price": 143.0,
-            "description": "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-            "area": 76.0,
-            "numberOfRoom": 1,
-            "type": "Sell",
-            "datePosted": null,
-            "status": false,
-            "imageUrls": [],
-            "address": null
-        }
+        // {
+        //     "id": 1,
+        //     "name": "Safe Harbor",
+        //     "price": 143.0,
+        //     "description": "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+        //     "area": 76.0,
+        //     "numberOfRoom": 1,
+        //     "type": "Sell",
+        //     "datePosted": null,
+        //     "status": false,
+        //     "imageUrls": [],
+        //     "address": null
+        // }
     ]
 
     const [PropertyData, setPropertyData] = useState(initialState);
@@ -54,14 +54,13 @@ export default function PropertyCard() {
     const DeleteProperty = async (id, e) => {
 
         const result = await axios.delete("http://localhost:8080/properties/"+`${id}`);
-        getProperty();
+        window.location.reload(false);
     }
 
     useEffect(() => {
-
         getProperty();
-        DeleteProperty();
-    },  [null])
+    
+    }, [])
 
 
     return (
@@ -70,7 +69,7 @@ export default function PropertyCard() {
 
                 return (
 
-                    <Card sx={{maxWidth: 360}} onClick={showDetails} className="card-hover" {...item}>
+                    <Card sx={{maxWidth: 360}} onClick={showDetails} className="card-hover" {...item} key={item.id}>
                         <CardHeader
                             avatar={
                                 <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">

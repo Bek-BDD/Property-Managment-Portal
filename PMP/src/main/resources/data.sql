@@ -11,8 +11,6 @@ insert into address (id, state, city, zip, street) values (10, 'Delaware', 'Wilm
 
 
 
-insert into users ( id, email, firstname, lastname, imageurl, password,deleted, active) values ( '6', 'hiwot.alemayehu@miu.edu', 'Virginia', 'de Castelain', 'http://dummyimage.com/219x100.png/5fa2dd/ffffff', '$2a$12$uPTgn0ayVBmHvobGv6..h.dU45mHqHa4pmblU7ch3eaXm1EtY1azC',false, true);
-
 insert into property (id, area, description, name, number_of_room, price,status,type) values ( '1', 76, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 'Safe Harbor', 1, 143,false,'Sell');
 insert into property (id, area, description, name, number_of_room, price,status,type)  values ('2', 68, 'Aenean lectus. Pellentesque eget nunc.  condimentum.', 'Mills LLC', 3,  174,false,'Sell');
 insert into property (id, area, description, name, number_of_room, price,status,type)  values ( '3', 43, 'Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. ',' Country Side', 5, 63,false,'Rent');
@@ -45,4 +43,4 @@ insert into role (id,role) values (3,'admin');
 
 insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
             (10,false,'hiwot.alemayehu@miu.edu','a','a','a','$2a$10$Sq3je4VID3xAQvL7z9.aw.oxsi0qpFiHJMhOM1CZMjZmhjy8BIug2','',true);
-            (10,false,'hiwot.alemayehu@miu.edu','a','a','a','$2a$10$Sq3je4VID3xAQvL7z9.aw.oxsi0qpFiHJMhOM1CZMjZmhjy8BIug2','',true);
+--             (10,false,'hiwot.alemayehu@miu.edu','a','a','a','$2a$10$Sq3je4VID3xAQvL7z9.aw.oxsi0qpFiHJMhOM1CZMjZmhjy8BIug2','',true);
