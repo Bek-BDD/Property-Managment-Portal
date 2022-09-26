@@ -13,120 +13,84 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
+import { useState } from 'react';
 import { userActions } from './Redux/UserSlice';
 import axios from 'axios';
-import { useState,useEffect } from 'react';
 //import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
-export default function() {
-const [ verify,setVerify]= useState(false);
-    useEffect(()=>{
-        const queryParams = new URLSearchParams(window.location.search)
-        const token = queryParams.get("token")
-        axios.get(`http://localhost:9090/reset_pwd?token=${token}`)
-             .then((response)=>{
-                setVerify(true);
-             })
-        
-    },[])
-
-
+export default function(){
+  const state = useSelector((state)=> state)
+  const [sentEmail,setSentEmail] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    changePassword(data);
-  };
-  const changePassword = (data)=>{
-    const newPass = {
-        password : data.get('password'),
-        email : localStorage.getItem('resetPwd')
-    }
+    loginRequest(data);
 
-      axios.post("http://localhost:9090/uaa/changePassword",newPass)
+  };
+  const loginRequest = (data)=>{
+    localStorage.setItem("resetPwd",data.get('email'))
+    const loginRequestObj = {
+        email    : data.get('email'),
+        password : ""
+    }
+      axios.post("http://localhost:9090/uaa/resetpassword",loginRequestObj)
             .then((response)=>{
-                localStorage.setItem("loggedUser",JSON.stringify(response.data))
-                 navigate("/customer")
-             });
+                setSentEmail(true);
+            });
   }
 
   return (
-    
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "#304EF2" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Change password
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            {isValid ? validInput : inValidInput}
-
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
-        > 
+        >
           <Avatar sx={{ m: 1, bgcolor: '#304EF2' }}>
             <LockOutlinedIcon />
           </Avatar>
-         
           <Typography component="h1" variant="h5">
-                  Change Password
+            Forgot password
           </Typography>
-          { (verify) ? 
+          {sentEmail && <div style={{color:'red'}}> reset link email sent </div>}
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
               fullWidth
-              id="password"
-              label="new Password"
-              name="password"
-              //autoComplete="email"
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
               autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="confirmpassword"
-              label="Confirm Password"
-              type="confirmpassword"
-              id="confirmpassword"
-              autoComplete="current-password"
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2 }} 
             >
-              Confirm Password
+               Reset password
             </Button>
-          </Box> :<div> Invalid token </div> }
-
+            <Grid container>
+            <Grid item xs>
+                <Link to="/login" variant="body2">
+                    Back
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
         </Box>
       </Container>
     </ThemeProvider>
-    
   );
-}
 }
