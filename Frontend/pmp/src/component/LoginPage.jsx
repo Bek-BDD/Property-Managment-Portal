@@ -3,8 +3,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -44,10 +43,10 @@ useEffect(()=>{
       "email" : data.get('email'),
       "password" : data.get('password')
     }
-      axios.post("http://localhost:9090/uaa/login",loginRequestObj)
+      axios.post("http://localhost:8080/uaa/login",loginRequestObj)
             .then((response)=>{
                   localStorage.setItem("tokens",JSON.stringify(response.data))
-                  axios.get(`http://localhost:9090/users/${data.get('email')}`,{
+                  axios.get(`http://localhost:8080/users/${data.get('email')}`,{
                    headers : {
                        'Authorization' : 'Bearer ' +JSON.parse(localStorage.getItem('tokens')).jwtToken
                      }
@@ -97,7 +96,7 @@ useEffect(()=>{
               name="email"
               autoComplete="email"
               autoFocus
-            /> */}
+            /> 
             <TextField
               margin="normal"
               required

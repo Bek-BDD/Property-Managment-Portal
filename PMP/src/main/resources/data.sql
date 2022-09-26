@@ -13,4 +13,4 @@ insert into role (id,role) values (3,'admin');
 
 
 insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
-            (1,false,'hiwot.alemayehu@miu.edu','a','a','a','$2a$10$Sq3je4VID3xAQvL7z9.aw.oxsi0qpFiHJMhOM1CZMjZmhjy8BIug2','',true);
+            (10,false,'hiwot.alemayehu@miu.edu','a','a','a','$2a$10$Sq3je4VID3xAQvL7z9.aw.oxsi0qpFiHJMhOM1CZMjZmhjy8BIug2','',true);

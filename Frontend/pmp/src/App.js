@@ -12,7 +12,6 @@ import LoginPage from "./component/LoginPage";
 import Signup from "./component/Signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PageNotFound from "./component/PageNotFound";
-import EditAccount from "./component/EditAccount";
 import CustomerDashBoard from "./component/Customer/CustomerDashBoard";
 import ForgotPassword from "./component/ForgotPassword";
 import CustomerHeader from "./component/Customer/CustomerHeader";
@@ -28,9 +27,8 @@ useEffect(()=>{
 }},[])
   return (
     <BrowserRouter>
-      <Header />
        {!(isLoggedIn)? 
-       <Header /> : 
+          <Header /> : 
        <CustomerHeader />
       }
       

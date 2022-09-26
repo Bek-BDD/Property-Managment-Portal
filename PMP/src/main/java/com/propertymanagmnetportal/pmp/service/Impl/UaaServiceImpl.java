@@ -128,12 +128,12 @@ public class UaaServiceImpl implements UaaService {
         newUser.setEmail(userDTO.getEmail());
         newUser.setFirstname(userDTO.getFirstname());
         newUser.setLastname(userDTO.getLastname());
-        if(userDTO.getCity() !=null && userDTO.getZip_code() != null && userDTO.getState() != null &&
-           userDTO.getStreet_number() != null) {
+        if(userDTO.getCity() == null || userDTO.getZip_code() == null||  userDTO.getState() == null ||
+                userDTO.getStreet_number() == null){
                 Address address = new Address();
                 address.setCity(userDTO.getCity());
                 address.setStreet(userDTO.getStreet_number());
-                address.setZip(userDTO.getZip_code().equals("") ? Integer.parseInt(userDTO.getZip_code()) : null);
+            address.setZip(userDTO.getZip_code().equals("") ? null : Integer.parseInt(userDTO.getZip_code()));
                 address.setState(userDTO.getState());
                 addressRepository.save(address);
         }

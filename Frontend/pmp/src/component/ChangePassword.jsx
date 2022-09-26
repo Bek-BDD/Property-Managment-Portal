@@ -25,7 +25,7 @@ const [ verify,setVerify]= useState(false);
     useEffect(()=>{
         const queryParams = new URLSearchParams(window.location.search)
         const token = queryParams.get("token")
-        axios.get(`http://localhost:9090/reset_pwd?token=${token}`)
+        axios.get(`http://localhost:8080/reset_pwd?token=${token}`)
              .then((response)=>{
                 setVerify(true);
              })
@@ -45,7 +45,7 @@ const [ verify,setVerify]= useState(false);
         email : localStorage.getItem('resetPwd')
     }
 
-      axios.post("http://localhost:9090/uaa/changePassword",newPass)
+      axios.post("http://localhost:8080/uaa/changePassword",newPass)
             .then((response)=>{
                 localStorage.setItem("loggedUser",JSON.stringify(response.data))
                  navigate("/customer")
@@ -60,25 +60,6 @@ const [ verify,setVerify]= useState(false);
         <Box
           sx={{
             marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "#304EF2" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Change password
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            {isValid ? validInput : inValidInput}
-
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -128,5 +109,4 @@ const [ verify,setVerify]= useState(false);
     </ThemeProvider>
     
   );
-}
 }

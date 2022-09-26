@@ -21,9 +21,7 @@ import axios from 'axios';
 const theme = createTheme();
 
 export default function(){
-  const state = useSelector((state)=> state)
-  const [sentEmail,setSentEmail] = useState(false);
-  const dispatch = useDispatch();
+   const [sentEmail,setSentEmail] = useState(false);
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -37,7 +35,7 @@ export default function(){
         email    : data.get('email'),
         password : ""
     }
-      axios.post("http://localhost:9090/uaa/resetpassword",loginRequestObj)
+      axios.post("http://localhost:8080/uaa/resetpassword",loginRequestObj)
             .then((response)=>{
                 setSentEmail(true);
             });
