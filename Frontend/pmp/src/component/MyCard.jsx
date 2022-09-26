@@ -19,6 +19,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import "../App.css";
 
 export default function RecipeReviewCard(props) {
+  debugger;
   const [expanded, setExpanded] = React.useState(false);
   const [liked, setLiked] = React.useState(false);
 
@@ -32,7 +33,7 @@ export default function RecipeReviewCard(props) {
     } else {
       // remove from datatbase
     }
-    setLiked(!liked);
+    setLiked(!liked)
   }
   function showDetails(id) {
     console.log(id);
@@ -57,8 +58,8 @@ export default function RecipeReviewCard(props) {
           <CardMedia
             component="img"
             height="194"
-            image={props.value.imageUrls[0].url}
-            alt="Paella dish"
+           image={props.value.imageUrls[0]?.url}
+            alt={"Paella dish"}
           />
           <CardContent>
             <Typography variant="body1" color="text.secondary">

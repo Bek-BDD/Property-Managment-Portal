@@ -9,6 +9,7 @@ import com.propertymanagmnetportal.pmp.dto.UserDTO;
 import com.propertymanagmnetportal.pmp.entity.Address;
 import com.propertymanagmnetportal.pmp.entity.Role;
 import com.propertymanagmnetportal.pmp.entity.User;
+import com.propertymanagmnetportal.pmp.repository.AddressRepository;
 import com.propertymanagmnetportal.pmp.repository.RoleRepository;
 import com.propertymanagmnetportal.pmp.repository.UserBaseRepository;
 import com.propertymanagmnetportal.pmp.security.JwtUtil;
@@ -62,6 +63,9 @@ public class UaaServiceImpl implements UaaService {
     @Autowired
     AwsUtil awsUtil;
 
+    @Autowired
+    AddressRepository addressRepository;
+
     private List<String> blackList = new ArrayList<>();
 
     public LoginResponse login(LoginRequest request){
@@ -94,7 +98,7 @@ public class UaaServiceImpl implements UaaService {
             User user = userBaseRepository.findByEmail(email);
             user.setResetpasswordtoken(token);
             userBaseRepository.save(user);
-            String resetURL = SiteUrl.getSiteURL(request) + "/reset_pwd?token="+token;
+            String resetURL = "http://localhost:3000/changePassword"+ "/reset_pwd?token="+token;
             emailService.sendEmail(user.getEmail(),"Password reset Link",resetURL);
             return resetURL;
         }else{
@@ -103,7 +107,6 @@ public class UaaServiceImpl implements UaaService {
     }
 
     public User getUserFromResetToken(String resetPasswordToken){
-
        // System.out.println(userBaseRepository.findByResetpasswordtoken(resetPasswordToken).getFirstname());
         return userBaseRepository.findByResetpasswordtoken(resetPasswordToken);
     }
@@ -125,15 +128,18 @@ public class UaaServiceImpl implements UaaService {
         newUser.setEmail(userDTO.getEmail());
         newUser.setFirstname(userDTO.getFirstname());
         newUser.setLastname(userDTO.getLastname());
-
-        Address address  = new Address();
-        address.setCity(userDTO.getCity());
-        address.setStreet(userDTO.getStreet_number());
-        address.setZip(Integer.parseInt(userDTO.getZip_code()));
-        address.setState(userDTO.getState());
-
+        if(userDTO.getCity() == null || userDTO.getZip_code() == null||  userDTO.getState() == null ||
+                userDTO.getStreet_number() == null){
+                Address address = new Address();
+                address.setCity(userDTO.getCity());
+                address.setStreet(userDTO.getStreet_number());
+            address.setZip(userDTO.getZip_code().equals("") ? null : Integer.parseInt(userDTO.getZip_code()));
+                address.setState(userDTO.getState());
+                addressRepository.save(address);
+        }
         //Image
-        newUser.setImageurl(awsUtil.uploadFile(userDTO.getImages()));
+        if(userDTO.getImages() != null)
+               newUser.setImageurl(awsUtil.uploadFile(userDTO.getImages()));
 
         Role role = roleRepository.findByRole(userDTO.getRoletype());
         role.setRole(userDTO.getRoletype());
@@ -156,9 +162,24 @@ public class UaaServiceImpl implements UaaService {
         return false;
     }
 
+    public User getUserByEmail(String email){
+        return userBaseRepository.findByEmail(email);
+    }
+
+    @Override
+
+    public User changePassword(String email, String password) {
+        User result = userBaseRepository.findByEmail(email);
+        result.setPassword(passwordEncoder.encode(password));
+        userBaseRepository.save(result);
+        return result;
+    }
     @Override
     public List<User> findAll() {
-        return userBaseRepository.findAll();
+        return userBaseRepository.findAll()
+                .stream()
+                .filter(us->us.isDeleted()==false)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -168,6 +189,7 @@ public class UaaServiceImpl implements UaaService {
                 .stream()
                 .filter(user->user.getRole()
                         .contains( new Role("customer")))
+                .filter(us->us.isDeleted()==false)
                 .collect(Collectors.toList());
     }
 
@@ -178,6 +200,7 @@ public class UaaServiceImpl implements UaaService {
                 .filter(s->s.getId()==id)
                 .filter(user->user.getRole()
                         .contains( new Role("customer")))
+                .filter(us->us.isDeleted()==false)
                 .collect(Collectors.toList()).stream().findAny().get();
 
 //        return Optional.of(users.stream().filter(user -> user.getId() == id).findAny().get());
@@ -192,7 +215,9 @@ public class UaaServiceImpl implements UaaService {
                         .contains( new Role("customer")))
                 .filter(us->us.isDeleted()==true)
                 .collect(Collectors.toList()).stream().findAny().get();
+        userBaseRepository.updateDeleteStatus(id);
 //        userBaseRepository.delete(u);
+
     }
 
     @Override
@@ -201,6 +226,7 @@ public class UaaServiceImpl implements UaaService {
                 .stream()
                 .filter(user->user.getRole()
                         .contains( new Role("owner")))
+                .filter(us->us.isDeleted()==false)
                 .collect(Collectors.toList());
     }
     @Override
@@ -210,6 +236,7 @@ public class UaaServiceImpl implements UaaService {
                 .filter(s->s.getId()==id)
                 .filter(user->user.getRole()
                         .contains( new Role("owner")))
+                .filter(us->us.isDeleted()==false)
                 .collect(Collectors.toList()).stream().findAny().get();
     }
 
@@ -222,6 +249,7 @@ public class UaaServiceImpl implements UaaService {
                         .contains( new Role("owner")))
                 .filter(us->us.isDeleted()==true)
                 .collect(Collectors.toList()).stream().findAny().get();
+        userBaseRepository.updateDeleteStatus(id);
 //        userBaseRepository.delete(u);
     }
 

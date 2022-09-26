@@ -1,75 +1,71 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link, useNavigate } from "react-router-dom";
-import { instance } from "../index";
-import { useState } from "react";
-import { validateEmail } from "../validation";
+import  React,{useState,useEffect} from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Link, useNavigate } from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import { userActions } from './Redux/UserSlice';
+import axios from 'axios';
+
 
 const theme = createTheme();
 
-export default function () {
-  const navigator = useNavigate();
-  const [isValid, setIsValid] = useState(true);
+export default function() {
+  const[isLoggedIn,setIsLoggedIn] = useState(false)
+  const[loginError,setLoginError] = useState(false)
 
-  const inValidInput = (
-    <TextField
-      error
-      helperText="Incorrect email format."
-      margin="normal"
-      required
-      fullWidth
-      id="email"
-      label="Email Address"
-      name="email"
-      autoComplete="email"
-    />
-  );
-  const validInput = (
-    <TextField
-      margin="normal"
-      required
-      fullWidth
-      id="email"
-      label="Email Address"
-      name="email"
-      autoComplete="email"
-      autoFocus
-    />
-  );
-
+useEffect(()=>{
+  if(localStorage.getItem("tokens") != null){setIsLoggedIn(true)
+}},[])
+  const state = useSelector((state)=> state)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    if (validateEmail(data.get("email"))) {
-      setIsValid(true);
-      instance
-        .post("/uaa/login", {
-          email: data.get("email"),
-          password: data.get("password"),
-        })
-        .then((response) => {
-          localStorage.setItem("token", response.data.jwtToken);
-          localStorage.setItem("refereshToken", response.data.refereshToken);
-          navigator("/");
-        })
-        .catch((err) => console.log(err));
-    } else {
-      setIsValid(false);
-    }
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+    });
+    loginRequest(data);
+
   };
+  const loginRequest = (data)=>{
+    const loginRequestObj = {
+      "email" : data.get('email'),
+      "password" : data.get('password')
+    }
+      axios.post("http://localhost:8080/uaa/login",loginRequestObj)
+            .then((response)=>{
+                  localStorage.setItem("tokens",JSON.stringify(response.data))
+                  axios.get(`http://localhost:8080/users/${data.get('email')}`,{
+                   headers : {
+                       'Authorization' : 'Bearer ' +JSON.parse(localStorage.getItem('tokens')).jwtToken
+                     }
+                    })
+                  .then((response)=> {
+                      localStorage.setItem("loggedUser",JSON.stringify(response.data))
+                      })
+                 dispatch(userActions.login("selam"));
+                 window.location.reload(false);
+                 navigate("/")
+             })
+            .catch((error) =>{
+                setLoginError(true);
+            });
+  }
 
   return (
+    <>
+    { (!isLoggedIn) ? 
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -85,16 +81,13 @@ export default function () {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
+            
             Sign in
+           
           </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            {isValid ? validInput : inValidInput}
-            {/* <TextField
+          { loginError && <p style={{color : 'red'}}>Username or Password incorrect !</p>}
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField
               margin="normal"
               required
               fullWidth
@@ -103,7 +96,7 @@ export default function () {
               name="email"
               autoComplete="email"
               autoFocus
-            /> */}
+            /> 
             <TextField
               margin="normal"
               required
@@ -123,12 +116,13 @@ export default function () {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              
             >
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link to="/forgetpassword" variant="body2">
+            <Grid item xs>
+                <Link to="/forgotpassword" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
@@ -142,5 +136,7 @@ export default function () {
         </Box>
       </Container>
     </ThemeProvider>
+    :<>{navigate("/")}</> }
+    </>
   );
 }

@@ -44,6 +44,12 @@ body {
 a{
     text-decoration: none;
 }
+
+.customerHeader{
+    display: flex;
+    justify-content: space-between;
+}
+
 .mid-container {
     width: 70vw;
     margin: 100px auto;
