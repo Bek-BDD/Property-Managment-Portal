@@ -190,8 +190,9 @@ public class UaaServiceImpl implements UaaService {
                 .filter(s->s.getId()==id)
                 .filter(user->user.getRole()
                         .contains( new Role("customer")))
+                .filter(us->us.isDeleted()==true)
                 .collect(Collectors.toList()).stream().findAny().get();
-        userBaseRepository.delete(u);
+//        userBaseRepository.delete(u);
     }
 
     @Override
@@ -219,8 +220,9 @@ public class UaaServiceImpl implements UaaService {
                 .filter(s->s.getId()==id)
                 .filter(user->user.getRole()
                         .contains( new Role("owner")))
+                .filter(us->us.isDeleted()==true)
                 .collect(Collectors.toList()).stream().findAny().get();
-        userBaseRepository.delete(u);
+//        userBaseRepository.delete(u);
     }
 
 

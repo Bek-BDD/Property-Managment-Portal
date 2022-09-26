@@ -15,4 +15,7 @@ public interface UserBaseRepository extends JpaRepository<User,Integer> {
     User findByResetpasswordtoken(String resetPaswordToken);
     @Query("update User u set u.active= false where u.id=:id")
     void updateActiveStatus(int id);
+
+    @Query("update User u set u.deleted= false where u.id=:id")
+    void updateDeleteStatus(int id);
 }
