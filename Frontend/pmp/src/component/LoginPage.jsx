@@ -73,12 +73,12 @@ useEffect(()=>{
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: '#304EF2' }}>
+          <Avatar sx={{ m: 1, bgcolor: "#304EF2" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -97,7 +97,7 @@ useEffect(()=>{
               name="email"
               autoComplete="email"
               autoFocus
-            />
+            /> */}
             <TextField
               margin="normal"
               required
@@ -108,10 +108,10 @@ useEffect(()=>{
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth

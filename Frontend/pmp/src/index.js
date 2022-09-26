@@ -3,8 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import ReduxStore from './component/Redux/ReduxStore';
-import { Provider } from 'react-redux';
+import axios from 'axios'
+
+export const instance = axios.create({
+     baseURL:"http://localhost:8080",
+})
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
      <Provider store={ReduxStore}>
@@ -16,3 +20,4 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+

@@ -14,12 +14,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PageNotFound from "./component/PageNotFound";
 import EditAccount from "./component/EditAccount";
 import CustomerDashBoard from "./component/Customer/CustomerDashBoard";
-import CustomerHeader from "./component/Customer/CustomerHeader";
 import ForgotPassword from "./component/ForgotPassword";
+import CustomerHeader from "./component/Customer/CustomerHeader";
 import ChangePassword from "./component/ChangePassword";
 import CustomerApplications from "./component/Customer/CustomerApplications";
 import { useEffect,useState } from "react";
 import { ImageTable } from "./component/Customer/FavoritesTable";
+import NewEditAccount from "./component/NewEditAccount";
 function App() {
   const[isLoggedIn,setIsLoggedIn] = useState(false)
 useEffect(()=>{
@@ -36,8 +37,8 @@ useEffect(()=>{
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/editaccount" element={<EditAccount />} />
-        <Route path="/changeaccount" element={<PageNotFound />} />
+        <Route path="/editaccount" element={ <NewEditAccount/> } />
+        <Route path="/changeaccount" element={<PageNotFound/>} />
         <Route path="/" element={<SplashScreen />} />
         <Route path="apply/" element={<PropertyDetails />} />
         <Route path="*" element={<PageNotFound />} />
