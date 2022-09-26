@@ -57,7 +57,7 @@ export default function RecipeReviewCard(props) {
           <CardMedia
             component="img"
             height="194"
-            image={props.value.imageUrls[0].url}
+          //  image={props.value.imageUrls[0].url}
             alt="Paella dish"
           />
           <CardContent>

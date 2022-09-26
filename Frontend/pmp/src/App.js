@@ -20,7 +20,6 @@ import ChangePassword from "./component/ChangePassword";
 import CustomerApplications from "./component/Customer/CustomerApplications";
 import { useEffect,useState } from "react";
 import { ImageTable } from "./component/Customer/FavoritesTable";
-import ChangePassword from "./component/ProflieChangePassword";
 import NewEditAccount from "./component/NewEditAccount";
 function App() {
   const[isLoggedIn,setIsLoggedIn] = useState(false)
