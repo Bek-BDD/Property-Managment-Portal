@@ -17,23 +17,55 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { ExpandMore } from "@mui/icons-material";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import "../App.css";
+import { useNavigate } from "react-router-dom";
+import { instance } from "../index";
 
 export default function RecipeReviewCard(props) {
-  
-  const [expanded, setExpanded] = React.useState(false);
-  const [liked, setLiked] = React.useState(false);
+  const [liked, setLiked] = React.useState(props.state);
+  const navigator = useNavigate();
+  const address =
+    props.value.address.street +
+    ", " +
+    props.value.address.city +
+    ", " +
+    props.value.address.state +
+    " " +
+    props.value.address.zip;
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-  function heart() {
-    console.log("heart");
-    if (liked) {
-      // send to database liked
+  function heart(id) {
+    const propertyId = id;
+    let userId = JSON.parse(localStorage.getItem("loggedUser"));
+    userId = userId?.id;
+    debugger
+    if (localStorage.getItem("tokens") == null) {
+      navigator("/login");
     } else {
-      // remove from datatbase
+      if (!liked) {
+        // send to database liked
+        instance
+          .post('/favorites?user_id='+userId+'&'+'property_id='+propertyId)
+          .then((response) => {
+            setLiked(true);
+          })
+          .catch((err) => {
+            console.log(err);
+            setLiked(false);
+          });
+      } else {
+        console.log("remove");
+        // remove from datatbase
+        instance
+          .delete('/favorites?user_id='+userId+'&&'+'property_id='+propertyId)
+          .then((response) => {
+            setLiked(false);
+            console.log(response.data);
+          })
+          .catch((err) => {
+            console.log(err);
+            setLiked(true);
+          });
+      }
     }
-    setLiked(!liked)
   }
   function showDetails(id) {
     console.log(id);
@@ -41,10 +73,7 @@ export default function RecipeReviewCard(props) {
 
   return (
     <div>
-      <Card
-        sx={{ maxWidth: 360 }}
-        className="card-hover"
-      >
+      <Card sx={{ maxWidth: 360 }} className="card-hover">
         <div onClick={() => showDetails(props.value.id)}>
           <CardHeader
             avatar={
@@ -58,8 +87,8 @@ export default function RecipeReviewCard(props) {
           <CardMedia
             component="img"
             height="194"
-           image={props.value.imageUrls[0]?.url}
-            alt={"Paella dish"}
+            image={props.value.imageUrls[0]?.url}
+            alt={props.value.name}
           />
           <CardContent>
             <Typography variant="body1" color="text.secondary">
@@ -71,10 +100,16 @@ export default function RecipeReviewCard(props) {
             <Typography variant="body1" color="text.primary">
               Price : {props.value.price}$
             </Typography>
+            <Typography variant="body2" >
+              {address}
+            </Typography>
           </CardContent>
         </div>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites" onClick={heart}>
+          <IconButton
+            aria-label="add to favorites"
+            onClick={() => heart(props.value.id)}
+          >
             {liked ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />}
           </IconButton>
         </CardActions>

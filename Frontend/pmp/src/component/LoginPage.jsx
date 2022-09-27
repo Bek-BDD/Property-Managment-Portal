@@ -29,6 +29,7 @@ useEffect(()=>{
   const state = useSelector((state)=> state)
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -39,6 +40,7 @@ useEffect(()=>{
     loginRequest(data);
 
   };
+
   const loginRequest = (data)=>{
     const loginRequestObj = {
       "email" : data.get('email'),
@@ -48,16 +50,14 @@ useEffect(()=>{
             .then((response)=>{
               debugger;
                   localStorage.setItem("tokens",JSON.stringify(response.data))
-                  axios.get(`http://localhost:9090/users/${data.get('email')}`)
-                     .then(response=> {
-                      console.log(response);
+                  axios.get(`http://localhost:8080/users/${data.get('email')}`)
+                  .then((response)=> {
+                    console.log(response.data);
                       localStorage.setItem("loggedUser",JSON.stringify(response.data))
+                      window.location.reload(false);
+                      navigate("/")
                       })
-                      .catch(error=>{
-                        console.log(error);
-                      })
-                 window.location.reload(false);
-                 navigate("/")
+               
              })
             .catch((error) =>{
                 setLoginError(true);

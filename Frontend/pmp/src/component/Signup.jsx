@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
+  Alert,
   FormControl,
   InputLabel,
   MenuItem,
@@ -20,7 +21,7 @@ import {
   Select,
 } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { validateEmail } from "../validation";
 import axios from "axios";
 
@@ -31,6 +32,8 @@ export default function () {
 
   const [validEmail, setValidEmail] = useState(true);
   const [selectedFile,setSelectedFile] =useState();
+  const [isSigned,setIsSigned] = useState(true);
+  const navigator = useNavigate();
 
   const inValidInput = (
     <TextField
@@ -64,10 +67,10 @@ export default function () {
 
     const data = new FormData(event.currentTarget);
 
-    data.append("city","Fairfield")
-    data.append("state","Fairfield")
-    data.append("street_number","123")
-    data.append("zip_code","52557")
+    data.append("city","")
+    data.append("state","")
+    data.append("street_number","")
+    data.append("zip_code","1000")
 
     
     const config = {
@@ -80,8 +83,11 @@ export default function () {
       setValidEmail(true);
       instance
         .post("/uaa/signupimg",data,config)
-        .then((response) => console.log(response.data))
-        .catch((err) => console.log(err));
+        .then((response) => {
+          navigator('/login') 
+          setIsSigned(true)
+        })
+        .catch((err) => setIsSigned(false));
     } else {
       setValidEmail(false);
     }
@@ -123,6 +129,8 @@ export default function () {
             onSubmit={handleSubmit}
             sx={{ mt: 3 }}
           >
+            {isSigned ? null : <Alert xs={{mb:4}} severity="error">Email already exist</Alert>}
+
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField

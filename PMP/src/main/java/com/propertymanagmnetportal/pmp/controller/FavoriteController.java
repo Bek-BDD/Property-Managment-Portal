@@ -3,12 +3,14 @@ package com.propertymanagmnetportal.pmp.controller;
 import com.propertymanagmnetportal.pmp.entity.Property;
 import com.propertymanagmnetportal.pmp.service.FavoriteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/favorites")
+@CrossOrigin
 public class FavoriteController {
 
     @Autowired
@@ -32,5 +34,10 @@ public class FavoriteController {
     @DeleteMapping("/{id}")
     public void removeFavorite(@PathVariable int id){
         favoriteService.removeFavorite(id);
+    }
+
+    @DeleteMapping()
+    public void removeFavouriteByUserIdAndPropertyId(@RequestParam int user_id, @RequestParam int property_id){
+       favoriteService.deleteFavouriteByUserIdAndPropertyId(user_id,property_id);
     }
 }
