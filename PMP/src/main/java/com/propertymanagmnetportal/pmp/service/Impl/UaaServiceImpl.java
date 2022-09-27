@@ -4,7 +4,6 @@ import com.propertymanagmnetportal.pmp.Exceptions.CredentialException;
 import com.propertymanagmnetportal.pmp.Exceptions.EmailExistException;
 import com.propertymanagmnetportal.pmp.Utility.AwsUtil;
 import com.propertymanagmnetportal.pmp.Utility.EmailService;
-import com.propertymanagmnetportal.pmp.Utility.SiteUrl;
 import com.propertymanagmnetportal.pmp.dto.UserDTO;
 import com.propertymanagmnetportal.pmp.entity.Address;
 import com.propertymanagmnetportal.pmp.entity.Role;
@@ -14,7 +13,6 @@ import com.propertymanagmnetportal.pmp.repository.RoleRepository;
 import com.propertymanagmnetportal.pmp.repository.UserBaseRepository;
 import com.propertymanagmnetportal.pmp.security.JwtUtil;
 import com.propertymanagmnetportal.pmp.security.MyUserDetailService;
-import com.propertymanagmnetportal.pmp.security.MyUserDetails;
 import com.propertymanagmnetportal.pmp.security.entity.LoginRequest;
 import com.propertymanagmnetportal.pmp.security.entity.LoginResponse;
 import com.propertymanagmnetportal.pmp.service.UaaService;
@@ -30,13 +28,12 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UaaServiceImpl implements UaaService {
+class UaaServiceImpl implements UaaService {
     @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
@@ -244,15 +241,25 @@ public class UaaServiceImpl implements UaaService {
     public void deleteOwnerById(int id) {
         User u = userBaseRepository.findAll()
                 .stream()
-                .filter(s->s.getId()==id)
-                .filter(user->user.getRole()
-                        .contains( new Role("owner")))
-                .filter(us->us.isDeleted()==true)
+                .filter(s -> s.getId() == id)
+                .filter(user -> user.getRole()
+                        .contains(new Role("owner")))
+                .filter(us -> us.isDeleted() == true)
                 .collect(Collectors.toList()).stream().findAny().get();
         userBaseRepository.updateDeleteStatus(id);
 //        userBaseRepository.delete(u);
     }
 
+    @Override
+    public void deleteById(int id) {
 
+        userBaseRepository.deleteById(id);
+    }
+
+    @Override
+    public void update(int id) {
+
+        userBaseRepository.save(userBaseRepository.findById(id).get());
+    }
 
 }

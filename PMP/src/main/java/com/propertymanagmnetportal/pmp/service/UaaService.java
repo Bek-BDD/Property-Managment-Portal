@@ -6,7 +6,6 @@ import com.propertymanagmnetportal.pmp.security.entity.LoginRequest;
 import com.propertymanagmnetportal.pmp.security.entity.LoginResponse;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.http.HttpRequest;
 import java.util.List;
 
 public interface UaaService {
@@ -37,4 +36,10 @@ public interface UaaService {
     public User findOwnerById(int id);
 
     public void deleteOwnerById(int id);
+
+    void deleteById(int id);
+
+    void update(int id);
+
+
 }

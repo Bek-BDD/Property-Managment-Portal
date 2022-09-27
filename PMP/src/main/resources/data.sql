@@ -42,5 +42,26 @@ insert into role (id,role) values (3,'admin');
 
 
 insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
-            (10,false,'hiwot.alemayehu@miu.edu','a','a','a','$2a$10$Sq3je4VID3xAQvL7z9.aw.oxsi0qpFiHJMhOM1CZMjZmhjy8BIug2','',true);
---             (10,false,'hiwot.alemayehu@miu.edu','a','a','a','$2a$10$Sq3je4VID3xAQvL7z9.aw.oxsi0qpFiHJMhOM1CZMjZmhjy8BIug2','',true);
+            (1,false,'hiwot.alemayehu@miu.edu','Hiwot','image_url','Alem','$2a$10$Sq3je4ug2','',true);
+--             (10,false,'hiwot.alemayehu@miu.edu','hiwot','alemayehu','a','$CZMjZmhjy8BIug2','',true);
+
+
+insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
+    (2,false,'Joe@miu.edu','Joe','image_url','Keven','oxsi0qpZmhjy8BIug2','',false);
+--
+
+insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
+    (3,false,'Anna@miu.edu','Anna','image_url','Michel','OM1CZMjZmhjy8BIug2','',true);
+--
+
+insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
+    (4,true,'David@miu.edu','David','image_url','Anderson','oxCZMjZmhjy8BIug2','',false);
+--
+
+insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
+    (5,false,'Aden@miu.edu','Aden','image_url','Samuel','CZMjZmhjy8BIug2','',true);
+--
+
+insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
+    (6,false,'Tom@miu.edu','Cruz','image_url','Snow','M1CZMjZmhjy8BIug2','',true);
+--

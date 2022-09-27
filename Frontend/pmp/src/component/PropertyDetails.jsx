@@ -27,6 +27,7 @@ const PropertyDetails=()=>{
 
     const pictures = ["https://wp-tid.zillowstatic.com/bedrock/app/uploads/sites/5/2022/08/ZG_Brand_LA_0322_Harvard-_ExtFront_1504_4936px_NO-PPL_desktopImg2x-scaled.webp","https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg","https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg","https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg","https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg","https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg"]
      const [bannerimage, setBannerimage]=useState(pictures[0])
+
     return(
         <div className='card-container mid-container'>
             <div className=" fr3">

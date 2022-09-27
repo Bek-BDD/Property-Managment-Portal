@@ -21,7 +21,8 @@ export default function(){
             <Link to={"/property-detail"}>  <Button variant="text">Property Details</Button> </Link>
             <Link to={"/login"} >  <Button variant="text">Login</Button> </Link>
             <Link to={"/create-property"} >  <Button variant="text">Create Property</Button> </Link>
-          
+                <Link to={"/AdminPage"} >  <Button variant="text">Admin Page</Button> </Link>
+
             </div>
         
             
