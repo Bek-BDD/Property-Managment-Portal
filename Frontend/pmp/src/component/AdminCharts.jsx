@@ -31,16 +31,28 @@ export default function AdminCharts(){
 
     const [PropertyData, setPropertyData] = useState(initialState);
 
+    const [stateData, setStateData] = useState(initialState);
+
+
     const getProperty = async () => {
         const result = await axios.get('http://localhost:8080/properties');
         setPropertyData(result.data);
+        setStateData(result.data.address.state);
     }
+
 
     useEffect(() => {
         getProperty();
     }, []);
 
-    console.log(PropertyData);
+    // console.log(PropertyData);
+    // console.log(stateData);
+    // console.log(PropertyData[0].address);
+
+    PropertyData.forEach((item)=>{
+        console.log(item.address.state);
+    })
+
 
     const options = {
         responsive: true,
@@ -56,14 +68,42 @@ export default function AdminCharts(){
         },
     };
 
-    const labels = ['Iowa', 'Minnesota', 'Texas', 'Seattle', 'Virginia', 'Washington', 'Portland'];
 
+
+    const arr = ['a', 'b', 'a', 'a', 'c', 'c'];
+
+    const count = {};
+
+    for (let index = 0; index < PropertyData.length; index++) {
+        const element = PropertyData[index].address.state;
+
+        if (count[element]) {
+            count[element] += 1;
+        } else {
+            count[element] = 1;
+        }
+    }
+    const labels = ['Iowa', 'California', 'Ohio', 'Michigan', 'Tennessee'];
+
+
+
+
+
+    console.log(count); // 👉️ {a: 3, b: 1, c: 2}
+    const dt = [count.Iowa, count.California, count.Ohio, count.Michigan, count.Tennessee];
+
+    console.log(dt);
+    // const [count] = [];
+
+    // let c = 0;
+
+    // labels.filter(state=>PropertyData.filter(prop=>prop.address.state==state));
     const data = {
         labels,
         datasets: [
             {
                 label: 'Dataset 1',
-                data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+                data: dt,
                 backgroundColor: [
                     'rgba(255, 99, 132, 1)',
                     'rgba(54, 162, 235, 1)',
@@ -74,7 +114,7 @@ export default function AdminCharts(){
             },
             {
                 label: 'Dataset 2',
-                data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+                data: dt,
                 backgroundColor: [
                     'rgb(0, 204, 255)',
                     'rgba(255, 99, 132, 0.2)',
