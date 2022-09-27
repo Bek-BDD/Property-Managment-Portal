@@ -141,6 +141,7 @@ public class UaaController {
         UserDTO userDTO = new UserDTO(images,firstname,lastname,email,password,roletype,city,state,street_number,zip_code);
         return uaaService.signUpImg(userDTO);
     }
+
     @GetMapping("/reset_pwd")
     public String validateToken(@Param(value = "token") String token, HttpServletResponse response){
 
@@ -162,6 +163,25 @@ public class UaaController {
         return null;
     }
 }
+
+    @DeleteMapping("/users/{id}")
+//    @PreAuthorize("hasAuthority('admin')")
+    public void deleteUserById(@PathVariable int id) {
+        uaaService.deleteById(id);
+    }
+
+    @PutMapping("/users/{id}")
+//    @PreAuthorize("hasAuthority('admin')")
+    public void updateUserById(@PathVariable int id) {
+        uaaService.update(id);
+    }
+
+
+}
+
+
+
+
 
 
 

@@ -10,19 +10,10 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
 import {orange, yellow} from "@mui/material/colors";
-import {instance} from "../../index";
 
 export default function (props) {
-
-
-
-
-
-
   const [userState, setUserState] = useState({
-
-
-    firstname:'',
+    firstname: props,
     lastname: "Shiferaw",
     email: "zedshif123@gmail.com",
     address: "100N 4th St",
@@ -163,11 +154,7 @@ export default function (props) {
           alignItems: "center",
         }}
       >
-        <Button type="submit" onClick={()=>{
-
-
-
-        }} variant="contained" sx={{ mt: 3, mb: 2 }}>
+        <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
          Save
         </Button>
         </Box>

@@ -5,8 +5,6 @@ import {green, grey, red} from "@mui/material/colors";
 import {CircularProgress} from "@mui/joy";
 import axios from 'axios';
 import {element} from "prop-types";
-import {instance} from "../../index";
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 export default function (props) {
 
@@ -40,11 +38,7 @@ export default function (props) {
                         bgcolor: green[500],
                        '&:hover': { bgcolor: green[700] }? {bgcolor: [red]}:{bgcolor: green[700]},
                     }}
-                    onClick={ ()=> {
-                         window.alert('deacivated')
-                        instance.delete("/users/activate/"+props.theRow.id)
-                        setflag(flag === false)
-                    }}
+                    onClick={ ()=> setflag(flag === false)}
                     disabled={flag}
                 >
                     <Check />
@@ -58,11 +52,7 @@ export default function (props) {
                         bgcolor: green[500],
                         '&:hover': { bgcolor: green[700] }? {bgcolor: [red]}:{bgcolor: green[700]},
                     }}
-                    onClick={ ()=> {
-                        setflag(flag === false)
-
-
-                    }}
+                    onClick={ ()=> setflag(flag === false)}
                     disabled={flag}
                 >
                     <Check />
@@ -77,13 +67,7 @@ export default function (props) {
                         left: -6,
                         zIndex: 1,
                     }}
-                    onClick={ ()=> {
-
-
-                        instance.delete("/users/deactivate/"+props.theRow.id)
-                        window.alert("activated")
-                        setflag(flag === false)}
-                }
+                    onClick={ ()=> setflag(flag === false)}
                 />
             )}
         </Box>

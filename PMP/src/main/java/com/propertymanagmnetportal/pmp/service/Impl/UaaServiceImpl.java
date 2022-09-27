@@ -34,7 +34,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class UaaServiceImpl implements UaaService {
+class UaaServiceImpl implements UaaService {
     @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
@@ -258,16 +258,26 @@ public class UaaServiceImpl implements UaaService {
     public void deleteOwnerById(int id) {
         User u = userBaseRepository.findAll()
                 .stream()
-                .filter(s->s.getId()==id)
-                .filter(user->user.getRole()
-                        .contains( new Role("owner")))
-                .filter(us->us.isDeleted()==true)
+                .filter(s -> s.getId() == id)
+                .filter(user -> user.getRole()
+                        .contains(new Role("owner")))
+                .filter(us -> us.isDeleted() == true)
                 .collect(Collectors.toList()).stream().findAny().get();
         userBaseRepository.updateDeleteStatus(id);
 //        userBaseRepository.delete(u);
     }
 
     @Override
+    public void deleteById(int id) {
+
+        userBaseRepository.deleteById(id);
+    }
+
+    @Override
+    public void update(int id) {
+
+        userBaseRepository.save(userBaseRepository.findById(id).get());
+    }
     public void deleteUserById(int id) {
 //        userBaseRepository.findAll()
 //                .stream()

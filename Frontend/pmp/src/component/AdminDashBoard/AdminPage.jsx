@@ -117,13 +117,15 @@ export default function DataTable(){
     }
 
 
+
+
+
+
     useEffect(() => {
 
         getUserData()
             .then(r => console.log(' axios request getUserData() successful'))
             .catch(e=>console.log("Exception thrown by axios request getUserData() "));
-
-
 
     },[]);
 
