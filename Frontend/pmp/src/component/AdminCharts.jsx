@@ -128,11 +128,11 @@ export default function AdminCharts(){
 
 
     const data2 = {
-        labels: ['Iowa', 'Minnesota', 'Texas', 'Seattle', 'Virginia', 'Washington', 'Portland', 'Ohio', 'Tennesse', 'Harar', 'Gahi', 'Debi'],
+        labels: ['Iowa', 'California', 'Ohio', 'Michigan', 'Tennessee'],
         datasets: [
             {
-                label: 'Number of Customers',
-                data: [12, 19, 3, 5, 2, 3,12, 19, 3, 5, 2, 3],
+                label: 'Customers',
+                data: dt,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -174,9 +174,9 @@ export default function AdminCharts(){
                     width:"700px"
                 }}/>
             </div>
-            <div style={{marginTop:30}}>
+            <div style={{ width: '50%',margin:"auto", marginTop:50, justifyContent:"center"}}>
                 <Bar options={options} data={data2} height="500px"
-                     width="600px" />
+                      />
             </div>
         </div>
 
