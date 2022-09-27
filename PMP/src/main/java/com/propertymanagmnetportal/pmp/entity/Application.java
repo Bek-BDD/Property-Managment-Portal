@@ -1,21 +1,24 @@
 package com.propertymanagmnetportal.pmp.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 
 public class Application {
     @EmbeddedId
     private ApplicationCompositeKey compositeKey;
-    private LocalDate Date;
+
+    private String message;
+    private String fullname;
+    private String phonenumber;
+    private LocalDate date;
 
     @ManyToOne
     @MapsId("user_id")
