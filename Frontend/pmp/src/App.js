@@ -22,6 +22,7 @@ import { useEffect,useState } from "react";
 import { ImageTable } from "./component/Customer/FavoritesTable";
 import NewEditAccount from "./component/NewEditAccount";
 import PropertyStepper from "./component/Property/PropertyStepper";
+import ApplicationForm from "./component/ApplicationForm";
 function App() {
   const[isLoggedIn,setIsLoggedIn] = useState(false)
 useEffect(()=>{
@@ -41,6 +42,7 @@ useEffect(()=>{
         <Route path="*" element={<PageNotFound />} />
         <Route path="*" element={<PageNotFound />} />
         <Route path="/create-property" element={<PropertyStepper />} />
+        <Route path="/apply" element={<ApplicationForm />} />
         <Route path="/properties" element={<ManageProperties />} />
         <Route path="/customer" element={<CustomerDashBoard />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
