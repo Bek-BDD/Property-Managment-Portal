@@ -1,61 +1,102 @@
 package com.propertymanagmnetportal.pmp.service.Impl;
 
 
-import com.propertymanagmnetportal.pmp.dto.ApplicationDto;
+
 import com.propertymanagmnetportal.pmp.entity.Application;
+import com.propertymanagmnetportal.pmp.entity.ApplicationCompositeKey;
+import com.propertymanagmnetportal.pmp.entity.Property;
+import com.propertymanagmnetportal.pmp.entity.User;
 import com.propertymanagmnetportal.pmp.repository.ApplicationRepo;
 import com.propertymanagmnetportal.pmp.repository.PropertyRepo;
+import com.propertymanagmnetportal.pmp.repository.UserBaseRepository;
 import com.propertymanagmnetportal.pmp.security.MyUserDetails;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.propertymanagmnetportal.pmp.Utility.EmailService;
 import com.propertymanagmnetportal.pmp.service.ApplicationService;
-import org.springframework.objenesis.SpringObjenesis;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Service
 public class ApplicationServiceImpl implements ApplicationService {
     private EmailService emailService;
     private ApplicationRepo applicationRepo;
     private PropertyRepo propertyRepo;
-    private ModelMapper mapper;
+    private UserBaseRepository userBaseRepository;
 
-    public ApplicationServiceImpl(EmailService emailService, ApplicationRepo applicationRepo, ModelMapper mapper, PropertyRepo propertyRepo){
+
+    public ApplicationServiceImpl(EmailService emailService, ApplicationRepo applicationRepo, PropertyRepo propertyRepo, UserBaseRepository userBaseRepository){
         this.emailService=emailService;
         this.applicationRepo=applicationRepo;
         this.propertyRepo=propertyRepo;
-        this.mapper=mapper;
+        this.userBaseRepository=userBaseRepository;
+
     }
     public boolean sendEmail(String to, String subject, String message){
        return emailService.sendEmail(to,subject,message);
     }
 
     @Override
-    public Boolean saveApplication(Application application) throws Exception{
-        try{
-            MyUserDetails userdetail =(MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            String userEmail=userdetail.getUsername();
-            String ownerEmail = application.getProperty().getUser().getEmail();
-            String propertyName= application.getProperty().getName();
-            String ownerName =application.getProperty().getUser().getFirstname();
+    public Boolean saveApplication(int userid, int propertyid, Application app) throws Exception{
+//            System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
+//            MyUserDetails userdetail = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        ApplicationCompositeKey compositeKey =new ApplicationCompositeKey(userid,propertyid);
+        Property property =propertyRepo.findById(propertyid).get();
+        User user =userBaseRepository.findById(userid).get();
+        LocalDate now =LocalDate.now();
+        Application application =new Application();
+        application.setCompositeKey(compositeKey);
+        application.setDate(now);
+        application.setUser(user);
+        application.setProperty(property);
+        applicationRepo.save(application);
+        String userEmail= user.getEmail();
+        String ownerEmail = property.getUser().getEmail();
+        String propertyName= property.getName();
+        String ownerName = property.getUser().getFirstname();
 
-            String message="Dear "+ ownerName +" You have new application for your " +
-                    propertyName+" Please contact the customer using "+userEmail;
+        String message="Dear "+ ownerName +" You have new application for your " +
+                propertyName+" Please contact the customer using "+ app.getPhonenumber() +"Or" + userEmail;
 
-            sendEmail(ownerEmail, "New application for your:" + propertyName ,message);
+        applicationRepo.save(application);
+        sendEmail(ownerEmail, app.getMessage() + propertyName ,message);
+
             return true;
-        }catch (Exception e) {
-            throw new Exception();
-        }
+
     }
+//    public Boolean saveApplication(Application application) throws Exception{
+////            System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
+////            MyUserDetails userdetail = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//
+//        String userEmail=application.getUser().getEmail();
+//        String ownerEmail = application.getProperty().getUser().getEmail();
+//        String propertyName= application.getProperty().getName();
+//        String ownerName =application.getProperty().getUser().getFirstname();
+//
+//        String message="Dear "+ ownerName +" You have new application for your " +
+//                propertyName+" Please contact the customer using "+userEmail;
+//
+//        applicationRepo.save(application);
+//        sendEmail(ownerEmail, "New application for your:" + propertyName ,message);
+//        return true;
+//
+//    }
 
     @Override
     public List<Application> findAll() {
         return applicationRepo.findAll();
+    }
+
+    public List<Application> findApplicationByProperty_Address_City(String city){
+        return applicationRepo.findApplicationByProperty_Address_City(city);
+    }
+    public List<Application> findApplicationByProperty_Name(String name){
+        return applicationRepo.findApplicationByProperty_Name(name);
+    }
+    public List<Application> findApplicationByDate(LocalDate date){
+       return applicationRepo.findByDate(date);
     }
 
 
