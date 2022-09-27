@@ -68,9 +68,12 @@ export default function PropertyCard() {
 
     
     const DeleteProperty = async (id, e) => {
+        const confirmation = window.confirm("Delete?");
 
-        const result = await axios.delete("http://localhost:8080/properties/"+`${id}`);
-        window.location.reload(false);
+        if(confirmation){
+            const result = await axios.delete("http://localhost:8080/properties/"+`${id}`);
+            window.location.reload(false);
+        }
     }
 
     useEffect(() => {
@@ -80,12 +83,10 @@ export default function PropertyCard() {
 
 
     return (
-
-          
                 <>
                   {
                     PropertyData.map((item) => (
-                        <Card sx={{maxWidth: 360}} onClick={()=>{showDetails(item.id)}} className="card-hover" key={item.id}>
+                        <Card sx={{maxWidth: 360}}  className="card-hover" key={item.id}>
                         <CardHeader
                             avatar={
                                 <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
@@ -94,6 +95,7 @@ export default function PropertyCard() {
                             }
                             title={item.name}
                             subheader={item.description}
+                            onClick={()=>{showDetails(item.id)}}
                         />
 
                         <CardMedia
@@ -101,17 +103,18 @@ export default function PropertyCard() {
                             height="194"
                             image="https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg"
                             alt="Paella dish"
+                            onClick={()=>{showDetails(item.id)}}
                         />
-                        <CardContent>
+                        <CardContent onClick={()=>{showDetails(item.id)}}>
                             <Typography variant="body2" color="text.secondary">
 
                                 {PropertyData.description}
 
                             </Typography>
+
                         </CardContent>
                         <CardActions disableSpacing >
 
-                            {/*<DeleteButton />*/}
                             <Stack direction="row" spacing={2}>
                                 <Button variant="contained" endIcon={<SendIcon/>} onClick={() =>handleClickOpen(item.id)}>
                                     Edit
@@ -122,7 +125,6 @@ export default function PropertyCard() {
                                 </Button>
                             </Stack>
 
-                            {/*<EditProperty/>*/}
 
                         </CardActions>
 
@@ -139,13 +141,6 @@ export default function PropertyCard() {
                         fullWidth={fullWidth}
                         /> : null
                    }
-                                         
-
-                   
-                
                 </>
-                
-            
-
         );
 }
