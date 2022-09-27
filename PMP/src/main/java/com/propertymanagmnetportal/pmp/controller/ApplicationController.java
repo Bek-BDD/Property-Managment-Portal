@@ -37,6 +37,10 @@ public class ApplicationController {
         return findApplicationByDate(date);
     }
 
+    //////////////////
+    /////api fetch by user id
+    //////////////////
+
 
 
 
