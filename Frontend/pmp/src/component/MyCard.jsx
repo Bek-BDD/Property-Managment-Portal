@@ -5,23 +5,26 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { ExpandMore } from "@mui/icons-material";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
 import { instance } from "../index";
+import { useState} from "react";
+
+
 
 export default function RecipeReviewCard(props) {
   const [liked, setLiked] = React.useState(props.state);
+  const[openDetail, setOpenDetail]=useState(false);
+    const [fullWidth, setFullWidth] = useState(true);
+    const [maxWidth, setMaxWidth] = useState('lg');
+    const [property, setProperty] = useState({})
+    const [visited,setVisited]=useState(false);
   const navigator = useNavigate();
   const address =
     props.value.address.street +
@@ -67,13 +70,23 @@ export default function RecipeReviewCard(props) {
       }
     }
   }
-  function showDetails(id) {
-    console.log(id);
-  }
+  const showDetails = (id) =>{
+    instance.get(`/properties/${id}`)
+     .then(response => {
+       console.log(response.data)
+      setProperty(response.data)
+      console.log(property)
+      setVisited(true)
+        setOpenDetail(true)
+    })}
+    const hideDetails=()=>{
+        setOpenDetail(false)
+        setVisited(false)
+    }
 
   return (
-    <div>
-      <Card sx={{ maxWidth: 360 }} className="card-hover">
+    <>{
+      <Card sx={{ maxWidth: 360 }} className="card-hover" >
         <div onClick={() => showDetails(props.value.id)}>
           <CardHeader
             avatar={
@@ -114,6 +127,8 @@ export default function RecipeReviewCard(props) {
           </IconButton>
         </CardActions>
       </Card>
-    </div>
+      }
+      
+    </>
   );
 }

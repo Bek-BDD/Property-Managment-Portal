@@ -22,7 +22,6 @@ export default function PropertyCard() {
     const [fullWidth, setFullWidth] = useState(true);
     const [maxWidth, setMaxWidth] = useState('lg');
     const [property, setProperty] = useState({})
-    const [propid, setPropid]=useState(1)
     const [visited,setVisited]=useState(false);
 
 
