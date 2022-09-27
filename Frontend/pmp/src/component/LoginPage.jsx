@@ -28,6 +28,7 @@ useEffect(()=>{
   const state = useSelector((state)=> state)
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -38,6 +39,7 @@ useEffect(()=>{
     loginRequest(data);
 
   };
+
   const loginRequest = (data)=>{
     const loginRequestObj = {
       "email" : data.get('email'),
@@ -46,17 +48,14 @@ useEffect(()=>{
       axios.post("http://localhost:8080/uaa/login",loginRequestObj)
             .then((response)=>{
                   localStorage.setItem("tokens",JSON.stringify(response.data))
-                  axios.get(`http://localhost:8080/users/${data.get('email')}`,{
-                   headers : {
-                       'Authorization' : 'Bearer ' +JSON.parse(localStorage.getItem('tokens')).jwtToken
-                     }
-                    })
+                  axios.get(`http://localhost:8080/users/${data.get('email')}`)
                   .then((response)=> {
+                    console.log(response.data);
                       localStorage.setItem("loggedUser",JSON.stringify(response.data))
+                      window.location.reload(false);
+                      navigate("/")
                       })
-                 dispatch(userActions.login("selam"));
-                 window.location.reload(false);
-                 navigate("/")
+               
              })
             .catch((error) =>{
                 setLoginError(true);

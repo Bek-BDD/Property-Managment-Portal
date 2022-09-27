@@ -34,7 +34,6 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Role> role;
     @JsonManagedReference
     @OneToMany(mappedBy = "user")

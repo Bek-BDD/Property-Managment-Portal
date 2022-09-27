@@ -1,9 +1,13 @@
 import { Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
+import AccountMenu from "./Customer/ProfileDropDown";
 import '../App.css'
 
 export default function(){
     const navigator = useNavigate();
+    const user = JSON.parse(localStorage.getItem('loggedUser'));
+    const token = localStorage.getItem('tokens');
+    const role = user?.role[0].role;
 
     return(
         <div className="container">
@@ -14,14 +18,14 @@ export default function(){
             </Link>
 
             <div>
-            <Link to={"/editaccount"}>  <Button variant="text">Edit Account</Button> </Link>
-            <Link to={"/changePassword"}>  <Button variant="text">Change Password</Button> </Link>
-            <Link to={"/"}> <Button variant="text">Favorite list</Button> </Link>
-            <Link to={"/properties"}> <Button variant="text">Manage property</Button> </Link>
-            <Link to={"/property-detail"}>  <Button variant="text">Property Details</Button> </Link>
-            <Link to={"/login"} >  <Button variant="text">Login</Button> </Link>
-            <Link to={"/create-property"} >  <Button variant="text">Create Property</Button> </Link>
-          
+            {token && role == 'customer' ?  <Link to={"/viewApplication"}><Button variant="text">View Applications</Button></Link>:null}
+            {token && role == 'customer' ?  <Link to={"/favourites"}><Button variant="text">Favorite</Button></Link>:null}
+            {token && role == 'owner' ?  <Link to={"/customerapplications"}><Button variant="text">Manage Application</Button> </Link>:null}
+            {token && role == 'owner' ? <Link to={"/properties"}> <Button variant="text">Manage property</Button> </Link>:null}
+            {token && role == 'owner' ? <Link to={"/property-detail"}>  <Button variant="text">Property Details</Button> </Link>:null}
+            {token && role == 'owner' ?  <Link to={"/create-property"} >  <Button variant="text">Create Property</Button> </Link>:null}
+            {token ? <AccountMenu /> : <Link to={"/login"} >  <Button variant="text">Login</Button> </Link>}
+
             </div>
         
             
