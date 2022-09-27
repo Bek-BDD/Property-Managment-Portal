@@ -12,7 +12,7 @@ insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpas
 
 
 insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
-    (101,false,'bereket@gmail','bereket','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975645768_jpeg','daniel','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true);
+    (101,false,'bereket@gmail.com','bereket','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975645768_jpeg','daniel','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true);
 
 
 insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values

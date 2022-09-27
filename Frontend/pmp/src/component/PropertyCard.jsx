@@ -13,7 +13,6 @@ import SendIcon from '@mui/icons-material/Send';
 import Stack from '@mui/material/Stack';
 import '../App.css'
 import {useEffect, useState} from "react";
-import axios from "axios";
 import {instance} from "../index"
 import PropertyDetails from "./PropertyDetails";
 
@@ -62,14 +61,14 @@ export default function PropertyCard() {
     const [PropertyData, setPropertyData] = useState(initialState);
 
     const getProperty = async () => {
-        const result = await axios.get('http://localhost:8080/properties');
+        const result = await instance.get('/properties');
         setPropertyData(result.data);
     }
 
     
     const DeleteProperty = async (id, e) => {
 
-        const result = await axios.delete("http://localhost:8080/properties/"+`${id}`);
+        const result = await instance.delete("/properties/"+`${id}`);
         window.location.reload(false);
     }
 

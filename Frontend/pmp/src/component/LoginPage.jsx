@@ -13,7 +13,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { userActions } from './Redux/UserSlice';
-import axios from 'axios';
 import { instance } from '../index';
 
 
@@ -50,7 +49,7 @@ useEffect(()=>{
             .then((response)=>{
               debugger;
                   localStorage.setItem("tokens",JSON.stringify(response.data))
-                  axios.get(`http://localhost:8080/users/${data.get('email')}`)
+                  instance.get(`/users/${data.get('email')}`)
                   .then((response)=> {
                     console.log(response.data);
                       localStorage.setItem("loggedUser",JSON.stringify(response.data))
