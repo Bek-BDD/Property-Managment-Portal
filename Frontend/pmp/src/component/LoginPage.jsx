@@ -47,7 +47,7 @@ useEffect(()=>{
     }
       instance.post("/uaa/login",loginRequestObj)
             .then((response)=>{
-              debugger;
+              
                   localStorage.setItem("tokens",JSON.stringify(response.data))
                   instance.get(`/users/${data.get('email')}`)
                   .then((response)=> {

@@ -15,6 +15,7 @@ import "../App.css";
 import { useNavigate } from "react-router-dom";
 import { instance } from "../index";
 import { useState} from "react";
+import PropertyDetails from "./PropertyDetails";
 
 
 
@@ -25,6 +26,8 @@ export default function RecipeReviewCard(props) {
     const [maxWidth, setMaxWidth] = useState('lg');
     const [property, setProperty] = useState({})
     const [visited,setVisited]=useState(false);
+
+    
   const navigator = useNavigate();
   const address =
     props.value.address.street +
@@ -39,7 +42,7 @@ export default function RecipeReviewCard(props) {
     const propertyId = id;
     let userId = JSON.parse(localStorage.getItem("loggedUser"));
     userId = userId?.id;
-    debugger
+    
     if (localStorage.getItem("tokens") == null) {
       navigator("/login");
     } else {
@@ -73,11 +76,11 @@ export default function RecipeReviewCard(props) {
   const showDetails = (id) =>{
     instance.get(`/properties/${id}`)
      .then(response => {
-       console.log(response.data)
+      
       setProperty(response.data)
-      console.log(property)
+      
       setVisited(true)
-        setOpenDetail(true)
+      setOpenDetail(true)
     })}
     const hideDetails=()=>{
         setOpenDetail(false)
@@ -85,9 +88,9 @@ export default function RecipeReviewCard(props) {
     }
 
   return (
-    <>{
+    <>{ 
       <Card sx={{ maxWidth: 360 }} className="card-hover" >
-        <div onClick={() => showDetails(props.value.id)}>
+        <div onClick={() => {showDetails(props.value.id)}}>
           <CardHeader
             avatar={
               <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -128,6 +131,16 @@ export default function RecipeReviewCard(props) {
         </CardActions>
       </Card>
       }
+
+      {
+        visited && <PropertyDetails 
+        open={openDetail}
+        property={property}
+        hideDetail={hideDetails} 
+        maxWidth={maxWidth} 
+        fullWidth={fullWidth}
+        />
+      }      
       
     </>
   );

@@ -15,11 +15,16 @@ const handleSubmit = (event) => {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);  
+    // data.append("message")
+    // data.append("fullname")
+    // data.append("phone")
+
+    console.log(data)
     
-      instance
-        .post("/uaa/application/",data)
-        .then((response) => console.log(response.data))
-        .catch((err) => console.log(err));
+    //   instance
+    //     .post("/uaa/application/",data)
+    //     .then((response) => console.log(response.data))
+    //     .catch((err) => console.log(err));
  
   };
 
@@ -40,6 +45,8 @@ const ApplicationForm =(props)=>{
     setLiked(!liked);
    
   }
+
+
  
    
     return(
@@ -77,6 +84,7 @@ const ApplicationForm =(props)=>{
                             <div className="mg-10 ">
                             <TextField
                             id="outlined-multiline-flexible"
+                            name="message"
                             label="Enter Your Message"
                             multiline
                             maxRows={4} 
@@ -89,6 +97,7 @@ const ApplicationForm =(props)=>{
                             <TextField
                             id="outlined-multiline-flexible"
                             label="Your First and Last Name"
+                            name="fullname"
                             maxRows={1} 
                             fullWidth                       
                             />
@@ -98,6 +107,7 @@ const ApplicationForm =(props)=>{
                             <TextField
                             id="outlined-multiline-flexible"
                             label="phone"
+                            name="Phone"
                             maxRows={1} 
                             fullWidth                       
                             />
