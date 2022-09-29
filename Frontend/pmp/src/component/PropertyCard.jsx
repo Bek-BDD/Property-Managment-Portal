@@ -41,15 +41,12 @@ export default function PropertyCard() {
       setOpen(false);
 
     };
-    const showDetails = (id) =>{
-    instance.get(`/properties/${id}`)
-     .then(response => {
-       console.log(response.data)
-      setProperty(response.data)
+    const showDetails = (item) =>{    
+      setProperty(item)
       console.log(property)
       setVisited(true)
-        setOpenDetail(true)
-    })}
+      setOpenDetail(true)
+    }
     const hideDetails=()=>{
         setOpenDetail(false)
         setVisited(false)
@@ -83,7 +80,7 @@ export default function PropertyCard() {
                 <>
                   {
                     PropertyData.map((item) => (
-                        <Card sx={{maxWidth: 360}} onClick={()=>{showDetails(item.id)}} className="card-hover" key={item.id}>
+                        <Card sx={{maxWidth: 360}} onClick={()=>{showDetails(item)}} className="card-hover" key={item.id}>
                         <CardHeader
                             avatar={
                                 <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
@@ -128,14 +125,14 @@ export default function PropertyCard() {
                     ))
                   }
                   
-                   { visited ?
+                   { visited &&
                         <PropertyDetails 
                         open={openDetail}
                         property={property}
                         hideDetail={hideDetails} 
                         maxWidth={maxWidth} 
                         fullWidth={fullWidth}
-                        /> : null
+                        /> 
                    }
                                          
 
