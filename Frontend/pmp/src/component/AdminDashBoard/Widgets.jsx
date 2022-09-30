@@ -4,7 +4,7 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import HouseIcon from '@mui/icons-material/House';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import React from "react";
-import {count} from '../index';
+import {count} from '../../index';
 
 
 const Widgets = (props) => {

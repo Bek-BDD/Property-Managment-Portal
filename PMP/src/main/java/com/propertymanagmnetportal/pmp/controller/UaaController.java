@@ -3,8 +3,6 @@ package com.propertymanagmnetportal.pmp.controller;
 import com.propertymanagmnetportal.pmp.Exceptions.EmailExistException;
 import com.propertymanagmnetportal.pmp.Exceptions.TokenDoesnotExsist;
 import com.propertymanagmnetportal.pmp.dto.UserDTO;
-import com.propertymanagmnetportal.pmp.entity.Address;
-import com.propertymanagmnetportal.pmp.entity.Role;
 import com.propertymanagmnetportal.pmp.entity.User;
 import com.propertymanagmnetportal.pmp.repository.UserBaseRepository;
 import com.propertymanagmnetportal.pmp.security.entity.LoginRequest;
@@ -16,7 +14,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -71,6 +69,12 @@ public class UaaController {
     //@PreAuthorize("hasAuthority('owner')")
     public void deleteUser(@PathVariable int id){
         uaaService.deleteUserById(id);
+    }
+
+    @GetMapping("/userss/{id}")
+//    @PreAuthorize("hasAuthority('admin')")
+    public Optional<User> findUsersById(@PathVariable int id){
+        return uaaService.findUserById(id);
     }
 
     @GetMapping("/customers")

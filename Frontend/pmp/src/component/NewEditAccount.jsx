@@ -15,6 +15,7 @@ import { useEffect } from "react";
 export default function () {
   const [userState, setUserState] = useState({});
   const [isLoadded, setIsLogged] = useState(false);
+
   useEffect(()=>{
     const user =JSON.parse(localStorage.getItem('loggedUser'))
     instance.get('/users/'+user.email)

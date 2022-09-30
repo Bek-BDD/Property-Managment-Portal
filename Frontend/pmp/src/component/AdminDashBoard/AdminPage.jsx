@@ -100,7 +100,7 @@ export default function DataTable() {
             const conformation = window.confirm("Delete User " + row);
             if (conformation) {
                 const deleteMe = async() =>{
-                    await instance.delete("/usersId/" + row);
+                    await instance.delete("/users/" + row);
 
                     window.location.reload(false);
                 }

@@ -23,7 +23,7 @@ import { ImageTable } from "./component/Customer/FavoritesTable";
 import NewEditAccount from "./component/NewEditAccount";
 import PropertyStepper from "./component/Property/PropertyStepper";
 import ApplicationForm from "./component/ApplicationForm";
-import AdminCharts from "./component/AdminCharts";
+import AdminCharts from "./component/AdminDashBoard/AdminCharts";
 import AdminPage from "./component/AdminDashBoard/AdminPage"
 import ProfilePasswordChange from "./component/ProfilePasswordChange";
 import ProflieChangePassword from "./component/ProflieChangePassword";
