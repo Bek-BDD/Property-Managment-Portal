@@ -15,14 +15,14 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@SQLDelete(sql = "UPDATE images SET deleted = true WHERE id=?")
-@Where(clause = "deleted=false")
+//@SQLDelete(sql = "UPDATE images SET deleted = true WHERE id=?")
+//@Where(clause = "deleted=false")
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String url;
-    private boolean deleted =Boolean.FALSE;
+   // private boolean deleted =Boolean.FALSE;
 
     public Image(String url) {
         this.url = url;

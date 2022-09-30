@@ -22,6 +22,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
 import {instance} from "../index"
 import PropertyDetails from "./PropertyDetails";
+
+
+
+
 export default function PropertyCard() {
     const [open, setOpen] = useState(false);
     const [fullWidth, setFullWidth] = useState(true);
@@ -29,11 +33,11 @@ export default function PropertyCard() {
     const [maxWidth, setMaxWidth] = useState('lg');
     const[openDetail, setOpenDetail]=useState(false);
     const [PropertyData, setPropertyData] = useState([]);
-    const handleClickOpen = (id) => {
+     const [visited,setVisited]=useState(false);
+    const handleClickOpenForEdit = (id) => {
         debugger;
         const selectedTender = PropertyData.find(clicked => clicked.id === id);
         setProperty(selectedTender)
-    const [visited,setVisited]=useState(false);
 
     setOpen(true);
     };
@@ -46,6 +50,7 @@ export default function PropertyCard() {
     const getProperty = () => {
         axios.get('http://localhost:8080/properties')
         .then(res => setPropertyData(res.data))
+    }
     const handleClickOpen = (id) => {  
     instance.get(`/properties/${id}`)
         .then(response => {
@@ -57,10 +62,7 @@ export default function PropertyCard() {
     })
     setOpen(true);    
     };
-    const handleClose = () => {
-      setOpen(false);
 
-    };
     const showDetails = (item) =>{    
       setProperty(item)
       console.log(property)
@@ -71,17 +73,7 @@ export default function PropertyCard() {
         setOpenDetail(false)
         setVisited(false)
     }
-
-    const initialState = []
-
-    const [PropertyData, setPropertyData] = useState(initialState);
-
-    const getProperty = async () => {
-        const result = await instance.get('/properties');
-        setPropertyData(result.data);
-    }
-
-    
+   
     const DeleteProperty = async (id, e) => {
 
         const result = await instance.delete("/properties/"+`${id}`);
@@ -98,13 +90,10 @@ export default function PropertyCard() {
 
           
                     <>
+  
                   {
                     PropertyData.map((item) => (
-                        <Card sx={{maxWidth: 360}} onClick={showDetails} className="card-hover" key={item.id}>
-                <>
-                  {
-                    PropertyData.map((item) => (
-                        <Card sx={{maxWidth: 360}} onClick={()=>{showDetails(item)}} className="card-hover" key={item.id}>
+                        <Card sx={{maxWidth: 360}}  className="card-hover" key={item.id}>
                         <CardHeader
                             avatar={
                                 <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
@@ -120,6 +109,7 @@ export default function PropertyCard() {
                             height="194"
                             image="https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg"
                             alt="Paella dish"
+                            onClick={()=>{showDetails(item)}}
                         />
                         <CardContent>
                             <Typography variant="body2" color="text.secondary">
@@ -132,7 +122,7 @@ export default function PropertyCard() {
 
                             {/*<DeleteButton />*/}
                             <Stack direction="row" spacing={2}>
-                                <Button variant="contained" endIcon={<SendIcon/>} onClick={() =>handleClickOpen(item.id)}>
+                                <Button variant="contained" endIcon={<SendIcon/>} onClick={() =>handleClickOpenForEdit(item.id)}>
                                     Edit
                                 </Button>
                                 <Button variant="outlined" startIcon={<DeleteIcon/>}
@@ -155,12 +145,9 @@ handleClose={handleClose}
 maxWidth={maxWidth} 
 fullWidth={fullWidth} 
 property={property}
-/>       
-                   
-                
-                    </>
-                  
-                   { visited &&
+/>  
+
+     { visited &&
                         <PropertyDetails 
                         open={openDetail}
                         property={property}
@@ -169,11 +156,10 @@ property={property}
                         fullWidth={fullWidth}
                         /> 
                    }
-                                         
-
                    
                 
-                </>
+                    </>
+                  
                 
             
 

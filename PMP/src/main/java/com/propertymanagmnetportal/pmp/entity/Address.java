@@ -11,8 +11,8 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE address SET deleted = true WHERE id=?")
-@Where(clause = "deleted=false")
+//@SQLDelete(sql = "UPDATE address SET deleted = true WHERE id=?")
+//@Where(clause = "deleted=false")
 @AllArgsConstructor
 public class Address {
     @Id
@@ -23,7 +23,7 @@ public class Address {
     int zip;
     String street;
 
-    private boolean deleted =Boolean.FALSE;
+   // private boolean deleted =Boolean.FALSE;
 
     public Address(String state, String city, int zip, String street) {
         this.state = state;

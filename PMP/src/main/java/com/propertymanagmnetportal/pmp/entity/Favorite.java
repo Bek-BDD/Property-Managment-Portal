@@ -12,13 +12,13 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE favorite SET deleted = true WHERE id=?")
-@Where(clause = "deleted=false")
+//@SQLDelete(sql = "UPDATE favorite SET deleted = true WHERE id=?")
+//@Where(clause = "deleted=false")
 public class Favorite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private boolean deleted=Boolean.FALSE;
+   // private boolean deleted=Boolean.FALSE;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
