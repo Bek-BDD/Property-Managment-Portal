@@ -41,4 +41,8 @@ public interface UaaService {
 
     public void deleteUserById(int id);
 
+    public void userActivate(int id);
+
+    public void userDeactivate(int id);
+
 }

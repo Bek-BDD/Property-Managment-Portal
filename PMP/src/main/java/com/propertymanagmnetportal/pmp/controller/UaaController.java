@@ -60,57 +60,6 @@ public class UaaController {
     public LoginRequest signup(@RequestBody UserDTO userDTO) throws EmailExistException {
         return uaaService.signup(userDTO);
     }
-
-    @GetMapping("/users")
-    //@PreAuthorize("hasAuthority('owner')")
-    public List<User> findAllUsers(){
-        return uaaService.findAll();
-    }
-
-    @GetMapping("/customers")
-//    @PreAuthorize("hasAuthority('admin')")
-    public List<User> findAllCustomers(){
-        return  uaaService.findAllCustomers();
-    }
-
-    @GetMapping("/customers/{id}")
-//    @PreAuthorize("hasAuthority('admin')")
-    public User findCustomerById(@PathVariable int id){
-        return uaaService.findCustomerById(id);
-    }
-
-    @DeleteMapping("/customers/{id}")
-//    @PreAuthorize("hasAuthority('admin')")
-    public void deleteCustomerById(@PathVariable int id){
-        uaaService.deleteCustomerById(id);
-    }
-
-
-    @GetMapping("/owners")
-//    @PreAuthorize("hasAuthority('admin')")
-    public List<User> findAllOwners(){
-        return uaaService.findAllOwners();
-    }
-
-    @GetMapping("/owners/{id}")
-//    @PreAuthorize("hasAuthority('admin')")
-    public User findAllOwnersById(@PathVariable int id){
-        return uaaService.findOwnerById(id);
-    }
-
-    @DeleteMapping("/owners/{id}")
-//    @PreAuthorize("hasAuthority('admin')")
-    public void deleteOwnerById(@PathVariable int id){
-        uaaService.deleteOwnerById(id);
-    }
-
-    @DeleteMapping("/users/{id}")
-//    @PreAuthorize("hasAuthority('admin')")
-    public void deleteUserById(@PathVariable int id){
-        uaaService.deleteUserById(id);
-    }
-
-
     @PostMapping("/uaa/resetpassword")
     public String resetPassword(HttpServletRequest request, @RequestBody LoginRequest email){
         System.out.println(email.getEmail());

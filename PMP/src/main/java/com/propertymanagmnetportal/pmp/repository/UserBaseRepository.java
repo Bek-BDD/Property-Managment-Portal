@@ -19,4 +19,10 @@ public interface UserBaseRepository extends JpaRepository<User,Integer> {
     @Query("update User u set u.deleted= true where u.id=:id")
     void updateDeleteStatus(int id);
 
+    @Query("update User u set u.active = true where u.id=:id")
+    void userActivate(int id);
+
+    @Query("update User u set u.active = true where u.id=:id")
+    void userDeactivate(int id);
+
 }

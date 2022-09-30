@@ -267,6 +267,12 @@ public class UaaServiceImpl implements UaaService {
 //                .collect(Collectors.toList()).stream().findAny().get();
         userBaseRepository.updateDeleteStatus(id);
     }
+    public void userActivate(int id){
+        userBaseRepository.userActivate(id);
+    };
 
+    public void userDeactivate(int id){
+        userBaseRepository.userDeactivate(id);
+    };
 
 }
