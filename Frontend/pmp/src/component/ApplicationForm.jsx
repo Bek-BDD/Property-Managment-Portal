@@ -28,20 +28,20 @@ const ApplicationForm =(props)=>{
     const handleSubmit = (event) => {
         const token=JSON.parse(localStorage.getItem("tokens"))
    
-    if(token.jwtToken){
-        event.preventDefault();
-        const user=JSON.parse(localStorage.getItem("loggedUser"))
-        axios({
-            header:"Bearer "+token.jwtToken,
-            method:"post",
-            data:application,
-            url:"http://localhost:8080/application?userid="+user.id+"&propertyid="+propertyid
-        }).then(res=>res.status===200? navigate('/properties'):null)
-      
-    }
-    else{
-        navigate('/login')
-    }   
+        if(token.jwtToken){
+            event.preventDefault();
+            const user=JSON.parse(localStorage.getItem("loggedUser"))
+            axios({
+                header:"Bearer "+token.jwtToken,
+                method:"post",
+                data:application,
+                url:"http://localhost:8080/application?userid="+user.id+"&propertyid="+propertyid
+            }).then(navigate('/properties'))
+        
+        }
+        else{
+            navigate('/login')
+        }   
  
   };
    const onChange=(e)=>{

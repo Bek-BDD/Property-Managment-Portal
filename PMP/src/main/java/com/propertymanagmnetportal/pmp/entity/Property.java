@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.awt.*;
@@ -18,6 +20,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@SQLDelete(sql="Update table property set deleted=true where id=?")
+@Where(clause="deleted=false")
 public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +31,7 @@ public class Property {
     private String description;
     private double area;
     private int numberOfRoom;
+    private boolean deleted =Boolean.FALSE;
     private String type;
 
     private LocalDate datePosted;

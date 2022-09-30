@@ -85,39 +85,41 @@ const PropertyDetails=(props)=>{
     const [liked,setLiked]=useState(false);
 
     const heart=(id)=> {
-    const propertyId = id;
-    let userId = JSON.parse(localStorage.getItem("loggedUser"));
-    userId = userId?.id;
-    
-    if (localStorage.getItem("tokens") == null) {
-      navigator("/login");
-    } else {
-      if (!liked) {
-        // send to database liked
-        instance
-          .post('/favorites?user_id='+userId+'&'+'property_id='+propertyId)
-          .then((response) => {
-            setLiked(true);
-          })
-          .catch((err) => {
-            console.log(err);
-            setLiked(false);
-          });
-      } else {
-        console.log("remove");
-        // remove from datatbase
-        instance
-          .delete('/favorites?user_id='+userId+'&&'+'property_id='+propertyId)
-          .then((response) => {
-            setLiked(false);
-            console.log(response.data);
-          })
-          .catch((err) => {
-            console.log(err);
-            setLiked(true);
-          });
+      
+      const propertyId = id;
+      let userId = JSON.parse(localStorage.getItem("loggedUser"));
+      userId = userId?.id;
+      
+      if (localStorage.getItem("tokens") == null) {
+        navigator("/login");
       }
-    }
+      else {
+        if (!liked) {
+          // send to database liked
+          instance
+            .post('/favorites?user_id='+userId+'&'+'property_id='+propertyId)
+            .then((response) => {
+              setLiked(true);
+            })
+            .catch((err) => {
+              console.log(err);
+              setLiked(false);
+            });
+        } else {
+          console.log("remove");
+          // remove from datatbase
+          instance
+            .delete('/favorites?user_id='+userId+'&&'+'property_id='+propertyId)
+            .then((response) => {
+              setLiked(false);
+              console.log(response.data);
+            })
+            .catch((err) => {
+              console.log(err);
+              setLiked(true);
+            });
+        }
+      }
   }
 
   useEffect(()=>{
