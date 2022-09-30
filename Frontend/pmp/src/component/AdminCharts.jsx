@@ -10,15 +10,12 @@ import {
 } from 'chart.js';
 
 import { Bar, Pie, Doughnut } from 'react-chartjs-2';
-import {createContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import "hammerjs";
-// import Chart from "./Chart";
 import Widgets from "./Widgets";
-import AreaChart from "./AreaChart";
-import OwnersBar from "./OwnersBar";
-import Widget from "./Widget";
-import Button from "@mui/material/Button";
+import BarChart from "./BarChart";
+
 
 ChartJS.register(
     CategoryScale,
@@ -29,8 +26,8 @@ ChartJS.register(
     Legend,
     ArcElement
 );
-//
-// export const context = createContext();
+
+
 export default function AdminCharts(){
 
     const [PropertyData, setPropertyData] = useState([]);
@@ -193,7 +190,7 @@ export default function AdminCharts(){
                 </div>
                 <div className="area">
                     {/*<AreaChart/>*/}
-                    <OwnersBar data = { userData}/>
+                    <BarChart data = { userData}/>
                 </div>
 
 
