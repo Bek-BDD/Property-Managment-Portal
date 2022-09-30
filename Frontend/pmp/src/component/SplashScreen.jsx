@@ -4,19 +4,34 @@ import IconButton from "@mui/material/IconButton";
 import Cards from "./Cards";
 import { useState } from "react";
 import { useEffect } from "react";
-import {instance} from "../index"
-
+import {instance} from "../index";
+import axios from "axios";
+import * as React from 'react';
+import { useSelector } from "react-redux";
 
 export default function () {
   const[propertyState,setPropertyState] = useState([])
   const[searchState,setSearchState] = useState();
-
+  const[loggedUser,setLoggedUser] = useState( JSON.parse(localStorage.getItem("loggedUser")))
+  const [userFavourite,setUserFavourite] = useState();
+  const logged = useSelector((state)=> state.loggedUser.loggedIn)
+  
    useEffect(()=>{
-    
-   instance.get('/properties')
-    .then(response => setPropertyState (response.data))
-    .catch(err=> console.log(err))
-    
+    if(JSON.parse(localStorage.getItem("loggedUser"))?.role[0].role == "customer"){
+      instance.get('/properties')
+      .then(r => setPropertyState(r.data)).catch(err=>console.log(err))
+      instance.get('/favorites/'+loggedUser.id)
+      .then(r=> setUserFavourite(r.data))
+      .catch(err=>console.log(err))
+    }
+    else{
+      instance.get('/properties')
+      .then(response => {
+        setPropertyState(response.data)
+        setUserFavourite(null)
+      } )
+      .catch(err=> console.log(err))
+    }
   },[])
 
   function search(e){
@@ -52,7 +67,7 @@ export default function () {
         </Paper>
       </div>
     </div>
-    <Cards value={propertyState} />
+    <Cards value={propertyState} fav={userFavourite} />
     </div>
   );
 }

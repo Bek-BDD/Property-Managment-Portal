@@ -14,6 +14,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { userActions } from './Redux/UserSlice';
 import { instance } from '../index';
+import {setLoggedIn} from '../Redux/loggedUserSlice'
 
 
 const theme = createTheme();
@@ -21,6 +22,7 @@ const theme = createTheme();
 export default function() {
   const[isLoggedIn,setIsLoggedIn] = useState(false)
   const[loginError,setLoginError] = useState(false)
+  const dipatch = useDispatch();
 
 useEffect(()=>{
   if(localStorage.getItem("tokens") != null){setIsLoggedIn(true)
@@ -32,10 +34,6 @@ useEffect(()=>{
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
     loginRequest(data);
 
   };
@@ -51,9 +49,9 @@ useEffect(()=>{
                   localStorage.setItem("tokens",JSON.stringify(response.data))
                   instance.get(`/users/${data.get('email')}`)
                   .then((response)=> {
-                    console.log(response.data);
                       localStorage.setItem("loggedUser",JSON.stringify(response.data))
-                      window.location.reload(false);
+                      // window.location.reload(false);
+                      dispatch(setLoggedIn(true))
                       navigate("/")
                       })
                
@@ -65,7 +63,8 @@ useEffect(()=>{
 
   return (
     <>
-    { (!isLoggedIn) ? 
+    { 
+    // (!isLoggedIn) ? 
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -136,7 +135,8 @@ useEffect(()=>{
         </Box>
       </Container>
     </ThemeProvider>
-    :<>{navigate("/")}</> }
+    // :<>{navigate("/")}</> 
+    }
     </>
   );
 }
