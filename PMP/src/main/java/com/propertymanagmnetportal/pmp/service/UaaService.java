@@ -6,8 +6,8 @@ import com.propertymanagmnetportal.pmp.security.entity.LoginRequest;
 import com.propertymanagmnetportal.pmp.security.entity.LoginResponse;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.http.HttpRequest;
 import java.util.List;
+import java.util.Optional;
 
 public interface UaaService {
     public LoginResponse login(LoginRequest request);
@@ -30,6 +30,8 @@ public interface UaaService {
     public List<User> findAllCustomers();
 
     public User findCustomerById(int id);
+
+    public Optional<User> findUserById(int id);
 
     public void deleteCustomerById(int id);
 

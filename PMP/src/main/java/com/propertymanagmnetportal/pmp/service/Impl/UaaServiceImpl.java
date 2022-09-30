@@ -4,7 +4,6 @@ import com.propertymanagmnetportal.pmp.Exceptions.CredentialException;
 import com.propertymanagmnetportal.pmp.Exceptions.EmailExistException;
 import com.propertymanagmnetportal.pmp.Utility.AwsUtil;
 import com.propertymanagmnetportal.pmp.Utility.EmailService;
-import com.propertymanagmnetportal.pmp.Utility.SiteUrl;
 import com.propertymanagmnetportal.pmp.dto.UserDTO;
 import com.propertymanagmnetportal.pmp.entity.Address;
 import com.propertymanagmnetportal.pmp.entity.Role;
@@ -14,7 +13,6 @@ import com.propertymanagmnetportal.pmp.repository.RoleRepository;
 import com.propertymanagmnetportal.pmp.repository.UserBaseRepository;
 import com.propertymanagmnetportal.pmp.security.JwtUtil;
 import com.propertymanagmnetportal.pmp.security.MyUserDetailService;
-import com.propertymanagmnetportal.pmp.security.MyUserDetails;
 import com.propertymanagmnetportal.pmp.security.entity.LoginRequest;
 import com.propertymanagmnetportal.pmp.security.entity.LoginResponse;
 import com.propertymanagmnetportal.pmp.service.UaaService;
@@ -30,9 +28,9 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -189,6 +187,16 @@ public class UaaServiceImpl implements UaaService {
     }
 
     @Override
+    public Optional<User> findUserById(int id){
+        var user =  userBaseRepository.findAll()
+                .stream()
+                .filter(u->u.isDeleted()==false)
+                .filter(ur->ur.getId()==id)
+                .findFirst();
+        return user;
+    }
+
+    @Override
     public List<User> findAllCustomers() {
 
         return userBaseRepository.findAll()
@@ -265,6 +273,7 @@ public class UaaServiceImpl implements UaaService {
 //                .stream()
 //                .filter(us->us.isDeleted()==true)
 //                .collect(Collectors.toList()).stream().findAny().get();
+
         userBaseRepository.updateDeleteStatus(id);
     }
     public void userActivate(int id){

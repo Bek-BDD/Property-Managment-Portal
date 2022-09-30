@@ -24,6 +24,7 @@ import NewEditAccount from "./component/NewEditAccount";
 import PropertyStepper from "./component/Property/PropertyStepper";
 import ApplicationForm from "./component/ApplicationForm";
 import AdminCharts from "./component/AdminCharts";
+import AdminPage from "./component/AdminDashBoard/AdminPage"
 import ProfilePasswordChange from "./component/ProfilePasswordChange";
 import ProflieChangePassword from "./component/ProflieChangePassword";
 import ApplicationList from "./component/ApplicationList";
@@ -55,6 +56,7 @@ useEffect(()=>{
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/changePassword/reset_pwd" element={<ChangePassword />} />
         <Route path="/admincharts" element={<AdminCharts />} />
+        <Route path="/AdminPage" element={<AdminPage/>}/>
         <Route
           path="/customerapplications"
           element={<CustomerApplications />}
