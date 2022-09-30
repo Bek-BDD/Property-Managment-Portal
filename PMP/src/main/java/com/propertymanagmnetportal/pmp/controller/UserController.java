@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     UaaService uaaService;
+
     @GetMapping("/{email}")
-    public User getUserByEmail(@PathVariable String email){
-       return uaaService.getUserByEmail(email);
+    public User getUserByEmail(@PathVariable String email) {
+        return uaaService.getUserByEmail(email);
     }
 }

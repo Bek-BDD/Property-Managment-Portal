@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
@@ -23,27 +24,29 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
     MyUserDetailService userDetailService;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String header = request.getHeader("Authorization");
         String username = "";
         String token = "";
-        if( header != null){
+        if (header != null) {
             token = header.split(" ")[1].trim();
             username = jwtUtil.getUsernameFromToken(token);
             UserDetails userDetails = userDetailService.loadUserByUsername(username);
-            boolean isValidToken = jwtUtil.validateToken(token,userDetails);
-            if(isValidToken && SecurityContextHolder.getContext().getAuthentication() == null){
-                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
+            boolean isValidToken = jwtUtil.validateToken(token, userDetails);
+            if (isValidToken && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
 
-        } else{
+        } else {
             throw new AuthorizationHeaderNotPresent("Can not find authorization header!");
         }
-        filterChain.doFilter(request,response);
+        filterChain.doFilter(request, response);
     }
+
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         return new AntPathMatcher().match("/**", request.getServletPath());

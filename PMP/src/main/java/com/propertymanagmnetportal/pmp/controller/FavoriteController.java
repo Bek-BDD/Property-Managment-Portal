@@ -15,22 +15,22 @@ public class FavoriteController {
     private FavoriteService favoriteService;
 
     @GetMapping
-    public List<Property> findAll(){
+    public List<Property> findAll() {
         return favoriteService.findAll();
     }
 
     @GetMapping("/{id}")
-    public List<Property> getFavoriteById(@PathVariable int id){
+    public List<Property> getFavoriteById(@PathVariable int id) {
         return favoriteService.getFavoriteByUserId(id);
     }
 
     @PostMapping
-    public void addFavorite(@RequestParam int user_id, @RequestParam int property_id){
-         favoriteService.addFavorite(user_id, property_id);
+    public void addFavorite(@RequestParam int user_id, @RequestParam int property_id) {
+        favoriteService.addFavorite(user_id, property_id);
     }
 
     @DeleteMapping("/{id}")
-    public void removeFavorite(@PathVariable int id){
+    public void removeFavorite(@PathVariable int id) {
         favoriteService.removeFavorite(id);
     }
 }

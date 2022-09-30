@@ -127,9 +127,9 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public Property deleteProperty(int id) {
-      Property property =  propertyRepo.findById(id).get();
-         propertyRepo.deleteById(id);
-         return property;
+        Property property = propertyRepo.findById(id).get();
+        propertyRepo.deleteById(id);
+        return property;
     }
 
 

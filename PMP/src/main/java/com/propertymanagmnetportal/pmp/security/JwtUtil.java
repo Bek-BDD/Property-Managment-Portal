@@ -14,10 +14,8 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
+    public static final long JWT_TOKEN_VALIDITY = 100 * 60;
     private static final long serialVersionUID = -2550185165626007488L;
-
-    public static final long JWT_TOKEN_VALIDITY = 100 * 60 ;
-
     private final String secret = "God_Bless_Ethiopia";
 
     //retrieve username from jwt token
@@ -34,6 +32,7 @@ public class JwtUtil {
         final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
     }
+
     //for retrieveing any information from token we will need the secret key
     private Claims getAllClaimsFromToken(String token) {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
@@ -50,6 +49,7 @@ public class JwtUtil {
         Map<String, Object> claims = new HashMap<>();
         return doGenerateToken(claims, userDetails.getUsername());
     }
+
     //while creating the token -
     //1. Define  claims of the token, like Issuer, Expiration, Subject, and the ID
     //2. Sign the JWT using the HS512 algorithm and secret key.
@@ -65,12 +65,13 @@ public class JwtUtil {
                 .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
     }
-    public String generateRefereshToken(String email){
+
+    public String generateRefereshToken(String email) {
         return Jwts.builder()
                 .setSubject(email)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() +JWT_TOKEN_VALIDITY))
-                .signWith(SignatureAlgorithm.HS512,secret)
+                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY))
+                .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
 
     }

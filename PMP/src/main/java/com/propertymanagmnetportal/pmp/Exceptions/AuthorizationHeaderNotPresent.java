@@ -1,8 +1,8 @@
 package com.propertymanagmnetportal.pmp.Exceptions;
 
-public class AuthorizationHeaderNotPresent extends RuntimeException{
+public class AuthorizationHeaderNotPresent extends RuntimeException {
 
-    public AuthorizationHeaderNotPresent(String message){
+    public AuthorizationHeaderNotPresent(String message) {
         super(message);
     }
 }

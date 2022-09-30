@@ -1,28 +1,22 @@
-import react, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Box, Fab} from "@mui/material";
-import {Check, Save} from "@mui/icons-material";
+import {Check} from "@mui/icons-material";
 import {green, grey, red} from "@mui/material/colors";
 import {CircularProgress} from "@mui/joy";
-import axios from 'axios';
-import {element} from "prop-types";
 
 export default function (props) {
 
 
-    let [flag,setflag]=useState(false);
-
+    let [flag, setflag] = useState(false);
 
 
     useEffect(() => {
 
 
-
-    },[flag]);
-
+    }, [flag]);
 
 
-
-    return  (
+    return (
         <Box
             sx={{
                 m: 1,
@@ -36,12 +30,12 @@ export default function (props) {
                         width: 40,
                         height: 40,
                         bgcolor: green[500],
-                       '&:hover': { bgcolor: green[700] }? {bgcolor: [red]}:{bgcolor: green[700]},
+                        '&:hover': {bgcolor: green[700]} ? {bgcolor: [red]} : {bgcolor: green[700]},
                     }}
-                    onClick={ ()=> setflag(flag === false)}
+                    onClick={() => setflag(flag === false)}
                     disabled={flag}
                 >
-                    <Check />
+                    <Check/>
                 </Fab>
             ) : (
                 <Fab
@@ -50,15 +44,15 @@ export default function (props) {
                         width: 40,
                         height: 40,
                         bgcolor: green[500],
-                        '&:hover': { bgcolor: green[700] }? {bgcolor: [red]}:{bgcolor: green[700]},
+                        '&:hover': {bgcolor: green[700]} ? {bgcolor: [red]} : {bgcolor: green[700]},
                     }}
-                    onClick={ ()=> setflag(flag === false)}
+                    onClick={() => setflag(flag === false)}
                     disabled={flag}
                 >
-                    <Check />
+                    <Check/>
                 </Fab>
             )}
-            { props.theRow.row.active && (
+            {props.theRow.row.active && (
                 <CircularProgress
                     sx={{
                         color: grey[500],
@@ -67,7 +61,7 @@ export default function (props) {
                         left: -6,
                         zIndex: 1,
                     }}
-                    onClick={ ()=> setflag(flag === false)}
+                    onClick={() => setflag(flag === false)}
                 />
             )}
         </Box>

@@ -29,12 +29,11 @@ import java.util.List;
 //@RequestMapping("/uaa")
 public class UaaController {
     @Autowired
+    BCryptPasswordEncoder passwordEncoder;
+    @Autowired
     private UaaService uaaService;
     @Autowired
     private UserBaseRepository userBaseRepository;
-
-    @Autowired
-    BCryptPasswordEncoder passwordEncoder;
 
 
 //    public  UaaController(UserBaseRepository userBaseRepository){
@@ -45,9 +44,8 @@ public class UaaController {
 //        this.uaaService = uaaService;
 //    }
 
-
     @PostMapping("/uaa/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest){
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         LoginResponse response = uaaService.login(loginRequest);
         return ResponseEntity.ok().body(response);
     }
@@ -60,58 +58,58 @@ public class UaaController {
 
     @GetMapping("/users")
     //@PreAuthorize("hasAuthority('owner')")
-    public List<User> findAllUsers(){
+    public List<User> findAllUsers() {
         return uaaService.findAll();
     }
 
     @GetMapping("/customers")
 //    @PreAuthorize("hasAuthority('admin')")
-    public List<User> findAllCustomers(){
-        return  uaaService.findAllCustomers();
+    public List<User> findAllCustomers() {
+        return uaaService.findAllCustomers();
     }
 
     @GetMapping("/customers/{id}")
 //    @PreAuthorize("hasAuthority('admin')")
-    public User findCustomerById(@PathVariable int id){
+    public User findCustomerById(@PathVariable int id) {
         return uaaService.findCustomerById(id);
     }
 
     @DeleteMapping("/customers/{id}")
 //    @PreAuthorize("hasAuthority('admin')")
-    public void deleteCustomerById(@PathVariable int id){
+    public void deleteCustomerById(@PathVariable int id) {
         uaaService.deleteCustomerById(id);
     }
 
 
     @GetMapping("/owners")
 //    @PreAuthorize("hasAuthority('admin')")
-    public List<User> findAllOwners(){
+    public List<User> findAllOwners() {
         return uaaService.findAllOwners();
     }
 
     @GetMapping("/owners/{id}")
 //    @PreAuthorize("hasAuthority('admin')")
-    public User findAllOwnersById(@PathVariable int id){
+    public User findAllOwnersById(@PathVariable int id) {
         return uaaService.findOwnerById(id);
     }
 
     @DeleteMapping("/owners/{id}")
 //    @PreAuthorize("hasAuthority('admin')")
-    public void deleteOwnerById(@PathVariable int id){
+    public void deleteOwnerById(@PathVariable int id) {
         uaaService.deleteOwnerById(id);
     }
 
     @PostMapping("/uaa/resetpassword")
-    public String resetPassword(HttpServletRequest request, @RequestBody LoginRequest email){
+    public String resetPassword(HttpServletRequest request, @RequestBody LoginRequest email) {
         System.out.println(email.getEmail());
         String emailToken = RandomString.make(45);
-        String resetURL =uaaService.updateResetPasswordToken(emailToken,email.getEmail(),request);
+        String resetURL = uaaService.updateResetPasswordToken(emailToken, email.getEmail(), request);
         return resetURL;
     }
 
-    @PostMapping(path = "/uaa/signupimg",consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PostMapping(path = "/uaa/signupimg", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     public String signUpImg(
-            @RequestPart(value = "images",required = false) MultipartFile images
+            @RequestPart(value = "images", required = false) MultipartFile images
             , @RequestPart("firstname") String firstname
             , @RequestPart("lastname") String lastname
             , @RequestPart("password") String password
@@ -119,20 +117,20 @@ public class UaaController {
             , @RequestPart("roletype") String roletype
 
 ////      Address fields
-            , @RequestPart(value = "city" ,required = false) String city
+            , @RequestPart(value = "city", required = false) String city
             , @RequestPart(value = "state", required = false) String state
             , @RequestPart(value = "street_number", required = false) String street_number
             , @RequestPart(value = "zip_code", required = false) String zip_code
     ) throws IOException {
 
-        UserDTO userDTO = new UserDTO(images,firstname,lastname,email,password,roletype,city,state,street_number,zip_code);
+        UserDTO userDTO = new UserDTO(images, firstname, lastname, email, password, roletype, city, state, street_number, zip_code);
         return uaaService.signUpImg(userDTO);
     }
 
     @GetMapping("/reset_pwd")
-    public String validateToken(@Param(value = "token") String token, HttpServletResponse response){
+    public String validateToken(@Param(value = "token") String token, HttpServletResponse response) {
 
-        if(uaaService.getUserFromResetToken(token)== null)
+        if (uaaService.getUserFromResetToken(token) == null)
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "token not found", new TokenDoesnotExsist("ex"));
         return "verified";

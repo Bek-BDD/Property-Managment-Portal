@@ -1,16 +1,12 @@
 package com.propertymanagmnetportal.pmp.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.awt.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,7 +30,7 @@ public class Property {
 
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="property_id")
+    @JoinColumn(name = "property_id")
     private List<Image> imageUrls;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -42,9 +38,8 @@ public class Property {
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="owner_id")
+    @JoinColumn(name = "owner_id")
     private User user;
-
 
 
     public Property(String name, double price, String description, double area, int numberOfRoom, String type, Address address, boolean status) {

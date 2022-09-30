@@ -1,8 +1,8 @@
 package com.propertymanagmnetportal.pmp.Exceptions;
 
-public class TokenDoesnotExsist extends RuntimeException{
+public class TokenDoesnotExsist extends RuntimeException {
 
-    public TokenDoesnotExsist(String message){
+    public TokenDoesnotExsist(String message) {
         super(message);
     }
 }

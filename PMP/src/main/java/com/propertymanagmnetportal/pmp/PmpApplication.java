@@ -1,7 +1,5 @@
 package com.propertymanagmnetportal.pmp;
 
-import com.propertymanagmnetportal.pmp.Utility.EmailServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

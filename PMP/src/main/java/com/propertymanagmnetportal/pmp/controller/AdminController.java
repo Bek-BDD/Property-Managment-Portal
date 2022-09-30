@@ -15,7 +15,7 @@ public class AdminController {
     AdminService adminService;
 
     @GetMapping("/{id}")
-    public void activateDeactivate(@PathVariable int id){
+    public void activateDeactivate(@PathVariable int id) {
         adminService.activiateDeactivate(id);
     }
 }

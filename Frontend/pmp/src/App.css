@@ -1,51 +1,58 @@
-.container{
+.container {
     display: flex;
     justify-content: space-between;
     margin: 20px;
 }
+
 body {
     font-family: "Poppins";
 }
-.splashContainer{
+
+.splashContainer {
     background-image: url('https://wp-tid.zillowstatic.com/bedrock/app/uploads/sites/5/2022/08/ZG_Brand_LA_0322_Harvard-_ExtFront_1504_4936px_NO-PPL_desktopImg2x-scaled.webp');
     background-position-y: center;
     background-position-x: center;
     background-size: cover;
     height: 50vh;
 }
-.search-center{
+
+.search-center {
     margin-top: 170px;
     margin-left: 400px;
     display: inline-block;;
-  
+
 }
 
-.card-container{
+.card-container {
     display: grid;
     grid-template-columns: auto auto auto;
     justify-items: center;
     gap: 20px;
-    
+
 
 }
-.card-hover:hover{
+
+.card-hover:hover {
     box-shadow: rgb(209 209 213) 0px 5px 15px;
 }
-.image-center{
+
+.image-center {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 100%;
     object-fit: contain;
 }
-.contained{
+
+.contained {
     object-fit: contain;
 }
-a{
+
+a {
     text-decoration: none;
 }
 
-.customerHeader{
+.customerHeader {
     display: flex;
     justify-content: space-between;
 }
@@ -60,7 +67,7 @@ a{
 }
 
 .fr3 {
-    width:100%
+    width: 100%
 }
 
 .fr1 {
@@ -76,41 +83,47 @@ a{
 .banner img, .img-cards img {
     width: 100%;
     height: 100%;
-    object-fit:cover
+    object-fit: cover
 }
 
 .img-cards {
-    gap: 1px; 
+    gap: 1px;
     width: 100%;
     height: 200px;
 }
-.text-card{
+
+.text-card {
     width: 95%;
     margin: auto;
-    color:rgb(52, 50, 50)
-}
-.top-bar{
-    display: grid; 
-    grid-template-columns: auto auto;   
-    justify-content: space-between;
-}
-.mg-10{
-    margin:10px;
+    color: rgb(52, 50, 50)
 }
 
-.hr-line{
+.top-bar {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+}
+
+.mg-10 {
+    margin: 10px;
+}
+
+.hr-line {
     width: 95%;
-    margin:  auto;
+    margin: auto;
     margin-bottom: 10px;
     border: 1px solid rgb(235, 231, 231);
 }
-.action-button{
+
+.action-button {
     margin: 5px;
     text-align: start;
 }
-.center{
+
+.center {
     text-align: center;
 }
-.properties, .values{
+
+.properties, .values {
     text-align: start;
 }

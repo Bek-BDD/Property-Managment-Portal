@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Favorite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int g;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

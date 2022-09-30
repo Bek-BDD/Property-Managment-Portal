@@ -1,27 +1,27 @@
-import { Button } from "@mui/material";
+import {Button} from "@mui/material";
 import React from 'react'
 import {Link} from 'react-router-dom';
-import CollapsibleTable from "./CustomerApplications";
 import AccountMenu from "./ProfileDropDown";
+
 function CustomerHeader() {
-  return (
-        
-            <div className="customerHeader">
-                
-                <div>
-                    <Link to={"/"}> <Button variant="text">Rent</Button> </Link>
-                    <Link to={"/"}> <Button variant="text">Buy</Button> </Link>
-                    <Link to={"/"}>  <Button variant="text">Agent Finder</Button> </Link>
-                </div>
-                    <Link to={"/"}>  <img src="https://s.zillowstatic.com/pfs/static/z-logo-default.svg" /></Link> 
-                <div className="">
-                    <Link to={"/customerapplications"}><Button variant="text">Manage Application</Button> </Link>
-                    <Link to={"/Favourites"}><Button variant="text">Favorite</Button></Link>
-                    <Link to={"/"} >  <Button variant="text"><AccountMenu /></Button> </Link>
-            
-                </div>
-            </div> 
+    return (
+
+        <div className="customerHeader">
+
+            <div>
+                <Link to={"/"}> <Button variant="text">Rent</Button> </Link>
+                <Link to={"/"}> <Button variant="text">Buy</Button> </Link>
+                <Link to={"/"}> <Button variant="text">Agent Finder</Button> </Link>
+            </div>
+            <Link to={"/"}> <img src="https://s.zillowstatic.com/pfs/static/z-logo-default.svg"/></Link>
+            <div className="">
+                <Link to={"/customerapplications"}><Button variant="text">Manage Application</Button> </Link>
+                <Link to={"/Favourites"}><Button variant="text">Favorite</Button></Link>
+                <Link to={"/"}> <Button variant="text"><AccountMenu/></Button> </Link>
+
+            </div>
+        </div>
     )
 }
-        
+
 export default CustomerHeader

@@ -5,7 +5,6 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -41,12 +40,12 @@ public class AwsUtil {
         }
 
         amazonS3.setObjectAcl("propertymanagmentportal", key, CannedAccessControlList.PublicRead);
-       URL url = amazonS3.getUrl("propertymanagmentportal", key);
+        URL url = amazonS3.getUrl("propertymanagmentportal", key);
 
         return url.toString();
     }
 
-    public List<String> uploadMultipleFiles(List<MultipartFile> files){
+    public List<String> uploadMultipleFiles(List<MultipartFile> files) {
         List<String> urlList = new ArrayList<>();
 
         files.forEach(file -> {

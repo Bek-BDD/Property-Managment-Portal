@@ -1,9 +1,9 @@
-import MyCard from './MyCard'
 import '../App.css'
 import PropertyCard from "./PropertyCard";
-export default function(){
-    return(
-        <div className='card-container' style={{marginTop:30}}>
+
+export default function () {
+    return (
+        <div className='card-container' style={{marginTop: 30}}>
             <PropertyCard/>
 
         </div>

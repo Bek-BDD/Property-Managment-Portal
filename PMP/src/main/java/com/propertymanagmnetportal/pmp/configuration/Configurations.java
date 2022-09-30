@@ -31,6 +31,7 @@ public class Configurations {
         props.put("mail.debug", "true");
         return mailSender;
     }
+
     public AWSCredentials credentials() {
         AWSCredentials credentials = new BasicAWSCredentials(
                 "AKIASFFP5LPDNXASUOEA",
@@ -38,6 +39,7 @@ public class Configurations {
         );
         return credentials;
     }
+
     @Bean
     public AmazonS3 amazonS3() {
         AmazonS3 s3client = AmazonS3ClientBuilder
@@ -49,12 +51,9 @@ public class Configurations {
     }
 
     @Bean
-    public ModelMapper mapper(){
+    public ModelMapper mapper() {
         return new ModelMapper();
     }
-
-
-
 
 
 }

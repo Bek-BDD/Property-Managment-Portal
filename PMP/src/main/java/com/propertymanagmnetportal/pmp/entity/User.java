@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE users SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
-@Table(name="users")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class User {
     private boolean active = Boolean.TRUE;
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Role> role;
     @JsonManagedReference
@@ -41,14 +41,14 @@ public class User {
     private List<Property> properties;
 
 
-    public User(String firstname,String lastname,String email,String password,String imageurl,Address address,List<Role> role){
+    public User(String firstname, String lastname, String email, String password, String imageurl, Address address, List<Role> role) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.imageurl = imageurl;
 
         this.email = email;
         this.address = address;
-        this.password= password;
+        this.password = password;
         this.role = role;
     }
 }
