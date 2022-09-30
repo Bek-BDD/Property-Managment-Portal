@@ -104,6 +104,13 @@ public class UaaController {
         uaaService.deleteOwnerById(id);
     }
 
+    @DeleteMapping("/users/{id}")
+//    @PreAuthorize("hasAuthority('admin')")
+    public void deleteUserById(@PathVariable int id){
+        uaaService.deleteUserById(id);
+    }
+
+
     @PostMapping("/uaa/resetpassword")
     public String resetPassword(HttpServletRequest request, @RequestBody LoginRequest email){
         System.out.println(email.getEmail());

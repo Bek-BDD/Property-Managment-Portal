@@ -38,4 +38,6 @@ public interface UaaService {
     public User findOwnerById(int id);
 
     public void deleteOwnerById(int id);
+
+    public void deleteUserById(int id);
 }

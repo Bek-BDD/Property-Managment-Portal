@@ -214,13 +214,13 @@ public class UaaServiceImpl implements UaaService {
 
     @Override
     public void deleteCustomerById(int id) {
-        User u = userBaseRepository.findAll()
-                .stream()
-                .filter(s->s.getId()==id)
-                .filter(user->user.getRole()
-                        .contains( new Role("customer")))
-                .filter(us->us.isDeleted()==true)
-                .collect(Collectors.toList()).stream().findAny().get();
+//        User u = userBaseRepository.findAll()
+//                .stream()
+//                .filter(s->s.getId()==id)
+//                .filter(user->user.getRole()
+//                        .contains( new Role("customer")))
+//                .filter(us->us.isDeleted()==true)
+//                .collect(Collectors.toList()).stream().findAny().get();
         userBaseRepository.updateDeleteStatus(id);
 //        userBaseRepository.delete(u);
 
@@ -259,6 +259,14 @@ public class UaaServiceImpl implements UaaService {
 //        userBaseRepository.delete(u);
     }
 
+    @Override
+    public void deleteUserById(int id) {
+        userBaseRepository.findAll()
+                .stream()
+                .filter(us->us.isDeleted()==true)
+                .collect(Collectors.toList()).stream().findAny().get();
+        userBaseRepository.updateDeleteStatus(id);
+    }
 
 
 }
