@@ -33,6 +33,8 @@ function App() {
 useEffect(()=>{
   if(localStorage.getItem("tokens") != null){setIsLoggedIn(true)
 }},[])
+
+
   return (
     <BrowserRouter>
       {!isLoggedIn ? <Header /> : <CustomerHeader />}

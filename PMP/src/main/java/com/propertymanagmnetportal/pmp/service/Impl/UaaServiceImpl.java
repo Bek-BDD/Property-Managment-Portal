@@ -261,10 +261,10 @@ public class UaaServiceImpl implements UaaService {
 
     @Override
     public void deleteUserById(int id) {
-        userBaseRepository.findAll()
-                .stream()
-                .filter(us->us.isDeleted()==true)
-                .collect(Collectors.toList()).stream().findAny().get();
+//        userBaseRepository.findAll()
+//                .stream()
+//                .filter(us->us.isDeleted()==true)
+//                .collect(Collectors.toList()).stream().findAny().get();
         userBaseRepository.updateDeleteStatus(id);
     }
 

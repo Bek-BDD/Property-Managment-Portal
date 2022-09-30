@@ -40,4 +40,5 @@ public interface UaaService {
     public void deleteOwnerById(int id);
 
     public void deleteUserById(int id);
+
 }

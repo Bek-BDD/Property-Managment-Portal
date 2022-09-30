@@ -9,10 +9,16 @@ import {
     Legend, ArcElement,
 } from 'chart.js';
 
-import { Bar, Pie } from 'react-chartjs-2';
-import {useEffect, useState} from "react";
+import { Bar, Pie, Doughnut } from 'react-chartjs-2';
+import {createContext, useEffect, useState} from "react";
 import axios from "axios";
 import "hammerjs";
+// import Chart from "./Chart";
+import Widgets from "./Widgets";
+import AreaChart from "./AreaChart";
+import OwnersBar from "./OwnersBar";
+import Widget from "./Widget";
+import Button from "@mui/material/Button";
 
 ChartJS.register(
     CategoryScale,
@@ -23,25 +29,57 @@ ChartJS.register(
     Legend,
     ArcElement
 );
-
-
+//
+// export const context = createContext();
 export default function AdminCharts(){
-    const initialState = [];
 
-    const [PropertyData, setPropertyData] = useState(initialState);
+    const [PropertyData, setPropertyData] = useState([]);
+    const [customerData, setCustomerData] = useState([]);
+    const [ownerData, setOwnerData] = useState([]);
+    const [userData, setUserData] = useState([]);
+    const [stateData, setStateData] = useState([]);
 
-    const [stateData, setStateData] = useState(initialState);
 
     const getProperty = async () => {
         const result = await axios.get('http://localhost:8080/properties');
         setPropertyData(result.data);
-        setStateData(result.data.address.state);
+        console.log("poperty data",PropertyData);
+        // setStateData(result.data.address.state);
+    }
+
+
+
+    const getOwners = async () => {
+        const result = await axios.get('http://localhost:8080/owners');
+        setOwnerData(result.data);
+    }
+
+    const getCustomers = async () => {
+        const result = await axios.get('http://localhost:8080/customers');
+        setCustomerData(result.data);
+    }
+
+    const getUsers = async () => {
+        const result = await axios.get('http://localhost:8080/users');
+        setUserData(result.data);
     }
 
     useEffect(() => {
+        getOwners();
         getProperty();
+        getCustomers();
+        getUsers();
     }, []);
 
+
+    const datas = {
+        userData:userData.length,
+        ownerData: ownerData.length,
+        customerData: customerData.length,
+        PropertyData: PropertyData.length
+    }
+
+    console.log(PropertyData.length);
 
     const options = {
         responsive: true,
@@ -52,7 +90,7 @@ export default function AdminCharts(){
             },
             title: {
                 display: true,
-                text: 'Customers chart',
+                text: 'Properties chart by State',
             },
         },
     };
@@ -60,7 +98,7 @@ export default function AdminCharts(){
 
     const count = {};
 
-    console.log(stateData);
+    console.log('this is state data',stateData);
     for (let index = 0; index < PropertyData.length; index++) {
         const element = PropertyData[index].address.state;
 
@@ -102,7 +140,7 @@ export default function AdminCharts(){
         labels: labels3,
         datasets: [
             {
-                label: 'Customers',
+                label: 'Properties',
                 data: dt3,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -139,17 +177,30 @@ export default function AdminCharts(){
 
     return(
         <div>
-            <div style={{marginTop:30}} sx={{minWidth: 560}}>
-                <Pie data={data} options={{
+            <Widgets data = {datas }/>
+            <div style={{marginTop:30}} sx={{minWidth: 560}} className="pie">
+                <Doughnut data={data} options={{
                     responsive: true,
                     maintainAspectRatio: false,
                     width:"700px"
                 }}/>
             </div>
-            <div style={{ width: '50%',margin:"auto", marginTop:50, justifyContent:"center"}}>
-                <Bar options={options} data={data2} height="400px"
-                      />
+
+            <div className="barArea">
+                <div style={{margin:"auto", justifyContent:"center"}} className="bar">
+                    <Bar options={options} data={data2} height="400px"
+                    />
+                </div>
+                <div className="area">
+                    {/*<AreaChart/>*/}
+                    <OwnersBar data = { userData}/>
+                </div>
+
+
             </div>
+
+
+
         </div>
 
     )

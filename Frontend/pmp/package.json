@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@devexpress/dx-react-chart-material-ui": "^3.0.5",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@fontsource/poppins": "^4.5.9",
@@ -15,6 +16,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "chart.js": "^3.9.1",
+    "d3-scale": "^4.0.2",
     "faker": "^6.6.6",
     "hammerjs": "^2.0.8",
     "material-table": "^2.0.3",
@@ -23,6 +25,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.4",
     "react-scripts": "5.0.1",
+    "recharts": "^2.1.14",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
