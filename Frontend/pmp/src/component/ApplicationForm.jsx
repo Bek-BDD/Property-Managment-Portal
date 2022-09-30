@@ -7,35 +7,50 @@ import Box from '@mui/material/Box';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
-
-
-
-const handleSubmit = (event) => {
-
-    event.preventDefault();
-
-    const data = new FormData(event.currentTarget);  
-    // data.append("message")
-    // data.append("fullname")
-    // data.append("phone")
-
-    console.log(data)
-    
-    //   instance
-    //     .post("/uaa/application/",data)
-    //     .then((response) => console.log(response.data))
-    //     .catch((err) => console.log(err));
- 
-  };
-
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { SettingsInputCompositeSharp } from '@mui/icons-material';
 
 const ApplicationForm =(props)=>{
-  const  {show, hide,fullWidth}=props;
+    const  {show, hide,fullWidth,propertyid}=props;
+    const navigate=useNavigate()
     const [liked,setLiked]=useState(false);
+    const[success,setSuccess]=useState(false)
     const [maxWidth, setMaxWidth]=useState("sm");
-    
+     const[application,setapplication]=useState({
+        message:'',
+        fullname:'',
+        phone:''
+    })
 
-     function heart(){
+    const handleSubmit = (event) => {
+        const token=JSON.parse(localStorage.getItem("tokens"))
+   
+    if(token.jwtToken){
+        event.preventDefault();
+        const user=JSON.parse(localStorage.getItem("loggedUser"))
+        axios({
+            header:"Bearer "+token.jwtToken,
+            method:"post",
+            data:application,
+            url:"http://localhost:8080/application?userid="+user.id+"&propertyid="+propertyid
+        }).then(res=>{res===200? setSuccess(true):setSuccess(false)})
+      
+    }
+    else{
+        navigate('/login')
+    }   
+ 
+  };
+   const onChange=(e)=>{
+        const{name,value}=e.target
+        
+        setapplication({...application,[name]:value});
+       
+    }
+   function heart(){
     if(liked){
         // send to database liked
     }
@@ -50,6 +65,8 @@ const ApplicationForm =(props)=>{
  
    
     return(
+
+            
          
             <Dialog
                 
@@ -85,6 +102,7 @@ const ApplicationForm =(props)=>{
                             <TextField
                             id="outlined-multiline-flexible"
                             name="message"
+                            onChange={onChange}
                             label="Enter Your Message"
                             multiline
                             maxRows={4} 
@@ -97,6 +115,7 @@ const ApplicationForm =(props)=>{
                             <TextField
                             id="outlined-multiline-flexible"
                             label="Your First and Last Name"
+                            onChange={onChange}
                             name="fullname"
                             maxRows={1} 
                             fullWidth                       
@@ -106,8 +125,9 @@ const ApplicationForm =(props)=>{
                         <div className="mg-10">
                             <TextField
                             id="outlined-multiline-flexible"
+                            onChange={onChange}
                             label="phone"
-                            name="Phone"
+                            name="phone"
                             maxRows={1} 
                             fullWidth                       
                             />

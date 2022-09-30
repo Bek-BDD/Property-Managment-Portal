@@ -52,7 +52,7 @@ a{
 }
 
 .mid-container {
-    width: 80vw;
+    
     margin: auto;
     grid-template-columns: 2.5fr 1fr;
     justify-content: flex-start;
@@ -85,7 +85,7 @@ a{
 }
 
 .banner, .detail {
-    width: 100%;
+    width: 95%;
     margin: 5px;
     height: 500px;
 }
@@ -98,7 +98,7 @@ a{
 
 .img-cards {
     gap: 1px; 
-    width: 100%;
+    width: 95%;
     height: 200px;
     cursor: pointer;
 }
