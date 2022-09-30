@@ -3,6 +3,7 @@ package com.propertymanagmnetportal.pmp.controller;
 import com.propertymanagmnetportal.pmp.entity.User;
 import com.propertymanagmnetportal.pmp.service.UaaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,5 +19,10 @@ public class UserController {
         User result = uaaService.getUserByEmail(email);
         System.out.println(result.getEmail());
         return result;
+    }
+@GetMapping("/test")
+@PreAuthorize("hasAuthority('owner')")
+    public String test(){
+        return "done";
     }
 }
