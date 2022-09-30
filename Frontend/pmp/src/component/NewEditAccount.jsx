@@ -15,6 +15,8 @@ import { useEffect } from "react";
 export default function () {
   const [userState, setUserState] = useState({});
   const [isLoadded, setIsLogged] = useState(false);
+  const url = JSON.parse(localStorage.getItem('loggedUser')).imageurl
+  const lastCharacters = url.slice(-4)
   useEffect(()=>{
     const user =JSON.parse(localStorage.getItem('loggedUser'))
     instance.get('/users/'+user.email)
@@ -62,9 +64,15 @@ export default function () {
           alignItems: "center",
         }}
       >
+        {lastCharacters == 'null'? 
         <Avatar sx={{ m: 1, bgcolor: "#304EF2" }}>
           <EditIcon />
-        </Avatar>
+        </Avatar> :
+           <Avatar src={url} sx={{ m: 1, width:56,height:56 }}>
+           <EditIcon />
+         </Avatar> 
+        }
+        
         <Typography component="h1" variant="h5">
           Edit your account
         </Typography>
