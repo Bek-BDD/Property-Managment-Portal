@@ -189,7 +189,6 @@ export default function AdminCharts(){
                     />
                 </div>
                 <div className="area">
-                    {/*<AreaChart/>*/}
                     <BarChart data = { userData}/>
                 </div>
 
