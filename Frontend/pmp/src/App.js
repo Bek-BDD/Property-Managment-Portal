@@ -24,6 +24,10 @@ import NewEditAccount from "./component/NewEditAccount";
 import PropertyStepper from "./component/Property/PropertyStepper";
 import ApplicationForm from "./component/ApplicationForm";
 import AdminCharts from "./component/AdminCharts";
+import ProfilePasswordChange from "./component/ProfilePasswordChange";
+import ProflieChangePassword from "./component/ProflieChangePassword";
+import ApplicationList from "./component/ApplicationList";
+import FavouriteList from "./component/FavouriteList";
 function App() {
   const[isLoggedIn,setIsLoggedIn] = useState(false)
 useEffect(()=>{
@@ -40,6 +44,7 @@ useEffect(()=>{
         <Route path="/change-account" element={<PageNotFound />} />
         <Route path="/" element={<SplashScreen />} />
         <Route path="/property-detail" element={<PropertyDetails />} />
+        <Route path="*" element={<PageNotFound />} />
         <Route path="*" element={<PageNotFound />} />
         <Route path="/create-property" element={<PropertyStepper />} />
         <Route path="/apply" element={<ApplicationForm />} />

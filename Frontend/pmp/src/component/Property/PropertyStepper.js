@@ -15,7 +15,7 @@ import ImageInformation from "./ImageInformation";
 import Alert from '@mui/material/Alert';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import axios from "axios";
+import { instance } from "../../index";
 const theme = createTheme();
 
 export default function PropertyStepper(props) {
@@ -66,9 +66,9 @@ export default function PropertyStepper(props) {
       // Authorization: 'Bearer ' + UserToken?.jwt,
       headers: { "content-type": "multipart/form-data" },
     };
-    let url = "http://localhost:8080/properties";
+    let url = "/properties";
 
-    axios
+    instance
       .post(url, formData, config)
       .then((response) => {
         debugger;

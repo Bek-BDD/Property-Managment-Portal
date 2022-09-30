@@ -57,8 +57,21 @@ BootstrapDialogTitle.propTypes = {
 };
 
 const PropertyDetails=(props)=>{ 
+
+
+     const pictures = ["https://wp-tid.zillowstatic.com/bedrock/app/uploads/sites/5/2022/08/ZG_Brand_LA_0322_Harvard-_ExtFront_1504_4936px_NO-PPL_desktopImg2x-scaled.webp",
+                        "https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg",
+                        "https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg",
+                        "https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg",
+                        "https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg",
+                        "https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg"]   
+
+
     const {open, hideDetail,fullWidth,property} = props; 
     const [openApply,setOpenApply]=useState(false);
+    const[pics,setPics]=useState(pictures)
+    const [bannerimage, setBannerimage]=useState(pics[0])
+    const images=property.imageUrls
 
     const showApply=()=>{
         setOpenApply(true);
@@ -77,19 +90,16 @@ const PropertyDetails=(props)=>{
     }
     setLiked(!liked);
    
+  } 
+
+  const setPictures=(pics)=>{
+     // setPics(pics)
+     // setBannerimage(pics[0])
   }
-
-
-  
-
-    const pictures = ["https://wp-tid.zillowstatic.com/bedrock/app/uploads/sites/5/2022/08/ZG_Brand_LA_0322_Harvard-_ExtFront_1504_4936px_NO-PPL_desktopImg2x-scaled.webp","https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg","https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg","https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg","https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg","https://thumbs.dreamstime.com/b/housing-estate-link-house-2660912.jpg"]
-    if(property.imageUrls.length>0){
-         pictures = property.imageUrls;
-          bannerimage=property.imageUrls[0]
-        }
-     
-
-     const [bannerimage, setBannerimage]=useState(pictures[0])
+    
+    if(images.length>0){
+            setPictures(images)
+        }     
      
      const [maxWidth, setMaxWidth] = useState('xl');
 
@@ -113,7 +123,7 @@ const PropertyDetails=(props)=>{
                         <img src={bannerimage} alt="Front View" />
                     </div>
                     <div className="card-container">
-                        {pictures.map((picture) => {
+                        {pics.map((picture) => {
                         return (
                             <CardContent className="img-cards">
                             <img

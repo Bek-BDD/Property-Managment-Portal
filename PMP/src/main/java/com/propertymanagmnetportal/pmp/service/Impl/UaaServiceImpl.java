@@ -167,6 +167,12 @@ public class UaaServiceImpl implements UaaService {
     }
 
     @Override
+    public User updateUserById(User user, int id) {
+        user.setId(id);
+        return userBaseRepository.save(user);
+    }
+
+    @Override
 
     public User changePassword(String email, String password) {
         User result = userBaseRepository.findByEmail(email);
