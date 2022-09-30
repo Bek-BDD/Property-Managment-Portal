@@ -15,5 +15,6 @@ public interface FavoriteService {
     void removeFavorite(int id);
 
     void removeAllFavorites();
+     void deleteFavouriteByUserIdAndPropertyId(int user_id, int property_id);
 
 }
