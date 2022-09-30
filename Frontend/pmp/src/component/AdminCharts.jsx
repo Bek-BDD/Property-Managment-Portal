@@ -10,7 +10,6 @@ import {
 } from 'chart.js';
 
 import { Bar, Pie } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker';
 import {useEffect, useState} from "react";
 import axios from "axios";
 import "hammerjs";
@@ -33,25 +32,15 @@ export default function AdminCharts(){
 
     const [stateData, setStateData] = useState(initialState);
 
-
     const getProperty = async () => {
         const result = await axios.get('http://localhost:8080/properties');
         setPropertyData(result.data);
         setStateData(result.data.address.state);
     }
 
-
     useEffect(() => {
         getProperty();
     }, []);
-
-    // console.log(PropertyData);
-    // console.log(stateData);
-    // console.log(PropertyData[0].address);
-
-    PropertyData.forEach((item)=>{
-        console.log(item.address.state);
-    })
 
 
     const options = {
@@ -69,11 +58,9 @@ export default function AdminCharts(){
     };
 
 
-
-    const arr = ['a', 'b', 'a', 'a', 'c', 'c'];
-
     const count = {};
 
+    console.log(stateData);
     for (let index = 0; index < PropertyData.length; index++) {
         const element = PropertyData[index].address.state;
 
@@ -85,42 +72,26 @@ export default function AdminCharts(){
     }
     const labels = ['Iowa', 'California', 'Ohio', 'Michigan', 'Tennessee'];
 
+    // const dt = [count.Iowa, count.California, count.Ohio, count.Michigan, count.Tennessee];
+
+    const labels3 = Object.keys(count);
+    // console.log(labels3);
+    const dt3 = Object.values(count);
+    // console.log(dt3);
 
 
-
-
-    console.log(count); // 👉️ {a: 3, b: 1, c: 2}
-    const dt = [count.Iowa, count.California, count.Ohio, count.Michigan, count.Tennessee];
-
-    console.log(dt);
-    // const [count] = [];
-
-    // let c = 0;
-
-    // labels.filter(state=>PropertyData.filter(prop=>prop.address.state==state));
     const data = {
-        labels,
+        labels: labels3,
         datasets: [
             {
                 label: 'Dataset 1',
-                data: dt,
+                data: dt3,
                 backgroundColor: [
                     'rgba(255, 99, 132, 1)',
                     'rgba(54, 162, 235, 1)',
                     'rgba(255, 206, 86, 1)',
                     'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                ]
-            },
-            {
-                label: 'Dataset 2',
-                data: dt,
-                backgroundColor: [
-                    'rgb(0, 204, 255)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
+                    // 'rgba(153, 102, 255, 1)',
                 ]
             },
         ],
@@ -128,11 +99,11 @@ export default function AdminCharts(){
 
 
     const data2 = {
-        labels: ['Iowa', 'California', 'Ohio', 'Michigan', 'Tennessee'],
+        labels: labels3,
         datasets: [
             {
                 label: 'Customers',
-                data: dt,
+                data: dt3,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -165,6 +136,7 @@ export default function AdminCharts(){
             },
         ],
     };
+
     return(
         <div>
             <div style={{marginTop:30}} sx={{minWidth: 560}}>
@@ -175,7 +147,7 @@ export default function AdminCharts(){
                 }}/>
             </div>
             <div style={{ width: '50%',margin:"auto", marginTop:50, justifyContent:"center"}}>
-                <Bar options={options} data={data2} height="500px"
+                <Bar options={options} data={data2} height="400px"
                       />
             </div>
         </div>
