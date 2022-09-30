@@ -18,12 +18,14 @@ const ApplicationForm =(props)=>{
     const navigate=useNavigate()
     const [liked,setLiked]=useState(false);
     const[success,setSuccess]=useState(false)
+    const[error,setError]=useState(false)
     const [maxWidth, setMaxWidth]=useState("sm");
      const[application,setapplication]=useState({
         message:'',
         fullname:'',
         phone:''
     })
+
 
     const handleSubmit = (event) => {
         const token=JSON.parse(localStorage.getItem("tokens"))
@@ -36,10 +38,19 @@ const ApplicationForm =(props)=>{
                 method:"post",
                 data:application,
                 url:"http://localhost:8080/application?userid="+user.id+"&propertyid="+propertyid
-            }).then(navigate('/properties'))
+            }).then( (res)=>{
+                setSuccess(true) 
+             //   navigate('/properties')
+                       } 
+            )
+              .catch((error) => {       
+                setError(true);
+      });
+            
         
         }
         else{
+           
             navigate('/login')
         }   
  
@@ -79,6 +90,17 @@ const ApplicationForm =(props)=>{
             >
                 <Box component="form" onSubmit={handleSubmit} >  
                 <DialogContent dividers> 
+
+                    {success && (
+                        <>
+                            <Typography variant="h5" gutterBottom>
+                        <Alert severity="success">Your Application successfully Sent! Thank you!</Alert>
+                            </Typography>
+                        </>
+                        )
+                    }
+
+                     {error &&  <Alert severity="error">Something went wrong! Please try Again.</Alert>}
                       
                     <div className="text-card">
                         <div className="top-bar">

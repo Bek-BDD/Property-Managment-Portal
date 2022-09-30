@@ -24,7 +24,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const OpenEditPropertyDialog = (props) => {
-  debugger;
+  
   const { handleClose, maxWidth, fullWidth, open, property } = props;
   let prevInfo = property;
   const [propertyData, setPropertyData] = useState({
@@ -53,7 +53,7 @@ const OpenEditPropertyDialog = (props) => {
   };
 
   let handleFileChange = (e) => {
-    debugger;
+    
     for(let i = 0; i < e.target.files.length; i++){
       Files.push({
 
@@ -65,24 +65,44 @@ const OpenEditPropertyDialog = (props) => {
   }
 
   const handleSubmit = () => {
-    debugger;
+    
     setIsError(false);
     setIsSuccess(false);
     let formData = new FormData();
     
     if (propertyData !== undefined) {
       
-      formData.append("id", 2);
-      formData.append("name", propertyData.name ? propertyData.name : prevInfo.name);
-      formData.append("area", propertyData.area ? propertyData.area : prevInfo.area);
-      formData.append("price", propertyData.price ? propertyData.price : prevInfo.price);
-      formData.append("description", propertyData.description ? propertyData.description : prevInfo.description);
-      formData.append("type", propertyData.type ? propertyData.type : prevInfo.type);
-      formData.append("numberOfRoom", propertyData.numberOfRoom ? propertyData.numberOfRoom : prevInfo.numberOfRoom);
+      formData.append("id", prevInfo.id);
+      formData.append(
+        "name",
+        propertyData.name ? propertyData.name : prevInfo.name
+      );
+      formData.append(
+        "area",
+        propertyData.area ? propertyData.area : prevInfo.area
+      );
+      formData.append(
+        "price",
+        propertyData.price ? propertyData.price : prevInfo.price
+      );
+      formData.append(
+        "description",
+        propertyData.description
+          ? propertyData.description
+          : prevInfo.description
+      );
+      formData.append(
+        "type",
+        propertyData.type ? propertyData.type : prevInfo.type
+      );
+      formData.append(
+        "numberOfRoom",
+        propertyData.numberOfRoom
+          ? propertyData.numberOfRoom
+          : prevInfo.numberOfRoom
+      );
 
-
-
-      formData.append("address_id", 1);
+      formData.append("address_id", prevInfo.address?.id);
       formData.append("city", propertyData.city ? propertyData.city : prevInfo.address?.city);
       formData.append("state", propertyData.state ? propertyData.state : prevInfo.address?.state);
       formData.append("street_number", propertyData.street_number ? propertyData.street_number : prevInfo.address?.street);
@@ -90,14 +110,16 @@ const OpenEditPropertyDialog = (props) => {
 
 
     }
+    console.log(prevInfo.imageUrls);
 
     if(Files.length > 0)  {
       for(var i = 0; i < Files.length; i++){
         formData.append('images', Files[i].Attachement);
      }
+    }else{
+         formData.append("imageUrls", prevInfo.imageUrls);
     }
 
-    
 
     const config = {
       // Authorization: 'Bearer ' + UserToken?.jwt,
@@ -108,7 +130,7 @@ const OpenEditPropertyDialog = (props) => {
     axios
       .put(url, formData, config)
       .then((response) => {
-        debugger;
+
         setIsSuccess(true);
         console.log(response);
         setTimeout(function(){
@@ -118,7 +140,7 @@ const OpenEditPropertyDialog = (props) => {
 
       })
       .catch((error) => {
-        debugger;
+        
         setIsError(true);
       });
   };
@@ -293,7 +315,7 @@ const OpenEditPropertyDialog = (props) => {
                     />
                   </Grid>
 
-                  <Grid item xs={12} sm={12}>
+                  {/* <Grid item xs={12} sm={12}>
                     <label for="formFileMultiple" class="form-label text-left">
                       Property Images
                     </label>
@@ -304,12 +326,12 @@ const OpenEditPropertyDialog = (props) => {
                       multiple
                       onChange={(e) => handleFileChange(e)}
                     />
-                  </Grid>
+                  </Grid> */}
                 </Grid>
               </Item>
             </Grid>
           </Grid>
-          <div class="col text-center mt-4">
+          <div className="col text-center mt-4">
           <Button variant="contained" endIcon={<SendIcon />} onClick={handleSubmit}>
   Update Property
 </Button>

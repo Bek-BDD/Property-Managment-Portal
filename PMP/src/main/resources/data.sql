@@ -8,7 +8,7 @@ insert into users(deleted,email,firstname,imageurl,lastname,password,resetpasswo
     (false,'hiwot@gmail.com','hiwot','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1664134331536_jpg','Reta','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true);
 
 insert into users(deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
-    (false,'zed@gmail.com','zedagem','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975646074_jpg','demelash','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true);
+    (false,'zedshif123@icloud.com','zedagem','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975646074_jpg','demelash','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true);
 
 
 insert into users(deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values

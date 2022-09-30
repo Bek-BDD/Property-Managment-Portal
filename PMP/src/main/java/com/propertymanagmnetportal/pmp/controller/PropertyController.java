@@ -6,6 +6,7 @@ import com.propertymanagmnetportal.pmp.entity.Application;
 import com.propertymanagmnetportal.pmp.entity.Image;
 import com.propertymanagmnetportal.pmp.entity.Property;
 import com.propertymanagmnetportal.pmp.service.PropertyService;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 @CrossOrigin
@@ -53,6 +55,7 @@ public class PropertyController {
             ,@RequestPart(value = "street_number", required = false) String street_number
             ,@RequestPart(value = "zip_code", required = false) String zip_code
             ,@RequestPart(value = "owner_id", required = false) String owner_id
+
 
 
 
@@ -101,10 +104,10 @@ public class PropertyController {
 
 
     ) throws IOException {
-
+        LocalDate posteDate = LocalDate.now();
         Address address = new Address(Integer.parseInt(address_id),state,city,Integer.parseInt(zip_code),street_number);
         Property property = new Property(Integer.parseInt(id), name,Double.parseDouble(price),description,Double.parseDouble(area)
-                ,Integer.parseInt(numberOfRoom),type,address, false);
+                ,Integer.parseInt(numberOfRoom),type,address, false,posteDate);
 
         return propertyService.UpdateProperty(property, images);
     }

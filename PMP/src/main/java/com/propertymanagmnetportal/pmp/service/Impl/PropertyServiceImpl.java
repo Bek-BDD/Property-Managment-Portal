@@ -108,7 +108,7 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public Property UpdateProperty(Property property, List<MultipartFile> images) {
-
+        System.out.println(property.getImageUrls());
         if(!(images == null || images.isEmpty())) {
             List<String> imageUrls = awsUtil.uploadMultipleFiles(images);
             List<Image> imageList = new ArrayList<>();

@@ -75,6 +75,8 @@ const PropertyDetails=(props)=>{
     const [bannerimage, setBannerimage]=useState(pics[0])
     const images=property.imageUrls
 
+    const user =JSON.parse(localStorage.getItem("loggedUser"))
+
     const showApply=()=>{
         setOpenApply(true);
     }
@@ -182,9 +184,10 @@ const PropertyDetails=(props)=>{
                             </IconButton>
                         </CardActions>
                         </div>
-                        <div className="mg-10">
-                        <CardActions disableSpacing>
-                            <IconButton aria-label="add to favorites" onClick={heart}>
+                        {(user.role[0].id !== 1) &&
+                          <div className="mg-10">
+                            <CardActions disableSpacing>
+                            <IconButton aria-label="add to favorites" onClick={()=>heart(user.id)}>
                             {liked ? (
                                 <FavoriteIcon />
                             ) : (
@@ -193,6 +196,9 @@ const PropertyDetails=(props)=>{
                             </IconButton>
                         </CardActions>
                         </div>
+
+                        }
+                        
                     </div>
                     <div className="hr-line"></div>
 
@@ -201,6 +207,7 @@ const PropertyDetails=(props)=>{
                         {property.name}
                         </Typography>
                         <label htmlFor="">{property.address.street} st,  {property.address.city}, {property.address.state} {property.address.zip}</label>
+                        {(user.role[0].id !== 1) &&
 
                         <div className="mg-10">
                         <div className="top-bar ">
@@ -219,6 +226,9 @@ const PropertyDetails=(props)=>{
                             </div>
                         </div>
                         </div>
+
+                        }
+                        
                     </div>
                     <div className="hr-line"></div>
                     <div className="mg-10">

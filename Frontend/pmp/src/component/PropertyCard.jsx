@@ -35,7 +35,7 @@ export default function PropertyCard() {
     const [PropertyData, setPropertyData] = useState([]);
      const [visited,setVisited]=useState(false);
     const handleClickOpenForEdit = (id) => {
-        debugger;
+        
         const selectedTender = PropertyData.find(clicked => clicked.id === id);
         setProperty(selectedTender)
 
@@ -57,7 +57,7 @@ export default function PropertyCard() {
         setProperty(response.data)      
         })
         .catch(err=> {
-        debugger;
+        
         console.log(err)
     })
     setOpen(true);    
