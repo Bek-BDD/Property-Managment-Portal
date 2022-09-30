@@ -10,13 +10,16 @@ import axios from 'axios'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const token = localStorage.getItem('tokens') != null ? JSON.parse(localStorage.getItem('tokens')).jwtToken : ''
 //console.log(JSON.parse(localStorage.getItem('tokens')).)
-export const instance = axios.create({
-  baseURL: "http://localhost:9090",
-  headers: {
-    'Authorization': 'Bearer ' + token
+export const instance = () => {
+  const token = localStorage.getItem('tokens') != null ? JSON.parse(localStorage.getItem('tokens')).jwtToken : ''
+  return axios.create({
+    baseURL: "http://localhost:9090",
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
   }
-}
-);
+  );
+} 
 root.render(
   <Provider store={store}>
     <App />

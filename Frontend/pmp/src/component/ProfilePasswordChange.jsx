@@ -16,7 +16,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import { userActions } from './Redux/UserSlice';
 import {instance} from '../index'
 import { useState,useEffect } from 'react';
-import { instance } from '../index';
 //import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();

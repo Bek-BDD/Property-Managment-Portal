@@ -7,7 +7,7 @@ export default function(){
     const navigator = useNavigate();
     const user = JSON.parse(localStorage.getItem('loggedUser'));
     const token = localStorage.getItem('tokens');
-    const role = user ? user.role[0].role:null;
+    const role = user ? user.role[0]?.role:null;
 
     return(
         <div className="container">

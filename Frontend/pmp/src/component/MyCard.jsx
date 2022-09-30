@@ -49,7 +49,7 @@ export default function RecipeReviewCard(props) {
     } else {
       if (!liked) {
         // send to database liked
-        instance
+        instance()
           .post('/favorites?user_id='+userId+'&'+'property_id='+propertyId)
           .then((response) => {
             setLiked(true);
@@ -61,7 +61,7 @@ export default function RecipeReviewCard(props) {
       } else {
         console.log("remove");
         // remove from datatbase
-        instance
+        instance()
           .delete('/favorites?user_id='+userId+'&&'+'property_id='+propertyId)
           .then((response) => {
             setLiked(false);
@@ -78,7 +78,7 @@ export default function RecipeReviewCard(props) {
     }
   }
   const showDetails = (id) =>{
-    instance.get(`/properties/${id}`)
+    instance().get(`/properties/${id}`)
      .then(response => {
       
       setProperty(response.data)

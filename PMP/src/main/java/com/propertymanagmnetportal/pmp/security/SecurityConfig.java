@@ -60,7 +60,7 @@ public class SecurityConfig{
                     .csrf()
                     .disable()
                     .authorizeRequests()
-                    .antMatchers("/uaa/**", "/properties").permitAll()
+                    .antMatchers("/uaa/**", "/properties/**").permitAll()
 
                     //.antMatchers("/test/**")
                     .anyRequest()
