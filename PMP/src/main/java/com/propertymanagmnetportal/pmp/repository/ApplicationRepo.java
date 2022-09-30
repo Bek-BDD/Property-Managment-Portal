@@ -9,4 +9,7 @@ import java.util.List;
 @Repository
 public interface ApplicationRepo extends JpaRepository<Application, Integer> {
         List<Application> findAllByPropertyUserId(int id);
+
+        List<Application> findAllByUserId(int id);
+
 }

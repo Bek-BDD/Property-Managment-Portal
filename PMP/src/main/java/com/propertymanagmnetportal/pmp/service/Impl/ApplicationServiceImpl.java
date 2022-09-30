@@ -58,6 +58,9 @@ public class ApplicationServiceImpl implements ApplicationService {
         return applicationRepo.findAll();
     }
 
-
+    @Override
+    public List<Application> customerApplications(int id){
+        return applicationRepo.findAllByUserId(id);
+    }
 
 }

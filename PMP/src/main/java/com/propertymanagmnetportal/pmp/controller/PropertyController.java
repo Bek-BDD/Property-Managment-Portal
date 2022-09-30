@@ -7,6 +7,7 @@ import com.propertymanagmnetportal.pmp.entity.Image;
 import com.propertymanagmnetportal.pmp.entity.Property;
 import com.propertymanagmnetportal.pmp.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -14,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +31,8 @@ public class PropertyController {
 
     @GetMapping
     public List<Property> getAllProperty(){
+
+
         return propertyService.getAllProperty();
     }
 

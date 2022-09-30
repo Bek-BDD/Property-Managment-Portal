@@ -28,8 +28,8 @@ export default function AccountMenu() {
   const logout = () => {
     localStorage.removeItem('tokens');
     localStorage.removeItem('loggedUser');
-    window.location.reload(false);
     navigate("/");
+    window.location.reload(false);
   }
   return (
     
@@ -86,7 +86,7 @@ export default function AccountMenu() {
           <Avatar /> Profile
         </MenuItem>
         <MenuItem>
-          <Avatar /> <Link> My account </Link>
+          <Avatar /> <Link to ="/customerdashboard"> My account </Link>
         </MenuItem>
         <Divider />
         <MenuItem>

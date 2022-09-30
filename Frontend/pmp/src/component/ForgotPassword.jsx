@@ -15,7 +15,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { useState } from 'react';
 import { userActions } from './Redux/UserSlice';
-import axios from 'axios';
+import { instance } from '../index';
 //import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
@@ -35,7 +35,7 @@ export default function(){
         email    : data.get('email'),
         password : ""
     }
-      axios.post("http://localhost:8080/uaa/resetpassword",loginRequestObj)
+      instance.post("/uaa/resetpassword",loginRequestObj)
             .then((response)=>{
                 setSentEmail(true);
             });

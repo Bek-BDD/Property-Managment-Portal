@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/application")
+@CrossOrigin
 public class ApplicationController {
     private ApplicationService applicationService;
     public ApplicationController(ApplicationService applicationService){
@@ -24,6 +25,10 @@ public class ApplicationController {
         return ResponseEntity.ok().body(applicationService.findAll());
     }
 
+    @GetMapping("/customers/{id}")
+    public List<Application> customerApplication(@PathVariable int id){
+        return applicationService.customerApplications(id);
+    }
     //////////////////
     /////api fetch by user id
     //////////////////

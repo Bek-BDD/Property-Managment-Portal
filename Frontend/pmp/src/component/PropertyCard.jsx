@@ -19,7 +19,7 @@ import '../App.css'
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {render} from "@testing-library/react";
-
+import {instance} from '../index'
 export default function PropertyCard() {
 
 
@@ -43,7 +43,7 @@ export default function PropertyCard() {
     const [PropertyData, setPropertyData] = useState(initialState);
 
     const getProperty = async () => {
-        const result = await axios.get('http://localhost:8080/properties');
+        const result = await instance.get('http://localhost:8080/properties');
         setPropertyData(result.data);
     }
 
@@ -53,7 +53,7 @@ export default function PropertyCard() {
 
     const DeleteProperty = async (id, e) => {
 
-        const result = await axios.delete("http://localhost:8080/properties/"+`${id}`);
+        const result = await instance.delete("http://localhost:8080/properties/"+`${id}`);
         window.location.reload(false);
     }
 

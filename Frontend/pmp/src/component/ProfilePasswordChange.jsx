@@ -16,6 +16,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { userActions } from './Redux/UserSlice';
 import axios from 'axios';
 import { useState,useEffect } from 'react';
+import { instance } from '../index';
 //import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
@@ -34,7 +35,7 @@ const [ verify,setVerify]= useState(false);
         email : JSON.parse(localStorage.getItem('loggedUser')).username
     }
 
-      axios.post("http://localhost:9090/uaa/changePassword",newPass)
+      instance.post("/uaa/changePassword",newPass)
             .then((response)=>{
                 setVerify()
              });

@@ -46,18 +46,22 @@ useEffect(()=>{
     }
       instance.post("/uaa/login",loginRequestObj)
             .then((response)=>{
-              debugger;
                   localStorage.setItem("tokens",JSON.stringify(response.data))
-                  axios.get(`http://localhost:9090/users/${data.get('email')}`)
+                  //response mimetaw header ezi ga metekm yechalal
+                  axios.get(`http://localhost:9090/users/${data.get('email')}`, {
+                    headers: {
+                      'Authorization' : 'Bearer '+ response.data.jwtToken
+                    }
+                  })
                      .then(response=> {
                       console.log(response);
                       localStorage.setItem("loggedUser",JSON.stringify(response.data))
+                      window.location.reload(false);
+                      navigate("/customerdashboard")
                       })
                       .catch(error=>{
                         console.log(error);
                       })
-                 window.location.reload(false);
-                 navigate("/")
              })
             .catch((error) =>{
                 setLoginError(true);
@@ -117,7 +121,6 @@ useEffect(()=>{
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              
             >
               Sign In
             </Button>
