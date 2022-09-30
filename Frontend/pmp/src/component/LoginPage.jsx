@@ -14,13 +14,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { userActions } from './Redux/UserSlice';
 import { instance } from '../index';
-
+import {setLoggedIn} from '../Redux/loggedUserSlice'
+import axios from 'axios'
 
 const theme = createTheme();
 
 export default function() {
   const[isLoggedIn,setIsLoggedIn] = useState(false)
   const[loginError,setLoginError] = useState(false)
+  const dipatch = useDispatch();
 
 useEffect(()=>{
   if(localStorage.getItem("tokens") != null){setIsLoggedIn(true)
@@ -32,10 +34,6 @@ useEffect(()=>{
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
     loginRequest(data);
 
   };
@@ -45,23 +43,14 @@ useEffect(()=>{
       "email" : data.get('email'),
       "password" : data.get('password')
     }
-      instance.post("/uaa/login",loginRequestObj)
+      instance().post("/uaa/login",loginRequestObj)
             .then((response)=>{
-              
                   localStorage.setItem("tokens",JSON.stringify(response.data))
-                  axios.get(`http://localhost:9090/users/${data.get('email')}`, {
-                    headers: {
-                      'Authorization' : 'Bearer '+ response.data.jwtToken
-                    }
-                  })
-                     .then(response=> {
-                      console.log(response);
+                  instance().get(`/users/${data.get('email')}`)
+                  .then((response)=> {
                       localStorage.setItem("loggedUser",JSON.stringify(response.data))
-                      window.location.reload(false);
-                      navigate("/customerdashboard")
-                      })
-                      .catch(error=>{
-                        console.log(error);
+                      dispatch(setLoggedIn(true))
+                      navigate("/")
                       })
              })
             .catch((error) =>{
@@ -71,7 +60,8 @@ useEffect(()=>{
 
   return (
     <>
-    { (!isLoggedIn) ? 
+    { 
+    // (!isLoggedIn) ? 
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -141,7 +131,8 @@ useEffect(()=>{
         </Box>
       </Container>
     </ThemeProvider>
-    :<>{navigate("/")}</> }
+    // :<>{navigate("/")}</> 
+    }
     </>
   );
 }
