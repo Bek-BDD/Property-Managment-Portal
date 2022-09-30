@@ -82,30 +82,31 @@ public class PropertyController {
 
     @PutMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})
     public Property UpdateProperty(
-            @RequestPart("images") List<MultipartFile> images
-            ,@RequestPart("name") String name
-            ,@RequestPart("description") String description
-            ,@RequestPart("price") String price
-            ,@RequestPart("area") String area
-            ,@RequestPart("numberOfRoom") String numberOfRoom
-            ,@RequestPart("type") String type
+            @RequestPart("id") String id
+            ,@RequestPart(value = "images", required = false) List<MultipartFile> images
+            ,@RequestPart(value="name" , required = false) String name
+            ,@RequestPart(value = "description", required = false) String description
+            ,@RequestPart(value = "price", required = false) String price
+            ,@RequestPart(value = "area", required = false) String area
+            ,@RequestPart(value = "numberOfRoom", required = false) String numberOfRoom
+            ,@RequestPart(value = "type", required = false) String type
 //
 ////      Address fields
-            ,@RequestPart("city") String city
+            ,@RequestPart(value = "city" ,required = false) String city
             ,@RequestPart(value = "state", required = false) String state
             ,@RequestPart(value = "street_number", required = false) String street_number
             ,@RequestPart(value = "zip_code", required = false) String zip_code
-            ,@RequestPart(value = "owner_id", required = false) String owner_id
+            ,@RequestPart(value = "address_id", required = false) String address_id
 
 
 
     ) throws IOException {
 
-        Address address = new Address(state,city,Integer.parseInt(zip_code),street_number);
-        Property property = new Property(name,Double.parseDouble(price),description,Double.parseDouble(area)
+        Address address = new Address(Integer.parseInt(address_id),state,city,Integer.parseInt(zip_code),street_number);
+        Property property = new Property(Integer.parseInt(id), name,Double.parseDouble(price),description,Double.parseDouble(area)
                 ,Integer.parseInt(numberOfRoom),type,address, false);
 
-        return propertyService.UpdateProperty(property, images, owner_id);
+        return propertyService.UpdateProperty(property, images);
     }
 
     @DeleteMapping("/{id}")

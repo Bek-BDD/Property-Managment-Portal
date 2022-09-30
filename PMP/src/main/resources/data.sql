@@ -9,10 +9,18 @@ insert into address (id, state, city, zip, street) values (8, 'Tennessee', 'Nash
 insert into address (id, state, city, zip, street) values (9, 'Florida', 'Jacksonville', '32244', '7550 Oriole Terrace');
 insert into address (id, state, city, zip, street) values (10, 'Delaware', 'Wilmington', '19886', '371 Hallows Alley');
 
+insert into role (id,role) values (1,'owner');
+insert into role(id,role) values (2,'customer');
+insert into role (id,role) values (3,'admin');
+
+
+insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
+    (10,false,'hiwot.alemayehu@miu.edu','a','a','a','$2a$10$Sq3je4VID3xAQvL7z9.aw.oxsi0qpFiHJMhOM1CZMjZmhjy8BIug2','',true);
+--             (10,false,'hiwot.alemayehu@miu.edu','a','a','a','$2a$10$Sq3je4VID3xAQvL7z9.aw.oxsi0qpFiHJMhOM1CZMjZmhjy8BIug2','',true);
 
 
 insert into property (id, area, description, name, number_of_room, price,status,type) values ( '1', 76, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 'Safe Harbor', 1, 143,false,'Sell');
-insert into property (id, area, description, name, number_of_room, price,status,type)  values ('2', 68, 'Aenean lectus. Pellentesque eget nunc.  condimentum.', 'Mills LLC', 3,  174,false,'Sell');
+insert into property (id, area, description, name, number_of_room, price,status,type,owner_id,address_id)  values ('2', 68, 'Aenean lectus. Pellentesque eget nunc.  condimentum.', 'Mills LLC', 3,  174,false,'Sell',10,1);
 insert into property (id, area, description, name, number_of_room, price,status,type)  values ( '3', 43, 'Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. ',' Country Side', 5, 63,false,'Rent');
 insert into property (id, area, description, name, number_of_room, price,status,type)  values ('4', 35, 'Quisque id justo sit amet sapien dignissim vestibulum. ','Sheraton palace', 5, 90,true,'Sell');
 insert into property (id, area, description, name, number_of_room, price,status,type)  values ('5', 99, 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. ', 'Acianda Bella' , 4, 89,true,'Sell');
@@ -24,7 +32,7 @@ insert into property (id, area, description, name, number_of_room, price,status,
 
 
 
-insert into image (id, url) values ('1', 'http://dummyimage.com/233x100.png/cc0000/ffffff');
+-- insert into image (id, url) values ('1', 'http://dummyimage.com/233x100.png/cc0000/ffffff');
 insert into image (id, url) values ('2', 'http://dummyimage.com/178x100.png/dddddd/000000');
 insert into image (id, url) values ('3', 'http://dummyimage.com/244x100.png/cc0000/ffffff');
 insert into image (id, url) values ('4', 'http://dummyimage.com/142x100.png/cc0000/ffffff');
@@ -36,11 +44,3 @@ insert into image (id, url) values ('9', 'http://dummyimage.com/115x100.png/dddd
 insert into image (id, url) values ('10', 'http://dummyimage.com/237x100.png/cc0000/ffffff');
 
 
-insert into role (id,role) values (1,'owner');
-insert into role(id,role) values (2,'customer');
-insert into role (id,role) values (3,'admin');
-
-
-insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
-            (10,false,'hiwot.alemayehu@miu.edu','a','a','a','$2a$10$Sq3je4VID3xAQvL7z9.aw.oxsi0qpFiHJMhOM1CZMjZmhjy8BIug2','',true);
---             (10,false,'hiwot.alemayehu@miu.edu','a','a','a','$2a$10$Sq3je4VID3xAQvL7z9.aw.oxsi0qpFiHJMhOM1CZMjZmhjy8BIug2','',true);

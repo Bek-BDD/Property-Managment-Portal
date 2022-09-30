@@ -22,6 +22,7 @@ import { useEffect,useState } from "react";
 import { ImageTable } from "./component/Customer/FavoritesTable";
 import NewEditAccount from "./component/NewEditAccount";
 import PropertyStepper from "./component/Property/PropertyStepper";
+import CustomizedDialogs from "./component/OpenEditPropertyDialog";
 function App() {
   const[isLoggedIn,setIsLoggedIn] = useState(false)
 useEffect(()=>{
@@ -49,6 +50,7 @@ useEffect(()=>{
           path="/customerapplications"
           element={<CustomerApplications />}
         />
+        <Route path="/CustomizedDialogs" element={<CustomizedDialogs />} />
       </Routes>
       <Footer />
     </BrowserRouter>

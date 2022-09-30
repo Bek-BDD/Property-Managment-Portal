@@ -7,10 +7,6 @@ import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import {red} from "@mui/material/colors";
-
-import Fab from '@mui/material/Fab';
-import EditIcon from '@mui/icons-material/Edit';
-
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
@@ -18,33 +14,36 @@ import Stack from '@mui/material/Stack';
 import '../App.css'
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {render} from "@testing-library/react";
+import OpenEditPropertyDialog from "./OpenEditPropertyDialog";
+import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import {instance} from "../index"
 
 export default function PropertyCard() {
+    const [open, setOpen] = useState(false);
+    const [fullWidth, setFullWidth] = useState(true);
+    const [maxWidth, setMaxWidth] = useState('lg');
+    const [property, setProperty] = useState();
+    const [PropertyData, setPropertyData] = useState([]);
+    const handleClickOpen = (id) => {
+        debugger;
+        const selectedTender = PropertyData.find(clicked => clicked.id === id);
+        setProperty(selectedTender)
 
+    setOpen(true);
+    };
+    const handleClose = () => {
+      setOpen(false);
+    };
 
+    
 
-    const initialState = [
-        // {
-        //     "id": 1,
-        //     "name": "Safe Harbor",
-        //     "price": 143.0,
-        //     "description": "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-        //     "area": 76.0,
-        //     "numberOfRoom": 1,
-        //     "type": "Sell",
-        //     "datePosted": null,
-        //     "status": false,
-        //     "imageUrls": [],
-        //     "address": null
-        // }
-    ]
-
-    const [PropertyData, setPropertyData] = useState(initialState);
-
-    const getProperty = async () => {
-        const result = await axios.get('http://localhost:8080/properties');
-        setPropertyData(result.data);
+    const getProperty = () => {
+        axios.get('http://localhost:8080/properties')
+        .then(res => setPropertyData(res.data))
     }
 
     function showDetails() {
@@ -65,11 +64,11 @@ export default function PropertyCard() {
 
     return (
 
-            PropertyData.map((item) => {
-
-                return (
-
-                    <Card sx={{maxWidth: 360}} onClick={showDetails} className="card-hover" key={item.id}>
+          
+                    <>
+                  {
+                    PropertyData.map((item) => (
+                        <Card sx={{maxWidth: 360}} onClick={showDetails} className="card-hover" key={item.id}>
                         <CardHeader
                             avatar={
                                 <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
@@ -97,7 +96,7 @@ export default function PropertyCard() {
 
                             {/*<DeleteButton />*/}
                             <Stack direction="row" spacing={2}>
-                                <Button variant="contained" endIcon={<SendIcon/>}>
+                                <Button variant="contained" endIcon={<SendIcon/>} onClick={() =>handleClickOpen(item.id)}>
                                     Edit
                                 </Button>
                                 <Button variant="outlined" startIcon={<DeleteIcon/>}
@@ -111,8 +110,21 @@ export default function PropertyCard() {
                         </CardActions>
 
                     </Card>
-                )
-            })
+                    ))
+                  }
+
+<OpenEditPropertyDialog 
+open={open}
+handleClose={handleClose} 
+maxWidth={maxWidth} 
+fullWidth={fullWidth} 
+property={property}
+/>       
+                   
+                
+                    </>
+                
+            
 
         );
 }
