@@ -46,6 +46,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     }
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return new AntPathMatcher().match("/uaa/**", request.getServletPath());
+        return new AntPathMatcher()
+                .match("/uaa/**", request.getServletPath())
+                ||
+                new AntPathMatcher()
+                        .match("/properties/**", request.getServletPath());
     }
 }

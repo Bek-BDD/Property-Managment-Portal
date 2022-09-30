@@ -46,8 +46,8 @@ useEffect(()=>{
     }
       instance.post("/uaa/login",loginRequestObj)
             .then((response)=>{
+              
                   localStorage.setItem("tokens",JSON.stringify(response.data))
-                  //response mimetaw header ezi ga metekm yechalal
                   axios.get(`http://localhost:9090/users/${data.get('email')}`, {
                     headers: {
                       'Authorization' : 'Bearer '+ response.data.jwtToken
@@ -88,7 +88,7 @@ useEffect(()=>{
           <Typography component="h1" variant="h5">
             
             Sign in
-           
+
           </Typography>
           { loginError && <p style={{color : 'red'}}>Username or Password incorrect !</p>}
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
