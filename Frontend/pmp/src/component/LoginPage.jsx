@@ -13,7 +13,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { userActions } from './Redux/UserSlice';
-import axios from 'axios';
 import { instance } from '../index';
 
 
@@ -29,6 +28,7 @@ useEffect(()=>{
   const state = useSelector((state)=> state)
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -39,6 +39,7 @@ useEffect(()=>{
     loginRequest(data);
 
   };
+
   const loginRequest = (data)=>{
     const loginRequestObj = {
       "email" : data.get('email'),

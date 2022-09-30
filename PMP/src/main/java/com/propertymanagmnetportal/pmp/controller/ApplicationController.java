@@ -5,6 +5,7 @@ import com.propertymanagmnetportal.pmp.service.ApplicationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -17,12 +18,24 @@ public class ApplicationController {
         this.applicationService=applicationService;
     }
     @PostMapping
-    public ResponseEntity<?> saveApplication(Application application) throws Exception {
-       return ResponseEntity.ok().body(applicationService.saveApplication(application));
+    public ResponseEntity<?> saveApplication(@RequestParam int userid, @RequestParam int propertyid, @RequestBody Application application ) throws Exception {
+       return ResponseEntity.ok().body(applicationService.saveApplication(userid,propertyid,application));
     }
     @GetMapping
     public ResponseEntity<List<Application>>findAllApplication(){
         return ResponseEntity.ok().body(applicationService.findAll());
+    }
+    @GetMapping("/filter/city")
+    public List<Application> findApplicationByProperty_Address_City(@PathVariable String cityname){
+        return applicationService.findApplicationByProperty_Address_City(cityname);
+    }
+    @GetMapping("/filter/name")
+    public List<Application> findApplicationByProperty_Name(@PathVariable String name){
+        return applicationService.findApplicationByProperty_Name(name);
+    }
+    @GetMapping("/filter/date/")
+    public List<Application> findApplicationByDate(@RequestParam LocalDate date){
+        return findApplicationByDate(date);
     }
 
     @GetMapping("/customers/{id}")

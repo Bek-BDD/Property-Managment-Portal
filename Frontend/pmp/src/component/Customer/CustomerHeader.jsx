@@ -17,9 +17,9 @@ function CustomerHeader() {
                 <div className="">
                     <Link to={"/customerapplications"}><Button variant="text">Sent Applications</Button> </Link>
                     <Link to={"/Favourites"}><Button variant="text">Favorite</Button></Link>
-                    <Link >  <Button variant="text"><AccountMenu /></Button> </Link>
-            
+                    <AccountMenu />
                 </div>
+               
             </div> 
     )
 }

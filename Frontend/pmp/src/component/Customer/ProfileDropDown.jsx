@@ -6,13 +6,10 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
+import EditIcon from '@mui/icons-material/Edit';
+import KeyIcon from '@mui/icons-material/Key';
 import Logout from '@mui/icons-material/Logout';
-import { Container } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 export default function AccountMenu() {
@@ -29,11 +26,17 @@ export default function AccountMenu() {
     localStorage.removeItem('tokens');
     localStorage.removeItem('loggedUser');
     navigate("/");
-    window.location.reload(false);
+    
+  }
+  const changePassword = () =>{
+    navigate('/ProfileChangePassword')
+  }
+  const editAccount = () =>{
+    navigate("/editaccount");
   }
   return (
     
-      <div>
+      <div style={{display: "inline-block"}} >
         <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
           <Tooltip title="Account settings">
           <IconButton
@@ -44,7 +47,7 @@ export default function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
             >
-          <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+          <Avatar sx={{ width: 42, height: 42 }}>{JSON.parse(localStorage.getItem('loggedUser')).firstname.charAt(0)}</Avatar>
           </IconButton>
           </Tooltip>
           <Menu
@@ -82,24 +85,22 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-         <MenuItem>
-          <Avatar /> Profile
-        </MenuItem>
+        
         <MenuItem>
-          <Avatar /> <Link to ="/customerdashboard"> My account </Link>
+          <Avatar /> <span>{JSON.parse(localStorage.getItem('loggedUser')).firstname}</span>
         </MenuItem>
         <Divider />
-        <MenuItem>
+        <MenuItem onClick={editAccount}>
           <ListItemIcon>
-            <PersonAdd fontSize="small" />
+            <EditIcon fontSize="small" />
           </ListItemIcon>
-          Add another account
+          Edit Account
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={changePassword}>
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <KeyIcon fontSize="small" />
           </ListItemIcon>
-          Settings
+          Change Password
         </MenuItem>
         <MenuItem onClick={logout}>
           <ListItemIcon>

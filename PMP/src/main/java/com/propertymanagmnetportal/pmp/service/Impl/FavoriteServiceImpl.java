@@ -5,11 +5,13 @@ import com.propertymanagmnetportal.pmp.entity.Property;
 import com.propertymanagmnetportal.pmp.entity.User;
 import com.propertymanagmnetportal.pmp.repository.FavoriteRepository;
 import com.propertymanagmnetportal.pmp.repository.PropertyRepo;
+import com.propertymanagmnetportal.pmp.repository.UserBaseRepository;
 import com.propertymanagmnetportal.pmp.service.FavoriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,8 +20,8 @@ public class FavoriteServiceImpl implements FavoriteService {
     @Autowired
     private FavoriteRepository favoriteRepo;
 
-//    @Autowired
-//    private UserRepository userRepository;
+    @Autowired
+    private UserBaseRepository userRepository;
 
     @Autowired
     private PropertyRepo propertyRepo;
@@ -41,9 +43,9 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     @Override
     public void addFavorite(int user_id, int property_id){
-//       Optional<User> user = userRepo.findById(user_id);
-//       Optional<Property> property = propertyRepo.findById(property_id);
-//          favoriteRepo.save(new Favorite(user.get(), property.get()));
+       Optional<User> user = userRepository.findById(user_id);
+       Optional<Property> property = propertyRepo.findById(property_id);
+          favoriteRepo.save(new Favorite(user.get(), property.get()));
     }
 
     @Override
@@ -54,6 +56,13 @@ public class FavoriteServiceImpl implements FavoriteService {
     @Override
     public void removeAllFavorites() {
         favoriteRepo.deleteAll();
+    }
+
+    @Override
+    public void deleteFavouriteByUserIdAndPropertyId(int user_id, int property_id) {
+      List<Favorite> list = favoriteRepo.findFavoriteByUserIdAndPropertyId(user_id,property_id);
+         int id = list.get(0).getId();
+        favoriteRepo.deleteById(id);
     }
 
 

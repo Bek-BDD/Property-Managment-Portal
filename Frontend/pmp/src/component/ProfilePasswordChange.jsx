@@ -14,7 +14,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { userActions } from './Redux/UserSlice';
-import axios from 'axios';
+import {instance} from '../index'
 import { useState,useEffect } from 'react';
 import { instance } from '../index';
 //import { useNavigate } from 'react-router-dom';
@@ -35,7 +35,7 @@ const [ verify,setVerify]= useState(false);
         email : JSON.parse(localStorage.getItem('loggedUser')).username
     }
 
-      instance.post("/uaa/changePassword",newPass)
+      instance.post("uaa/changePassword",newPass)
             .then((response)=>{
                 setVerify()
              });

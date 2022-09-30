@@ -4,6 +4,7 @@ import com.propertymanagmnetportal.pmp.entity.User;
 import com.propertymanagmnetportal.pmp.service.UaaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,9 +21,9 @@ public class UserController {
         System.out.println(result.getEmail());
         return result;
     }
-@GetMapping("/test")
-@PreAuthorize("hasAuthority('owner')")
-    public String test(){
-        return "done";
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateUserById(@RequestBody User user, @PathVariable int id){
+        return ResponseEntity.ok().body( uaaService.updateUserById(user,id));
     }
 }

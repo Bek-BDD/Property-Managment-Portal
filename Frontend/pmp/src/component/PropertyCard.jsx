@@ -7,53 +7,64 @@ import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import {red} from "@mui/material/colors";
-
-import Fab from '@mui/material/Fab';
-import EditIcon from '@mui/icons-material/Edit';
-
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import Stack from '@mui/material/Stack';
 import '../App.css'
 import {useEffect, useState} from "react";
-import axios from "axios";
-import {render} from "@testing-library/react";
-import {instance} from '../index'
+import {instance} from "../index"
+import PropertyDetails from "./PropertyDetails";
+
 export default function PropertyCard() {
+    const [open, setOpen] = useState(false);
+    const[openDetail, setOpenDetail]=useState(false);
+    const [fullWidth, setFullWidth] = useState(true);
+    const [maxWidth, setMaxWidth] = useState('lg');
+    const [property, setProperty] = useState({})
+    const [visited,setVisited]=useState(false);
 
 
 
-    const initialState = [
-        // {
-        //     "id": 1,
-        //     "name": "Safe Harbor",
-        //     "price": 143.0,
-        //     "description": "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-        //     "area": 76.0,
-        //     "numberOfRoom": 1,
-        //     "type": "Sell",
-        //     "datePosted": null,
-        //     "status": false,
-        //     "imageUrls": [],
-        //     "address": null
-        // }
-    ]
+    const handleClickOpen = (id) => {  
+    instance.get(`/properties/${id}`)
+        .then(response => {
+        setProperty(response.data)      
+        })
+        .catch(err=> {
+        debugger;
+        console.log(err)
+    })
+    setOpen(true);    
+    };
+    const handleClose = () => {
+      setOpen(false);
+
+    };
+    const showDetails = (item) =>{    
+      setProperty(item)
+      console.log(property)
+      setVisited(true)
+      setOpenDetail(true)
+    }
+    const hideDetails=()=>{
+        setOpenDetail(false)
+        setVisited(false)
+    }
+
+    const initialState = []
 
     const [PropertyData, setPropertyData] = useState(initialState);
 
     const getProperty = async () => {
-        const result = await instance.get('http://localhost:8080/properties');
+        const result = await instance.get('/properties');
         setPropertyData(result.data);
     }
 
-    function showDetails() {
-        // console.log("click");
-    }
-
+    
     const DeleteProperty = async (id, e) => {
 
-        const result = await instance.delete("http://localhost:8080/properties/"+`${id}`);
+        const result = await instance.delete("/properties/"+`${id}`);
         window.location.reload(false);
     }
 
@@ -65,11 +76,11 @@ export default function PropertyCard() {
 
     return (
 
-            PropertyData.map((item) => {
-
-                return (
-
-                    <Card sx={{maxWidth: 360}} onClick={showDetails} className="card-hover" key={item.id}>
+          
+                <>
+                  {
+                    PropertyData.map((item) => (
+                        <Card sx={{maxWidth: 360}} onClick={()=>{showDetails(item)}} className="card-hover" key={item.id}>
                         <CardHeader
                             avatar={
                                 <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
@@ -97,7 +108,7 @@ export default function PropertyCard() {
 
                             {/*<DeleteButton />*/}
                             <Stack direction="row" spacing={2}>
-                                <Button variant="contained" endIcon={<SendIcon/>}>
+                                <Button variant="contained" endIcon={<SendIcon/>} onClick={() =>handleClickOpen(item.id)}>
                                     Edit
                                 </Button>
                                 <Button variant="outlined" startIcon={<DeleteIcon/>}
@@ -111,8 +122,25 @@ export default function PropertyCard() {
                         </CardActions>
 
                     </Card>
-                )
-            })
+                    ))
+                  }
+                  
+                   { visited &&
+                        <PropertyDetails 
+                        open={openDetail}
+                        property={property}
+                        hideDetail={hideDetails} 
+                        maxWidth={maxWidth} 
+                        fullWidth={fullWidth}
+                        /> 
+                   }
+                                         
+
+                   
+                
+                </>
+                
+            
 
         );
 }
