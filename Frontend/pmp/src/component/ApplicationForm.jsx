@@ -36,7 +36,7 @@ const ApplicationForm =(props)=>{
             method:"post",
             data:application,
             url:"http://localhost:8080/application?userid="+user.id+"&propertyid="+propertyid
-        }).then(res=>{res===200? setSuccess(true):setSuccess(false)})
+        }).then(res=>res.status===200? navigate('/properties'):null)
       
     }
     else{
