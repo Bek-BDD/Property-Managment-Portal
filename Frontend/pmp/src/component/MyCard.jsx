@@ -26,6 +26,7 @@ export default function RecipeReviewCard(props) {
     const [maxWidth, setMaxWidth] = useState('lg');
     const [property, setProperty] = useState({})
     const [visited,setVisited]=useState(false);
+    const loggedUser = JSON.parse(localStorage.getItem('loggedUser'))
 
     
   const navigator = useNavigate();
@@ -125,12 +126,14 @@ export default function RecipeReviewCard(props) {
           </CardContent>
         </div>
         <CardActions disableSpacing>
-          <IconButton
+            {loggedUser?.role[0].role == 'owner' ? null : <IconButton
             aria-label="add to favorites"
             onClick={() => heart(props.value.id)}
           >
             {liked ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />}
           </IconButton>
+          }
+          
         </CardActions>
       </Card>
       }

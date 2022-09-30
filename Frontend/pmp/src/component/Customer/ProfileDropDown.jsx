@@ -12,6 +12,10 @@ import KeyIcon from '@mui/icons-material/Key';
 import Logout from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {setLoggedIn} from '../../Redux/loggedUserSlice'
+
+
 export default function AccountMenu() {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -19,13 +23,17 @@ export default function AccountMenu() {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  const dipatch = useDispatch();
+
   const handleClose = () => {
     setAnchorEl(null);
   };
   const logout = () => {
     localStorage.removeItem('tokens');
     localStorage.removeItem('loggedUser');
+    dipatch(setLoggedIn(false))
     navigate("/");
+    window.location.reload()
     
   }
   const changePassword = () =>{

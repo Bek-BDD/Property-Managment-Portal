@@ -6,18 +6,18 @@ import { useState } from "react";
 import { useEffect } from "react";
 import {instance} from "../index";
 import axios from "axios";
-
+import * as React from 'react';
+import { useSelector } from "react-redux";
 
 export default function () {
   const[propertyState,setPropertyState] = useState([])
   const[searchState,setSearchState] = useState();
   const[loggedUser,setLoggedUser] = useState( JSON.parse(localStorage.getItem("loggedUser")))
   const [userFavourite,setUserFavourite] = useState();
+  const logged = useSelector((state)=> state.loggedUser.loggedIn)
   
    useEffect(()=>{
-     
-
-    if(loggedUser?.role[0].role == "customer"){
+    if(JSON.parse(localStorage.getItem("loggedUser"))?.role[0].role == "customer"){
       instance.get('/properties')
       .then(r => setPropertyState(r.data)).catch(err=>console.log(err))
       instance.get('/favorites/'+loggedUser.id)
@@ -26,11 +26,12 @@ export default function () {
     }
     else{
       instance.get('/properties')
-      .then(response => setPropertyState (response.data))
+      .then(response => {
+        setPropertyState(response.data)
+        setUserFavourite(null)
+      } )
       .catch(err=> console.log(err))
     }
-
-    
   },[])
 
   function search(e){
