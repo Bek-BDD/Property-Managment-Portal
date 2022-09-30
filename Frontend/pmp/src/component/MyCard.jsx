@@ -64,6 +64,9 @@ export default function RecipeReviewCard(props) {
           .delete('/favorites?user_id='+userId+'&&'+'property_id='+propertyId)
           .then((response) => {
             setLiked(false);
+            if(props.remove) {
+              props.remove(id);
+            }
             console.log(response.data);
           })
           .catch((err) => {
