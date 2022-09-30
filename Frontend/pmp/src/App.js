@@ -41,7 +41,6 @@ useEffect(()=>{
         <Route path="/" element={<SplashScreen />} />
         <Route path="/property-detail" element={<PropertyDetails />} />
         <Route path="*" element={<PageNotFound />} />
-        <Route path="*" element={<PageNotFound />} />
         <Route path="/create-property" element={<PropertyStepper />} />
         <Route path="/apply" element={<ApplicationForm />} />
         <Route path="/properties" element={<ManageProperties />} />
