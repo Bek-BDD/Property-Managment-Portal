@@ -17,7 +17,7 @@ public class Application {
 
     private String message;
     private String fullname;
-    private String phonenumber;
+    private String phone;
     private LocalDate date;
 
     @ManyToOne
