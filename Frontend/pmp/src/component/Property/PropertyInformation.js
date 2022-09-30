@@ -29,11 +29,6 @@ const PropertyInformation = forwardRef((props, ref) => {
     
   };
 
-  const handleSubmit = () => {
-    alert('hetre')
-
-  };
-
 
 
   return (

@@ -23,7 +23,7 @@ public interface PropertyService {
 
     List<Property> getPropertiesByOwnerId();
 
-    Property UpdateProperty(Property property, List<MultipartFile> images, String owner_id);
+    Property UpdateProperty(Property property, List<MultipartFile> images);
 
     Property deleteProperty(int id);
 }

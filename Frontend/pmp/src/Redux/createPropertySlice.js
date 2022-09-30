@@ -1,14 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
-  data: [],
-  addrress:[]
-}
 
 export const createPropertySlice = createSlice({
   
   name: 'property',
-  initialState,
+  initialState: { data : []},
   reducers: {
     propertyInformation: (state, action) => {
       state.data = action.payload

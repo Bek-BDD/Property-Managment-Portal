@@ -13,19 +13,39 @@ import SendIcon from '@mui/icons-material/Send';
 import Stack from '@mui/material/Stack';
 import '../App.css'
 import {useEffect, useState} from "react";
+import axios from "axios";
+import OpenEditPropertyDialog from "./OpenEditPropertyDialog";
+import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogActions from '@mui/material/DialogActions';
 import {instance} from "../index"
 import PropertyDetails from "./PropertyDetails";
-
 export default function PropertyCard() {
     const [open, setOpen] = useState(false);
-    const[openDetail, setOpenDetail]=useState(false);
     const [fullWidth, setFullWidth] = useState(true);
+    const [property, setProperty] = useState();
     const [maxWidth, setMaxWidth] = useState('lg');
-    const [property, setProperty] = useState({})
+    const[openDetail, setOpenDetail]=useState(false);
+    const [PropertyData, setPropertyData] = useState([]);
+    const handleClickOpen = (id) => {
+        debugger;
+        const selectedTender = PropertyData.find(clicked => clicked.id === id);
+        setProperty(selectedTender)
     const [visited,setVisited]=useState(false);
 
+    setOpen(true);
+    };
+    const handleClose = () => {
+      setOpen(false);
+    };
 
+    
 
+    const getProperty = () => {
+        axios.get('http://localhost:8080/properties')
+        .then(res => setPropertyData(res.data))
     const handleClickOpen = (id) => {  
     instance.get(`/properties/${id}`)
         .then(response => {
@@ -77,6 +97,10 @@ export default function PropertyCard() {
     return (
 
           
+                    <>
+                  {
+                    PropertyData.map((item) => (
+                        <Card sx={{maxWidth: 360}} onClick={showDetails} className="card-hover" key={item.id}>
                 <>
                   {
                     PropertyData.map((item) => (
@@ -124,6 +148,17 @@ export default function PropertyCard() {
                     </Card>
                     ))
                   }
+
+<OpenEditPropertyDialog 
+open={open}
+handleClose={handleClose} 
+maxWidth={maxWidth} 
+fullWidth={fullWidth} 
+property={property}
+/>       
+                   
+                
+                    </>
                   
                    { visited &&
                         <PropertyDetails 

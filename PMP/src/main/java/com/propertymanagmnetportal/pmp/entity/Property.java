@@ -63,4 +63,18 @@ public class Property {
         this.address = address;
         this.status = status;
     }
+
+    public Property(int id, String name, double price, String description, double area,
+                    int numberOfRoom, String type, Address address, boolean status) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.area = area;
+        this.numberOfRoom = numberOfRoom;
+        this.type = type;
+        this.imageUrls = imageUrls;
+        this.address = address;
+        this.status = status;
+    }
 }

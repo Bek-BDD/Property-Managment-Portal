@@ -22,6 +22,7 @@ import { useEffect,useState } from "react";
 import { ImageTable } from "./component/Customer/FavoritesTable";
 import NewEditAccount from "./component/NewEditAccount";
 import PropertyStepper from "./component/Property/PropertyStepper";
+import CustomizedDialogs from "./component/OpenEditPropertyDialog";
 import OwnerApplication from "./component/Owner/OwnerApplications";
 import ApplicationForm from "./component/ApplicationForm";
 import ProfilePasswordChange from "./component/ProfilePasswordChange";
@@ -55,6 +56,7 @@ function App() {
           path="/customerapplications"
           element={<CustomerApplications />}
         />
+        <Route path="/CustomizedDialogs" element={<CustomizedDialogs />} />
       </Routes>
       <Footer />
     </BrowserRouter>
