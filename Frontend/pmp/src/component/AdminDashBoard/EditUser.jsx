@@ -12,6 +12,9 @@ import UserEdit from "./UserEdit";
 import {Fab} from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import {yellow} from "@mui/material/colors";
+import axios from "axios";
+import {instance} from "../../index";
+import {useEffect, useState} from "react";
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
     '& .MuiDialogContent-root': {
@@ -22,7 +25,27 @@ const BootstrapDialog = styled(Dialog)(({theme}) => ({
     },
 }));
 
+
+
+
 const BootstrapDialogTitle = (props) => {
+
+    const [userData,setUserData]=useState([]);
+
+    const getUserData=async ()=>{
+
+        const data=await instance.get('/users')
+        setUserData(data.data);
+
+    }
+
+    useEffect(()=>{
+        getUserData().then(r => console.log(' axios request getUserData() successful'))
+            .catch(e=>console.log("Exception thrown by axios request getUserData() "));
+
+    },[])
+
+
     const {children, onClose, ...other} = props;
 
     return (
@@ -91,7 +114,7 @@ export default function (props) {
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus onClick={handleClose}>
-                        Save Edit
+                        Done
                     </Button>
                 </DialogActions>
             </BootstrapDialog>
