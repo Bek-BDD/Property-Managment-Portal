@@ -50,7 +50,7 @@ import {addressInformation} from '../../Redux/propertyAddressSlice'
           <TextField
             id="city"
             name="city"
-            label="State"
+            label="City"
             fullWidth
             autoComplete="family-name"
             variant="standard"
@@ -62,9 +62,9 @@ import {addressInformation} from '../../Redux/propertyAddressSlice'
           <TextField
             id="state"
             name="state"
-            label="City"
+            label="State"
             fullWidth
-            autoComplete="city"
+            autoComplete="state"
             variant="standard"
             defaultValue={prevInfo ? prevInfo.state : null}
             onChange={handleChange}

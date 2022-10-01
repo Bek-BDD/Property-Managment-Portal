@@ -13,15 +13,15 @@ spring:
           auth: true
           starttls:
             enable: true
-    protocol: smtp
+    protocol:
     test-connection: false
   datasource:
-    password: zedM1
+    password:
     url: jdbc:postgresql://localhost:5432/pmpDB
     username: postgres
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
 
     properties:
       hibernate:

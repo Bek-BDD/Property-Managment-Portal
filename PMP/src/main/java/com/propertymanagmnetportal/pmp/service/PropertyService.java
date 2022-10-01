@@ -1,6 +1,7 @@
 package com.propertymanagmnetportal.pmp.service;
 
 import com.propertymanagmnetportal.pmp.entity.Application;
+import com.propertymanagmnetportal.pmp.entity.Image;
 import com.propertymanagmnetportal.pmp.entity.Property;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +24,7 @@ public interface PropertyService {
 
     List<Property> getPropertiesByOwnerId();
 
-    Property UpdateProperty(Property property, List<MultipartFile> images, String owner_id);
+    Property UpdateProperty(Property property, List<MultipartFile> images);
 
     Property deleteProperty(int id);
 }

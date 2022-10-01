@@ -89,9 +89,9 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public List<Property> getPropertiesByOwnerId() {
+        Integer id ;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        ;
-        Integer id = 2;
+
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUserName = authentication.getName();
             User user = userBaseRepository.findByEmail(currentUserName);
@@ -107,22 +107,18 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public Property UpdateProperty(Property property, List<MultipartFile> images, String owner_id) {
-        User user = userBaseRepository.findById(Integer.parseInt(owner_id)).get();
-        Property property1 = propertyRepo.findById(property.getId()).get();
-        if (user == null) {
-            throw new UserNotFoundException("User not found");
+    public Property UpdateProperty(Property property, List<MultipartFile> images) {
+        System.out.println(property.getImageUrls());
+        if(!(images == null || images.isEmpty())) {
+            List<String> imageUrls = awsUtil.uploadMultipleFiles(images);
+            List<Image> imageList = new ArrayList<>();
+            imageUrls.forEach(url -> {
+                imageList.add(new Image(url));
+            });
+            property.setImageUrls(imageList);
         }
-        property1.setUser(user);
 
-
-        List<String> imageUrls = awsUtil.uploadMultipleFiles(images);
-        List<Image> imageList = new ArrayList<>();
-        imageUrls.forEach(url -> {
-            imageList.add(new Image(url));
-        });
-        property1.setImageUrls(imageList);
-        return propertyRepo.save(property1);
+        return propertyRepo.save(property);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.propertymanagmnetportal.pmp.controller;
 
+import com.propertymanagmnetportal.pmp.dto.ApplicationDto;
 import com.propertymanagmnetportal.pmp.entity.Application;
 import com.propertymanagmnetportal.pmp.service.ApplicationService;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import java.util.List;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping("/application")
 public class ApplicationController {
     private ApplicationService applicationService;
@@ -17,7 +19,7 @@ public class ApplicationController {
         this.applicationService=applicationService;
     }
     @PostMapping
-    public ResponseEntity<?> saveApplication(@RequestParam int userid, @RequestParam int propertyid, @RequestBody Application application ) throws Exception {
+    public ResponseEntity<?> saveApplication(@RequestParam int userid, @RequestParam int propertyid, @RequestBody ApplicationDto application ) throws Exception {
        return ResponseEntity.ok().body(applicationService.saveApplication(userid,propertyid,application));
     }
     @GetMapping

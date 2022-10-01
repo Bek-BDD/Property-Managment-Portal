@@ -1,7 +1,8 @@
 package com.propertymanagmnetportal.pmp.service.Impl;
 
 
-
+import com.propertymanagmnetportal.pmp.Utility.EmailService;
+import com.propertymanagmnetportal.pmp.dto.ApplicationDto;
 import com.propertymanagmnetportal.pmp.entity.Application;
 import com.propertymanagmnetportal.pmp.entity.ApplicationCompositeKey;
 import com.propertymanagmnetportal.pmp.entity.Property;
@@ -9,10 +10,8 @@ import com.propertymanagmnetportal.pmp.entity.User;
 import com.propertymanagmnetportal.pmp.repository.ApplicationRepo;
 import com.propertymanagmnetportal.pmp.repository.PropertyRepo;
 import com.propertymanagmnetportal.pmp.repository.UserBaseRepository;
-import com.propertymanagmnetportal.pmp.security.MyUserDetails;
-import com.propertymanagmnetportal.pmp.Utility.EmailService;
 import com.propertymanagmnetportal.pmp.service.ApplicationService;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,12 +22,14 @@ import java.util.List;
 public class ApplicationServiceImpl implements ApplicationService {
     private EmailService emailService;
     private ApplicationRepo applicationRepo;
+    private ModelMapper mapper;
     private PropertyRepo propertyRepo;
     private UserBaseRepository userBaseRepository;
 
 
-    public ApplicationServiceImpl(EmailService emailService, ApplicationRepo applicationRepo, PropertyRepo propertyRepo, UserBaseRepository userBaseRepository){
+    public ApplicationServiceImpl(EmailService emailService, ModelMapper mapper, ApplicationRepo applicationRepo, PropertyRepo propertyRepo, UserBaseRepository userBaseRepository){
         this.emailService=emailService;
+        this.mapper=mapper;
         this.applicationRepo=applicationRepo;
         this.propertyRepo=propertyRepo;
         this.userBaseRepository=userBaseRepository;
@@ -39,14 +40,14 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
     @Override
-    public Boolean saveApplication(int userid, int propertyid, Application app) throws Exception{
+    public Boolean saveApplication(int userid, int propertyid, ApplicationDto app) throws Exception{
 //            System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
 //            MyUserDetails userdetail = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         ApplicationCompositeKey compositeKey =new ApplicationCompositeKey(userid,propertyid);
         Property property =propertyRepo.findById(propertyid).get();
         User user =userBaseRepository.findById(userid).get();
         LocalDate now =LocalDate.now();
-        Application application =new Application();
+        Application application =mapper.map(app,Application.class);
         application.setCompositeKey(compositeKey);
         application.setDate(now);
         application.setUser(user);
@@ -58,10 +59,10 @@ public class ApplicationServiceImpl implements ApplicationService {
         String ownerName = property.getUser().getFirstname();
 
         String message="Dear "+ ownerName +" You have new application for your " +
-                propertyName+" Please contact the customer using "+ app.getPhonenumber() +"Or" + userEmail;
+                propertyName+",    "+ app.getFullname()+ " is saying: "+ app.getMessage()+ ",    Please contact the customer using "+ app.getPhone() +" Or " + userEmail;
 
         applicationRepo.save(application);
-        sendEmail(ownerEmail, app.getMessage() + propertyName ,message);
+        sendEmail(ownerEmail, "New Application Submitted" + propertyName ,message);
 
             return true;
 

@@ -15,6 +15,8 @@ import DialogActions from '@mui/material/DialogActions';
 import CloseIcon from '@mui/icons-material/Close';
 import ApplicationForm from './ApplicationForm';
 import { computeStyles } from '@popperjs/core';
+import { useEffect } from 'react';
+import { instance	 } from '../index';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -73,6 +75,8 @@ const PropertyDetails=(props)=>{
     const [bannerimage, setBannerimage]=useState(pics[0])
     const images=property.imageUrls
 
+    const user =JSON.parse(localStorage.getItem("loggedUser"))
+
     const showApply=()=>{
         setOpenApply(true);
     }
@@ -81,25 +85,55 @@ const PropertyDetails=(props)=>{
     }
 
     const [liked,setLiked]=useState(false);
-     function heart(){
-    if(liked){
-        // send to database liked
-    }
-    else{
-        // remove from datatbase 
-    }
-    setLiked(!liked);
-   
-  } 
 
-  const setPictures=(pics)=>{
-     // setPics(pics)
-     // setBannerimage(pics[0])
+    const heart=(id)=> {
+      
+      const propertyId = id;
+      let userId = JSON.parse(localStorage.getItem("loggedUser"));
+      userId = userId?.id;
+      
+      if (localStorage.getItem("tokens") == null) {
+        navigator("/login");
+      }
+      else {
+        if (!liked) {
+          // send to database liked
+          instance
+            .post('/favorites?user_id='+userId+'&'+'property_id='+propertyId)
+            .then((response) => {
+              setLiked(true);
+            })
+            .catch((err) => {
+              console.log(err);
+              setLiked(false);
+            });
+        } else {
+          console.log("remove");
+          // remove from datatbase
+          instance
+            .delete('/favorites?user_id='+userId+'&&'+'property_id='+propertyId)
+            .then((response) => {
+              setLiked(false);
+              console.log(response.data);
+            })
+            .catch((err) => {
+              console.log(err);
+              setLiked(true);
+            });
+        }
+      }
   }
+
+  useEffect(()=>{
+     if(images.length>0){
+        
+       setPics(images)
+      setBannerimage(images[0].url)
+        }
+
+  },[])
     
-    if(images.length>0){
-            setPictures(images)
-        }     
+        
      
      const [maxWidth, setMaxWidth] = useState('xl');
 
@@ -125,9 +159,9 @@ const PropertyDetails=(props)=>{
                     <div className="card-container">
                         {pics.map((picture) => {
                         return (
-                            <CardContent className="img-cards">
+                            <CardContent className="img-cards" >
                             <img
-                                src={picture}
+                                src={picture.url}
                                 alt=""
                                 onClick={(e) => {
                                 setBannerimage(e.target.src);
@@ -150,9 +184,10 @@ const PropertyDetails=(props)=>{
                             </IconButton>
                         </CardActions>
                         </div>
-                        <div className="mg-10">
-                        <CardActions disableSpacing>
-                            <IconButton aria-label="add to favorites" onClick={heart}>
+                        {(user.role[0].id !== 1) &&
+                          <div className="mg-10">
+                            <CardActions disableSpacing>
+                            <IconButton aria-label="add to favorites" onClick={()=>heart(user.id)}>
                             {liked ? (
                                 <FavoriteIcon />
                             ) : (
@@ -161,6 +196,9 @@ const PropertyDetails=(props)=>{
                             </IconButton>
                         </CardActions>
                         </div>
+
+                        }
+                        
                     </div>
                     <div className="hr-line"></div>
 
@@ -168,7 +206,8 @@ const PropertyDetails=(props)=>{
                         <Typography variant="h5" component="h5">
                         {property.name}
                         </Typography>
-                        {/* <label htmlFor="">`${property.address.street}`+`${property.address.city}` + `${property.address.state}`+`${property.address.zip}`</label> */}
+                        <label htmlFor="">{property.address.street} st,  {property.address.city}, {property.address.state} {property.address.zip}</label>
+                        {(user.role[0].id !== 1) &&
 
                         <div className="mg-10">
                         <div className="top-bar ">
@@ -179,6 +218,7 @@ const PropertyDetails=(props)=>{
                             <Button
                                 variant="contained"
                                 color="primary"
+                                onClick={()=>{heart(property.id)}}
                             >
                                 <FavoriteBorderOutlinedIcon />
                                 Add to Favorites
@@ -186,6 +226,9 @@ const PropertyDetails=(props)=>{
                             </div>
                         </div>
                         </div>
+
+                        }
+                        
                     </div>
                     <div className="hr-line"></div>
                     <div className="mg-10">
@@ -244,6 +287,7 @@ const PropertyDetails=(props)=>{
        hide={hideApply}
        maxWidth={maxWidth} 
        fullWidth={fullWidth} 
+       propertyid={property.id}
        />
      </>
    );

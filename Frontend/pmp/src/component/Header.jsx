@@ -22,10 +22,10 @@ export default function(){
             {token && role == 'customer' ?  <Link to={"/favourites"}><Button variant="text">Favorite</Button></Link>:null}
             {token && role == 'owner' ?  <Link to={"/customerapplications"}><Button variant="text">Manage Application</Button> </Link>:null}
             {token && role == 'owner' ? <Link to={"/properties"}> <Button variant="text">Manage property</Button> </Link>:null}
-            {/* {token && role == 'owner' ? <Link to={"/property-detail"}>  <Button variant="text">Property Details</Button> </Link>:null} */}
+            {token && role == 'admin' ? <Link to={"/admincharts"}> <Button variant="text">Dashboard</Button> </Link>:null}
+                        {/* {token && role == 'owner' ? <Link to={"/property-detail"}>  <Button variant="text">Property Details</Button> </Link>:null} */}
             {token && role == 'owner' ?  <Link to={"/create-property"} >  <Button variant="text">Create Property</Button> </Link>:null}
-            {token ? <AccountMenu /> : <Link to={"/login"} >  <Button variant="text">Login</Button> </Link>}
-
+            {token ? <AccountMenu /> : <Link to={"/login"} >  <Button variant="text">Login</Button> </Link>}           
             </div>
         
             
