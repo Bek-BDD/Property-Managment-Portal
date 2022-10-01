@@ -17,7 +17,6 @@ import CustomerHeader from './CustomerHeader';
 import CollapsibleTable from './CustomerApplications';
 import CustomerApplications from './CustomerApplications';
 import Divider from '@mui/material/Divider';
-import MuiImageSlider from 'mui-image-slider';
 import FotterCards from './FotterCards';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import DescriptionIcon from '@mui/icons-material/Description';

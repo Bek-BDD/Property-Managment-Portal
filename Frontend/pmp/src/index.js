@@ -13,17 +13,13 @@ const token = localStorage.getItem('tokens') != null ? JSON.parse(localStorage.g
 export const instance = () => {
   const token = localStorage.getItem('tokens') != null ? JSON.parse(localStorage.getItem('tokens')).jwtToken : ''
   return axios.create({
-    baseURL: "http://localhost:9090",
+    baseURL: "http://localhost:8080",
     headers: {
       'Authorization': 'Bearer ' + token
     }
   }
   );
 } 
-export const instance = axios.create({
-baseURL:"http://localhost:8080"
-}
-);
 
 var visitCount = localStorage.getItem("page_view");
 if (visitCount) {

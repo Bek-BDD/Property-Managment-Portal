@@ -33,6 +33,6 @@ spring:
     init:
       mode: always
 server:
-  port: 9090
+  port: 8080
 
 

@@ -102,4 +102,4 @@ insert into users_role(user_id,role_id) values (6,1);
 insert into application(date,user_id,property_id) values ('2021-10-10',4,3);
 insert into application(date,user_id,property_id) values ('2021-10-10',4,9);
 insert into application(date,user_id,property_id) values ('2021-10-10',5,9);
-insert into application(date,user_id,property_id) values ('2021-10-10',5,9);
+

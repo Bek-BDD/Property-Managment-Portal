@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/application")
-@CrossOrigin
 public class ApplicationController {
     private ApplicationService applicationService;
     public ApplicationController(ApplicationService applicationService){

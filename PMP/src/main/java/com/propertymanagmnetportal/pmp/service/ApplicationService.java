@@ -13,6 +13,6 @@ public interface ApplicationService {
     public List<Application> findApplicationByProperty_Address_City(String city);
     public List<Application> findApplicationByProperty_Name(String name);
     public List<Application> findApplicationByDate(LocalDate date);
-    List<Application> customerApplications(int id);
+
 
 }
