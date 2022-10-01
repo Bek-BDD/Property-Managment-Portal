@@ -72,26 +72,6 @@ public class SecurityConfig{
 
         return httpSecurity.build();
     }
-//@Override
-//public void configure(AuthenticationManagerBuilder auth)throws Exception{
-//    auth.userDetailsService(myUserDetailService);
-//}
-//
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.cors().disable().csrf().disable()
-//                .authorizeRequests().antMatchers("/uaa/**","/properties","/").permitAll()
-//                .anyRequest().authenticated()
-//                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-//    }
-//
-//   @Override
-//   @Bean
-//   public AuthenticationManager authenticationManagerBean()throws Exception{
-//       return super.authenticationManagerBean();
-//   }
-
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
