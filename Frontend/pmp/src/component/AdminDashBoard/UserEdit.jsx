@@ -8,25 +8,49 @@ import {
     Typography,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import {orange, yellow} from "@mui/material/colors";
+import {instance} from "../../index";
 
 export default function (props) {
-  const [userState, setUserState] = useState({
-    firstname: props,
-    lastname: "Shiferaw",
-    email: "zedshif123@gmail.com",
-    address: "100N 4th St",
-    city:"Fairfield",
-    zipcode: "52557",
-    state: "Iowa",
-  });
 
-  function handleSubmit(event){
-    event.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    // console.log(data.get('city'));
-  }
+
+
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        const data = new FormData(event.currentTarget);
+
+        const updatedUser = {
+            ...userState,
+            firstname: data.get("firstname"),
+            lastname: data.get("lastname"),
+            email: data.get("email"),
+            address: {
+                state: data.get("state"),
+                city: data.get("city"),
+                zip: data.get("zip"),
+                street: data.get("address"),
+            },
+        };
+
+        instance
+            .put("/users/" + userState.id, updatedUser)
+            .then((response) => {
+                console.log(response.data)
+                window.alert('updated')
+
+                setUserState(updatedUser);
+
+            })
+            .catch((err) => console.log(err));
+    }
+
+
+    const user = props.theRow.row
+
+
+  const [userState, setUserState] = useState({...user});
 
   return (
     <div>
@@ -97,13 +121,8 @@ export default function (props) {
                 autoComplete="email"
               />
             </Grid>
+>
 
-            <Grid item xs={12}>
-              <Button variant="outlined" component="label" fullWidth>
-                Upload Image
-                <input type="file" hidden name="images" />
-              </Button>
-            </Grid>
           </Grid>
         </Grid>
         <Grid item xs={5}>

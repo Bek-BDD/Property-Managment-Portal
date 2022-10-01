@@ -268,9 +268,18 @@ class UaaServiceImpl implements UaaService {
     }
 
     @Override
-    public void deleteById(int id) {
+    public void updateDeleteStatus(int id) {
+        userBaseRepository.updateDeleteStatus(id);
+    }
 
-        userBaseRepository.deleteById(id);
+    @Override
+    public void userActivate(int id) {
+        userBaseRepository.userActivate(id);
+    }
+
+    @Override
+    public void userDeactivate(int id) {
+        userBaseRepository.userDeactivate(id);
     }
 
     @Override
@@ -293,5 +302,16 @@ class UaaServiceImpl implements UaaService {
     public void userDeactivate(int id){
         userBaseRepository.userDeactivate(id);
     };
+
+    @Override
+    public Optional<User> findUserById(int id) {
+        var user = userBaseRepository.findAll()
+                .stream()
+                .filter(u -> u.isDeleted() == false)
+                .filter(ur -> ur.getId() == id)
+                .findFirst();
+        return user;
+    }
+
 
 }

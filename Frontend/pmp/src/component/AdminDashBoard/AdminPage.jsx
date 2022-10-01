@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {DataGrid}  from '@mui/x-data-grid';
-import {BottomNavigation, BottomNavigationAction, Box, Fab} from "@mui/material";
+import {useEffect, useState} from 'react';
+import {DataGrid} from '@mui/x-data-grid';
+import {BottomNavigation, BottomNavigationAction, Fab} from "@mui/material";
 import PersonAddIcon from '@mui/icons-material/PersonAddAltOutlined';
-import {useEffect, useState} from "react";
 import {instance} from '../../index';
 
 import UserActions from './UserActions';
@@ -52,20 +52,21 @@ export default function DataTable(){
             valueGetter: (params) =>
                 `${params.row.firstname || ''} ${params.row.lastname || ''}`,
         },
-        { field: 'email', headerName: 'Email', width: 150 ,  editable: true },
+        {field: 'email', headerName: 'Email', width: 150, editable: true},
 
-        { field: 'password', headerName: 'Password',width: 160 },
+        {field: 'password', headerName: 'Password', width: 160},
 
 
-
-        { field: 'Action', headerName: 'Activate',width: 120 , type:'actions' ,
-            renderCell:(theRow)=>(<UserActions{...{theRow}}/>
+        {
+            field: 'Action', headerName: 'Activate', width: 120, type: 'actions',
+            renderCell: (theRow) => (<UserActions{...{theRow}}/>
             ),
 
         },
 
-        { field: 'Edit', headerName: 'Edit',width: 120 , type:'button' ,
-            renderCell:(theRow)=>(<EditUser {...{rowSelected}}></EditUser>
+        {
+            field: 'Edit', headerName: 'Edit', width: 120, type: 'button',
+            renderCell: (theRow) => (<EditUser {...{theRow}}></EditUser>
             ),
 
         },
@@ -81,14 +82,12 @@ export default function DataTable(){
     ];
 
 
+    const getUserData = async () => {
 
-    const getUserData=async ()=>{
-
-        const data=await instance.get('/users')
+        const data = await instance.get('/users')
         setUserData(data.data);
 
     }
-
 
 
     function handleDeletion() {
@@ -112,37 +111,48 @@ export default function DataTable(){
 
         }
 
+                const conformation = window.confirm("Delete User " + row);
+
+                if (conformation) {
+
+                    instance.delete('/users/' + row)
+                    window.location.reload(false);
+                }
+
+
+            }))
+
+        }
 
 
     }
-
-
-
-
 
 
     useEffect(() => {
 
         getUserData()
             .then(r => console.log(' axios request getUserData() successful'))
-            .catch(e=>console.log("Exception thrown by axios request getUserData() "));
+            .catch(e => console.log("Exception thrown by axios request getUserData() "));
 
-    },[]);
 
+    }, []);
 
 
     return (
 
         <Box className='dark' style={{ height: "600px", width: '100%' }}>           
 
+            <div style={{textAlign: "center"}}>
+                <BottomNavigation
+                    sx={{display: "inline-block"}}
+                    showLabels
+                    value={value}
+                    onChange={(event, newValue) => {
+                        setValue(newValue);
+                    }}
+                >
 
-            <BottomNavigation
-                showLabels
-                value={value}
-                onChange={(event, newValue) => {
-                    setValue(newValue);
-                }}
-            >
+                    <BottomNavigationAction onClick={() => {
 
                 <BottomNavigationAction onClick={()=>{
 
@@ -154,28 +164,60 @@ export default function DataTable(){
                 )}
             </BottomNavigation>
 
+                    {addUser && (
+                        <Navigate to="/signup" replace={true}/>
+                    )}
+                </BottomNavigation>
+
+
+                <BottomNavigation
+                    sx={{display: "inline-block"}}
+                    showLabels
+                    value={value}
+
+                    onChange={(event, newValue) => {
+                        setValue(newValue);
+                    }}
+                >
+
+                    <BottomNavigationAction onClick={() => {
+
+
+                        setChange(true)
+                    }
+
+                    } label="Rest Password" icon={<LockResetIcon/>}/>
+
+
+                    {change &&
+
+                        <PassChange></PassChange>
+                    }
+                </BottomNavigation>
+
+
+            </div>
 
 
             <DataGrid style={{color:"white", border:"none"}}
-
 
 
                 rows={userData}
                 columns={columns}
                 pageSize={10}
                 getRowId={row => row.id}
-                rowsPerPageOptions={[5,10,15]}
+                rowsPerPageOptions={[5, 10, 15]}
                 autoPageSize={true}
 
                 checkboxSelection
                 rowSelection='single'
-                experimentalFeatures={{ newEditingApi: true }}
+                experimentalFeatures={{newEditingApi: true}}
 
 
                 sx={{
 
                     bgcolor: blue[15],
-                    marginLeft:20
+                    marginLeft: 20
                 }}
 
                 onSelectionModelChange={(ids) => {
@@ -183,16 +225,14 @@ export default function DataTable(){
                     const selectedRowData = userData.filter((userData) =>
                         selectedIDs.has(userData.id.toString())
                     );
-                    console.log(selectedIDs);
+
                     setRowSelected(selectedIDs);
 
 
-
-
                 }}
-                getRowSpacing={params =>( {
-                    top:params.isFirstVisible ? 0:5,
-                    bottom:params.isFirstVisible? 0:5,
+                getRowSpacing={params => ({
+                    top: params.isFirstVisible ? 0 : 5,
+                    bottom: params.isFirstVisible ? 0 : 5,
 
                 })}
 

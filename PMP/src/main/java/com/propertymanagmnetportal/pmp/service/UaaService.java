@@ -50,5 +50,7 @@ public interface UaaService {
 
     void update(int id);
 
+    public Optional<User> findUserById(int id);
+
 
 }

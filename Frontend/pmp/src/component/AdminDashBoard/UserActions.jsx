@@ -5,19 +5,12 @@ import {green, grey, red} from "@mui/material/colors";
 import {CircularProgress} from "@mui/joy";
 import axios from 'axios';
 import {element} from "prop-types";
+import {instance} from "../../index";
 
 export default function (props) {
 
 
-    let [flag,setflag]=useState(false);
-
-
-
-    useEffect(() => {
-
-
-
-    },[flag]);
+    let [flag,setflag]=useState(props.theRow.row.active);
 
 
 
@@ -38,7 +31,23 @@ export default function (props) {
                         bgcolor: green[500],
                        '&:hover': { bgcolor: green[700] }? {bgcolor: [red]}:{bgcolor: green[700]},
                     }}
-                    onClick={ ()=> setflag(flag === false)}
+                    onClick={ ()=> {
+
+
+                        instance.get("/users/deactivate/"+props.theRow.id).then(()=>{
+
+                            window.alert("deactivate")
+
+                        }).catch((e)=>{
+
+                            console.log(e)
+
+                        })
+
+
+
+                        setflag(flag === false)
+                    }}
                     disabled={flag}
                 >
                     <Check />
@@ -52,7 +61,10 @@ export default function (props) {
                         bgcolor: green[500],
                         '&:hover': { bgcolor: green[700] }? {bgcolor: [red]}:{bgcolor: green[700]},
                     }}
-                    onClick={ ()=> setflag(flag === false)}
+                    onClick={ ()=> {
+                        setflag(flag === false)
+
+                    }}
                     disabled={flag}
                 >
                     <Check />
@@ -67,7 +79,20 @@ export default function (props) {
                         left: -6,
                         zIndex: 1,
                     }}
-                    onClick={ ()=> setflag(flag === false)}
+                    onClick={ ()=> {
+
+
+                        instance.get("/users/activate/"+props.theRow.id)
+                            .then((r)=>{
+
+                                window.alert('activate')
+                            } ).catch((e)=>{
+                            console.log(e)
+                        })
+
+                        setflag(flag === false)
+
+                }}
                 />
             )}
         </Box>

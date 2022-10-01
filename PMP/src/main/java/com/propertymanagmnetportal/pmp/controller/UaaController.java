@@ -166,8 +166,8 @@ public class UaaController {
 
     @DeleteMapping("/users/{id}")
 //    @PreAuthorize("hasAuthority('admin')")
-    public void deleteUserById(@PathVariable int id) {
-        uaaService.deleteById(id);
+    public void updateDeleteStatus(@PathVariable int id) {
+        uaaService.updateDeleteStatus(id);
     }
 
     @PutMapping("/users/{id}")
@@ -177,6 +177,27 @@ public class UaaController {
     }
 
 
+    @GetMapping("/users/activate/{id}")
+    public void userActivate(@PathVariable int id) {
+        userBaseRepository.userActivate(id);
+
+
+    }
+
+    @GetMapping("/users/deactivate/{id}")
+    public void userDeactivate(@PathVariable int id) {
+
+        userBaseRepository.userDeactivate(id);
+
+
+    }
+
+
+    @GetMapping("/userss/{id}")
+//    @PreAuthorize("hasAuthority('admin')")
+    public User findUsersById(@PathVariable int id) {
+        return uaaService.findUserById(id).get();
+    }
 }
 
 
