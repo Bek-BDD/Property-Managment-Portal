@@ -29,7 +29,7 @@ export default function (props) {
                         width: 40,
                         height: 40,
                         bgcolor: green[500],
-                       '&:hover': { bgcolor: green[700] }? {bgcolor: [red]}:{bgcolor: green[700]},
+                        '&:hover': { bgcolor: green[700] }? {bgcolor: [red]}:{bgcolor: green[700]},
                     }}
                     onClick={ ()=> {
 
@@ -48,7 +48,7 @@ export default function (props) {
 
                         setflag(flag === false)
                     }}
-                    disabled={flag}
+                    disabled={!flag}
                 >
                     <Check />
                 </Fab>
@@ -65,7 +65,7 @@ export default function (props) {
                         setflag(flag === false)
 
                     }}
-                    disabled={flag}
+                    disabled={!flag}
                 >
                     <Check />
                 </Fab>
@@ -92,7 +92,7 @@ export default function (props) {
 
                         setflag(flag === false)
 
-                }}
+                    }}
                 />
             )}
         </Box>

@@ -9,41 +9,31 @@ import UserActions from './UserActions';
 import EditUser from "./EditUser";
 import {blue, red} from "@mui/material/colors";
 import EditIcon from "@mui/icons-material/Edit";
-import Signup from "../Signup";
 import {Navigate} from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
-import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
-import Widgets from "./Widgets";
+import PassChange from './PassChange'
+import LockResetIcon from '@mui/icons-material/LockReset';
+
+export default function DataTable() {
+
+    const [userData, setUserData] = useState([]);
+
+    const [value, setValue] = useState(0);
+
+    const [rowSelected, setRowSelected] = useState(null);
+
+    let [userSelected, setUserSelected] = useState(null);
 
 
-
-export default function DataTable(){
-
-    const [userData,setUserData]=useState([]);
-
-    const [value, setValue]=useState(0);
-
-    const [rowSelected,setRowSelected]=useState(null);
-
-    let [userSelected,setUserSelected]=useState(null);
-
-
-    let [addUser,setaddUser]=useState(false);
+    let [addUser, setaddUser] = useState(false);
+    let [change, setChange] = useState(false);
 
 
     const columns = [
 
-        { field: 'id', headerName: 'Id', width: 50 },
-        { field: 'Photo', headerName: 'Image',width: 80,
-            renderCell: (theRow) => (<Avatar>
-
-
-                </Avatar>
-            ),
-        },
-        { field: 'lastname', headerName: 'Last name', width: 100},
-        { field: 'firstname', headerName: 'First name', width: 100 },
+        {field: 'id', headerName: 'Id', width: 50},
+        {field: 'Photo', headerName: 'Image', width: 80},
+        {field: 'lastname', headerName: 'Last name', width: 100},
+        {field: 'firstname', headerName: 'First name', width: 100},
         {
             field: 'fullName',
             headerName: 'Full name',
@@ -71,10 +61,18 @@ export default function DataTable(){
 
         },
 
-        { field: 'Delete', headerName: 'Delete',width: 90 , type:'button' ,
-            renderCell:(theRow)=>(
-                    <DeleteIcon type={'loading'} onClick={handleDeletion}/>
-                
+        {
+            field: 'Delete', headerName: 'Delete', width: 90, type: 'button',
+            renderCell: (theRow) => (<Fab
+                    sx={{
+                        width: 40,
+                        height: 40,
+                        bgcolor: red[700],
+                        '&:hover': {bgcolor: red[900]},
+                    }}
+                    color="secondary" aria-label="delete">
+                    <EditIcon type={'loading'} onClick={handleDeletion}/>
+                </Fab>
             ),
 
         },
@@ -93,30 +91,18 @@ export default function DataTable(){
     function handleDeletion() {
 
 
-        if(rowSelected!=null){
+        if (rowSelected != null) {
 
-            rowSelected.forEach((row=>{
-
-             const conformation= window.confirm("Delete User "+row);
-
-             if (conformation){
-
-                 instance.delete('/users/'+row)
-                 window.location.reload(false);
-             }
-
-
-
-            }))
-
-        }
+            rowSelected.forEach((row => {
 
                 const conformation = window.confirm("Delete User " + row);
 
                 if (conformation) {
 
                     instance.delete('/users/' + row)
-                    window.location.reload(false);
+                        .then(r=> window.location.reload())
+                        .catch(e=> console.log(e))
+
                 }
 
 
@@ -140,7 +126,8 @@ export default function DataTable(){
 
     return (
 
-        <Box className='dark' style={{ height: "600px", width: '100%' }}>           
+        <div style={{height: 600, width: '100%'}}>
+
 
             <div style={{textAlign: "center"}}>
                 <BottomNavigation
@@ -154,15 +141,9 @@ export default function DataTable(){
 
                     <BottomNavigationAction onClick={() => {
 
-                <BottomNavigationAction onClick={()=>{
 
-                    console.log('in here')
-                    setaddUser(true)}} label="Add User" icon={<PersonAddIcon />} />
-
-                {addUser && (
-                    <Navigate to="/signup" replace={true} />
-                )}
-            </BottomNavigation>
+                        setaddUser(true)
+                    }} label="Add User" icon={<PersonAddIcon/>}/>
 
                     {addUser && (
                         <Navigate to="/signup" replace={true}/>
@@ -199,7 +180,7 @@ export default function DataTable(){
             </div>
 
 
-            <DataGrid style={{color:"white", border:"none"}}
+            <DataGrid
 
 
                 rows={userData}
@@ -240,7 +221,7 @@ export default function DataTable(){
             />
 
 
-        </Box>
+        </div>
     );
 }
 ;

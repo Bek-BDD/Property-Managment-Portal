@@ -1,7 +1,7 @@
 package com.propertymanagmnetportal.pmp.service.Impl;
 
 
-
+import com.propertymanagmnetportal.pmp.Utility.EmailService;
 import com.propertymanagmnetportal.pmp.dto.ApplicationDto;
 import com.propertymanagmnetportal.pmp.entity.Application;
 import com.propertymanagmnetportal.pmp.entity.ApplicationCompositeKey;
@@ -10,11 +10,8 @@ import com.propertymanagmnetportal.pmp.entity.User;
 import com.propertymanagmnetportal.pmp.repository.ApplicationRepo;
 import com.propertymanagmnetportal.pmp.repository.PropertyRepo;
 import com.propertymanagmnetportal.pmp.repository.UserBaseRepository;
-import com.propertymanagmnetportal.pmp.security.MyUserDetails;
-import com.propertymanagmnetportal.pmp.Utility.EmailService;
 import com.propertymanagmnetportal.pmp.service.ApplicationService;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

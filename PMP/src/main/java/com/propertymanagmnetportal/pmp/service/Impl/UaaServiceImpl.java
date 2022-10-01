@@ -34,7 +34,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-class UaaServiceImpl implements UaaService {
+public class UaaServiceImpl implements UaaService {
     @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
@@ -268,25 +268,6 @@ class UaaServiceImpl implements UaaService {
     }
 
     @Override
-    public void updateDeleteStatus(int id) {
-        userBaseRepository.updateDeleteStatus(id);
-    }
-
-    @Override
-    public void userActivate(int id) {
-        userBaseRepository.userActivate(id);
-    }
-
-    @Override
-    public void userDeactivate(int id) {
-        userBaseRepository.userDeactivate(id);
-    }
-
-    @Override
-    public void update(int id) {
-
-        userBaseRepository.save(userBaseRepository.findById(id).get());
-    }
     public void deleteUserById(int id) {
 //        userBaseRepository.findAll()
 //                .stream()
@@ -302,16 +283,5 @@ class UaaServiceImpl implements UaaService {
     public void userDeactivate(int id){
         userBaseRepository.userDeactivate(id);
     };
-
-    @Override
-    public Optional<User> findUserById(int id) {
-        var user = userBaseRepository.findAll()
-                .stream()
-                .filter(u -> u.isDeleted() == false)
-                .filter(ur -> ur.getId() == id)
-                .findFirst();
-        return user;
-    }
-
 
 }

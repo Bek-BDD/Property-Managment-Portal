@@ -141,7 +141,6 @@ public class UaaController {
         UserDTO userDTO = new UserDTO(images,firstname,lastname,email,password,roletype,city,state,street_number,zip_code);
         return uaaService.signUpImg(userDTO);
     }
-
     @GetMapping("/reset_pwd")
     public String validateToken(@Param(value = "token") String token, HttpServletResponse response){
 
@@ -153,29 +152,15 @@ public class UaaController {
 
     @PostMapping("/uaa/changePassword")
     @CrossOrigin
-    public User changePassword(@RequestBody LoginRequest request){
-        return uaaService.changePassword(request.getEmail(),request.getPassword());
+    public User changePassword(@RequestBody LoginRequest request) {
+        return uaaService.changePassword(request.getEmail(), request.getPassword());
     }
 
     @PostMapping("/uaa/logout")
-    public String logout(HttpServletRequest request){
+    public String logout(HttpServletRequest request) {
         uaaService.logout(request.getHeader("Authorization"));
         return null;
     }
-}
-
-    @DeleteMapping("/users/{id}")
-//    @PreAuthorize("hasAuthority('admin')")
-    public void updateDeleteStatus(@PathVariable int id) {
-        uaaService.updateDeleteStatus(id);
-    }
-
-    @PutMapping("/users/{id}")
-//    @PreAuthorize("hasAuthority('admin')")
-    public void updateUserById(@PathVariable int id) {
-        uaaService.update(id);
-    }
-
 
     @GetMapping("/users/activate/{id}")
     public void userActivate(@PathVariable int id) {
@@ -191,18 +176,7 @@ public class UaaController {
 
 
     }
-
-
-    @GetMapping("/userss/{id}")
-//    @PreAuthorize("hasAuthority('admin')")
-    public User findUsersById(@PathVariable int id) {
-        return uaaService.findUserById(id).get();
-    }
 }
-
-
-
-
 
 
 
