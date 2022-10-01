@@ -37,6 +37,33 @@ insert into address ( state, city, zip, street) values ( 'Tennessee', 'Nashville
 insert into address ( state, city, zip, street) values ( 'Florida', 'Jacksonville', '32244', '7550 Oriole Terrace');
 insert into address ( state, city, zip, street) values ( 'Delaware', 'Wilmington', '19886', '371 Hallows Alley');
 
+insert into role (id,role) values (1,'owner');
+insert into role(id,role) values (2,'customer');
+insert into role (id,role) values (3,'admin');
+
+-- password 123 for all
+insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
+    (200,false,'hiwot@gmail.com','hiwot','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1664134331536_jpg','Reta','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true, 100);
+
+insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
+    (100,false,'zed@gmail.com','zedagem','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975646074_jpg','demelash','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true, 200);
+
+
+insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
+    (101,false,'bereket@gmail.com','bereket','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975645768_jpeg','daniel','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true,300);
+
+
+insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
+    (102,false,'zola@gmail.com','zelalem','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975644694_jpeg','belayneh','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true, 400);
+
+insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
+    (103,false,'dawit@gmail.com','dawit','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1664134386359_jpg','dave','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true, 500);
+
+insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
+    (104,false,'abdu@gmail.com','abdu','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975645545_jpeg','Edao','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true, 600);
+
+
+
 
 
 insert into property (date_posted, area, description, name, number_of_room, price,status,type,address_id,owner_id) values (  '2022-09-26',76, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 'Safe Harbor', 1, 143,false,'Sell',1,1);

@@ -3,8 +3,6 @@ package com.propertymanagmnetportal.pmp.controller;
 import com.propertymanagmnetportal.pmp.Exceptions.EmailExistException;
 import com.propertymanagmnetportal.pmp.Exceptions.TokenDoesnotExsist;
 import com.propertymanagmnetportal.pmp.dto.UserDTO;
-import com.propertymanagmnetportal.pmp.entity.Address;
-import com.propertymanagmnetportal.pmp.entity.Role;
 import com.propertymanagmnetportal.pmp.entity.User;
 import com.propertymanagmnetportal.pmp.repository.UserBaseRepository;
 import com.propertymanagmnetportal.pmp.security.entity.LoginRequest;
@@ -16,7 +14,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -65,6 +63,18 @@ public class UaaController {
     //@PreAuthorize("hasAuthority('owner')")
     public List<User> findAllUsers(){
         return uaaService.findAll();
+    }
+
+    @DeleteMapping("/users/{id}")
+    //@PreAuthorize("hasAuthority('owner')")
+    public void deleteUser(@PathVariable int id){
+        uaaService.deleteUserById(id);
+    }
+
+    @GetMapping("/userss/{id}")
+//    @PreAuthorize("hasAuthority('admin')")
+    public Optional<User> findUsersById(@PathVariable int id){
+        return uaaService.findUserById(id);
     }
 
     @GetMapping("/customers")
@@ -107,14 +117,14 @@ public class UaaController {
     @PostMapping("/uaa/resetpassword")
     public String resetPassword(HttpServletRequest request, @RequestBody LoginRequest email){
         System.out.println(email.getEmail());
-       String emailToken = RandomString.make(45);
-       String resetURL =uaaService.updateResetPasswordToken(emailToken,email.getEmail(),request);
-       return resetURL;
+        String emailToken = RandomString.make(45);
+        String resetURL =uaaService.updateResetPasswordToken(emailToken,email.getEmail(),request);
+        return resetURL;
     }
 
     @PostMapping(path = "/uaa/signupimg",consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})
     public String signUpImg(
-             @RequestPart(value = "images",required = false) MultipartFile images
+            @RequestPart(value = "images",required = false) MultipartFile images
             ,@RequestPart("firstname") String firstname
             ,@RequestPart("lastname") String lastname
             ,@RequestPart("password") String password
@@ -126,7 +136,7 @@ public class UaaController {
             ,@RequestPart(value = "state", required = false) String state
             ,@RequestPart(value = "street_number", required = false) String street_number
             ,@RequestPart(value = "zip_code", required = false) String zip_code
-            ) throws IOException {
+    ) throws IOException {
 
         UserDTO userDTO = new UserDTO(images,firstname,lastname,email,password,roletype,city,state,street_number,zip_code);
         return uaaService.signUpImg(userDTO);
@@ -134,25 +144,24 @@ public class UaaController {
     @GetMapping("/reset_pwd")
     public String validateToken(@Param(value = "token") String token, HttpServletResponse response){
 
-            if(uaaService.getUserFromResetToken(token)== null)
-                throw new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,"token not found",new TokenDoesnotExsist("ex"));
-            return "verified";
-        }
-
-     @PostMapping("/uaa/changePassword")
-     @CrossOrigin
-     public User changePassword(@RequestBody LoginRequest request){
-        return uaaService.changePassword(request.getEmail(),request.getPassword());
-     }
-
-        @PostMapping("/uaa/logout")
-    public String logout(HttpServletRequest request){
-            uaaService.logout(request.getHeader("Authorization"));
-            return null;
-        }
+        if(uaaService.getUserFromResetToken(token)== null)
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,"token not found",new TokenDoesnotExsist("ex"));
+        return "verified";
     }
 
+    @PostMapping("/uaa/changePassword")
+    @CrossOrigin
+    public User changePassword(@RequestBody LoginRequest request){
+        return uaaService.changePassword(request.getEmail(),request.getPassword());
+    }
+
+    @PostMapping("/uaa/logout")
+    public String logout(HttpServletRequest request){
+        uaaService.logout(request.getHeader("Authorization"));
+        return null;
+    }
+}
 
 
 

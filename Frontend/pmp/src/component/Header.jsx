@@ -25,7 +25,8 @@ export default function(){
             {/* {token && role == 'owner' ? <Link to={"/property-detail"}>  <Button variant="text">Property Details</Button> </Link>:null} */}
             {token && role == 'owner' ?  <Link to={"/create-property"} >  <Button variant="text">Create Property</Button> </Link>:null}
             {token ? <AccountMenu /> : <Link to={"/login"} >  <Button variant="text">Login</Button> </Link>}
-
+                <Link to={"/admincharts"} >  <Button variant="text">Charts</Button> </Link>
+                <Link to={"/AdminPage"}> <Button variant="text">Admin Page</Button> </Link>
             </div>
         
             
