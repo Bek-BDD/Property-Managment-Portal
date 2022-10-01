@@ -15,6 +15,7 @@ import {yellow} from "@mui/material/colors";
 import axios from "axios";
 import {instance} from "../../index";
 import {useEffect, useState} from "react";
+import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
     '& .MuiDialogContent-root': {
@@ -89,16 +90,9 @@ export default function (props) {
     return (
         <div>
 
-            <Fab
-                sx={{
-                    width: 40,
-                    height: 40,
-                    bgcolor: yellow[700],
-                    '&:hover': {bgcolor: yellow[900]},
-                }}
-                color="secondary" aria-label="edit">
-                <EditIcon onClick={handleClickOpen}/>
-            </Fab>
+            
+                <BorderColorRoundedIcon style={{coursor:"pointer"}}  onClick={handleClickOpen}/>
+           
             <BootstrapDialog
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"

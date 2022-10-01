@@ -31,6 +31,7 @@ import ProfilePasswordChange from "./component/ProfilePasswordChange";
 import ProflieChangePassword from "./component/ProflieChangePassword";
 import ApplicationList from "./component/ApplicationList";
 import FavouriteList from "./component/FavouriteList";
+
 function App() {
   const[isLoggedIn,setIsLoggedIn] = useState(false)
 useEffect(()=>{
@@ -58,7 +59,8 @@ useEffect(()=>{
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/changePassword/reset_pwd" element={<ChangePassword />} />
         <Route path="/admincharts" element={<AdminCharts />} />
-        <Route path="/AdminPage" element={<AdminPage/>}/>
+        <Route path="/AdminPage" element={<AdminPage />} />
+        <Route path="/favourites" element={<FavouriteList />} />
         <Route
           path="/customerapplications"
           element={<CustomerApplications />}

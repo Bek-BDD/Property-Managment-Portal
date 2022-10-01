@@ -3,29 +3,6 @@ insert into role (role) values ('owner');
 insert into role(role) values ('customer');
 insert into role (role) values ('admin');
 
--- password 123 for all
-insert into users(deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
-    (false,'hiwot@gmail.com','hiwot','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1664134331536_jpg','Reta','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true);
-
-insert into users(deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
-    (false,'zedshif123@icloud.com','zedagem','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975646074_jpg','demelash','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true);
-
-
-insert into users(deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
-    (false,'bereket@gmail.com','bereket','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975645768_jpeg','daniel','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true);
-
-
-insert into users(deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
-    (false,'zola@gmail.com','zelalem','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975644694_jpeg','belayneh','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true);
-
-insert into users(deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
-    (false,'dawit@gmail.com','dawit','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1664134386359_jpg','dave','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true);
-
-insert into users(deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active) values
-    (false,'abdu@gmail.com','abdu','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975645545_jpeg','Edao','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true);
-
-
-
 insert into address ( state, city, zip, street) values ( 'Iowa', 'Waterloo', '50706', '1 Buhler Plaza');
 insert into address ( state, city, zip, street) values ( 'California', 'Stockton', '95219', '766 Talisman Trail');
 insert into address ( state, city, zip, street) values ( 'Ohio', 'Cincinnati', '45243', '7650 Pennsylvania Park');
@@ -37,30 +14,26 @@ insert into address ( state, city, zip, street) values ( 'Tennessee', 'Nashville
 insert into address ( state, city, zip, street) values ( 'Florida', 'Jacksonville', '32244', '7550 Oriole Terrace');
 insert into address ( state, city, zip, street) values ( 'Delaware', 'Wilmington', '19886', '371 Hallows Alley');
 
-insert into role (id,role) values (1,'owner');
-insert into role(id,role) values (2,'customer');
-insert into role (id,role) values (3,'admin');
-
 -- password 123 for all
-insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
-    (200,false,'hiwot@gmail.com','hiwot','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1664134331536_jpg','Reta','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true, 100);
+insert into users(deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
+    (false,'hiwot@gmail.com','hiwot','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1664134331536_jpg','Reta','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true, 10);
 
-insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
-    (100,false,'zed@gmail.com','zedagem','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975646074_jpg','demelash','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true, 200);
-
-
-insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
-    (101,false,'bereket@gmail.com','bereket','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975645768_jpeg','daniel','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true,300);
+insert into users(deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
+    (false,'zed@gmail.com','zedagem','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975646074_jpg','demelash','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true, 2);
 
 
-insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
-    (102,false,'zola@gmail.com','zelalem','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975644694_jpeg','belayneh','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true, 400);
+insert into users(deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
+    (false,'bereket@gmail.com','bereket','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975645768_jpeg','daniel','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true,3);
 
-insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
-    (103,false,'dawit@gmail.com','dawit','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1664134386359_jpg','dave','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true, 500);
 
-insert into users(id,deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
-    (104,false,'abdu@gmail.com','abdu','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975645545_jpeg','Edao','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true, 600);
+insert into users(deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
+    (false,'zola@gmail.com','zelalem','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975644694_jpeg','belayneh','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true, 4);
+
+insert into users(deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
+    (false,'dawit@gmail.com','dawit','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1664134386359_jpg','dave','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true, 5);
+
+insert into users(deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
+    (false,'abedi715@gmail.com','abdu','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975645545_jpeg','Edao','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true, 6);
 
 
 
@@ -77,24 +50,52 @@ insert into property (date_posted, area, description, name, number_of_room, pric
 insert into property (date_posted, area, description, name, number_of_room, price,status,type,address_id,owner_id)  values ('2021-05-22', 84, 'Maecenas leo odio, condimentum  luctus nec, molestie sed,','Watsica-Konopelski', 2, 101,true,'Rent',2,3);
 insert into property (date_posted, area, description, name, number_of_room, price,status,type,address_id,owner_id)  values ( '2021-07-10',77, ' sed, tristique in, tempus sit amet, sem.Fusce consequat. Nulla nisl. Nunc nisl.', 'Renner Inc', 1, 66,true,'Rent',1,5);
 
+insert into image ( url,property_id) values ( 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',1);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1073&q=80',2);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',3);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',4);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1576941089067-2de3c901e126?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1278&q=80',5);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',6);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1165&q=80',7);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1571939228382-b2f2b585ce15?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',8);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1625602812206-5ec545ca1231?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',9);insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1592595896551-12b371d546d5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',10);
+
+insert into image ( url,property_id) values ( 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',1);
+insert into image ( url,property_id) values ( 'https://unsplash.com/s/photos/interior?orientation=landscape',1);
+insert into image ( url,property_id) values ( 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',1);
+insert into image ( url,property_id) values ( 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1700&q=80',2);
+insert into image ( url,property_id) values ( 'https://images.unsplash.com/photo-1537726235470-8504e3beef77?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',2);
+insert into image ( url,property_id) values ( 'https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80',2);
+insert into image ( url,property_id) values ( 'https://images.unsplash.com/photo-1615873968403-89e068629265?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80',3);
+insert into image ( url,property_id) values ( 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',3);
+insert into image ( url,property_id) values ( 'https://images.unsplash.com/photo-1605774337664-7a846e9cdf17?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',3);
+insert into image ( url,property_id) values ( 'https://images.unsplash.com/photo-1606744888344-493238951221?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',4);
+insert into image ( url,property_id) values ( 'https://images.unsplash.com/photo-1618221381711-42ca8ab6e908?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80',4);
+insert into image ( url,property_id) values ( 'https://images.unsplash.com/photo-1558882224-dda166733046?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80',4);
+insert into image ( url,property_id) values ( 'https://images.unsplash.com/photo-1592595896551-12b371d546d5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',5);
+insert into image ( url,property_id) values ( 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',5);
+insert into image ( url,property_id) values ( 'https://images.unsplash.com/photo-1625585598750-3535fe40efb3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',5);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1618221469555-7f3ad97540d6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80',10);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1562438668-bcf0ca6578f0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1760&q=80',10);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1600585154166-d8897c8f930d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',10);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1617104424032-b9bd6972d0e4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80',9);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1449247709967-d4461a6a6103?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80',9);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1582037928769-181f2644ecb7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',9);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1618221999490-9418f64786aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80',8);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1540574163026-643ea20ade25?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',8);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1600585154084-4e5fe7c39198?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',8);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1615876063860-d971f6dca5dc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80',7);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1592247350271-c5efb34dd967?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',7);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1618221710640-c0eaaa2adb49?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80',7);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1153&q=80',6);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1572048572872-2394404cf1f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80',6);
+insert into image (url,property_id) values ( 'https://images.unsplash.com/photo-1617103996702-96ff29b1c467?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80',6);
 
 
-insert into image ( url,property_id) values ( 'http://dummyimage.com/233x100.png/cc0000/ffffff',1);
-insert into image ( url,property_id) values ( 'http://dummyimage.com/178x100.png/dddddd/000000',2);
-insert into image ( url,property_id) values ( 'http://dummyimage.com/244x100.png/cc0000/ffffff',3);
-insert into image ( url,property_id) values ( 'http://dummyimage.com/142x100.png/cc0000/ffffff',4);
-insert into image ( url,property_id) values ( 'http://dummyimage.com/249x100.png/5fa2dd/ffffff',5);
-insert into image ( url,property_id) values ( 'http://dummyimage.com/123x100.png/ff4444/ffffff',6);
-insert into image ( url,property_id) values ( 'http://dummyimage.com/112x100.png/dddddd/000000',7);
-insert into image ( url,property_id) values ( 'http://dummyimage.com/217x100.png/dddddd/000000',8);
-insert into image ( url,property_id) values ( 'http://dummyimage.com/115x100.png/dddddd/000000',9);
-insert into image ( url,property_id) values ( 'http://dummyimage.com/237x100.png/cc0000/ffffff',1);
-
-
-insert into users_role(user_id,role_id) values (1,1);
+insert into users_role(user_id,role_id) values (1,3);
 insert into users_role(user_id,role_id) values (2,1);
 insert into users_role(user_id,role_id) values (3,1);
 insert into users_role(user_id,role_id) values (4,2);
 insert into users_role(user_id,role_id) values (5,2);
-insert into users_role(user_id,role_id) values (6,3);
-insert into users_role(user_id,role_id) values (1,3);
+insert into users_role(user_id,role_id) values (6,1);
+

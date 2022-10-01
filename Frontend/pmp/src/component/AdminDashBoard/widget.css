@@ -99,5 +99,12 @@
       border-radius: 5px;
       align-self: flex-end;
     }
+    .dark{
+      background-color: rgba(6, 5, 21, 0.892);
+      color:white
+    }
+    .dark-border{
+      border-radius: 1.5px solid rgba(6, 5, 21, 0.892);
+    }
 
 

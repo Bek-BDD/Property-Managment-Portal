@@ -17,11 +17,11 @@ spring:
     test-connection: false
   datasource:
     password: Incorrect@7
-    url: jdbc:postgresql://localhost:9090/test_pmp
+    url: jdbc:postgresql://localhost:9090/pmpDB
     username: postgres
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
 
     properties:
       hibernate:

@@ -218,7 +218,7 @@ const PropertyDetails=(props)=>{
                             <Button
                                 variant="contained"
                                 color="primary"
-                                onClick={heart}
+                                onClick={()=>{heart(property.id)}}
                             >
                                 <FavoriteBorderOutlinedIcon />
                                 Add to Favorites

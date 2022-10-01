@@ -89,9 +89,9 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public List<Property> getPropertiesByOwnerId() {
+        Integer id ;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        ;
-        Integer id = 2;
+
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUserName = authentication.getName();
             User user = userBaseRepository.findByEmail(currentUserName);

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {DataGrid}  from '@mui/x-data-grid';
-import {BottomNavigation, BottomNavigationAction, Fab} from "@mui/material";
+import {BottomNavigation, BottomNavigationAction, Box, Fab} from "@mui/material";
 import PersonAddIcon from '@mui/icons-material/PersonAddAltOutlined';
 import {useEffect, useState} from "react";
 import {instance} from '../../index';
@@ -12,6 +12,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import Signup from "../Signup";
 import {Navigate} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Widgets from "./Widgets";
 
 
 
@@ -68,16 +71,9 @@ export default function DataTable(){
         },
 
         { field: 'Delete', headerName: 'Delete',width: 90 , type:'button' ,
-            renderCell:(theRow)=>(<Fab
-                    sx={{
-                        width: 40,
-                        height: 40,
-                        bgcolor: red[700],
-                        '&:hover': { bgcolor: red[900]},
-                    }}
-                    color="secondary" aria-label="delete">
-                    <EditIcon type={'loading'} onClick={handleDeletion}/>
-                </Fab>
+            renderCell:(theRow)=>(
+                    <DeleteIcon type={'loading'} onClick={handleDeletion}/>
+                
             ),
 
         },
@@ -135,8 +131,7 @@ export default function DataTable(){
 
     return (
 
-        <div style={{ height: 600, width: '100%' }}>
-
+        <Box className='dark' style={{ height: "600px", width: '100%' }}>           
 
 
             <BottomNavigation
@@ -159,7 +154,7 @@ export default function DataTable(){
 
 
 
-            <DataGrid
+            <DataGrid style={{color:"white", border:"none"}}
 
 
 
@@ -203,7 +198,7 @@ export default function DataTable(){
             />
 
 
-        </div>
+        </Box>
     );
 }
 ;

@@ -15,6 +15,7 @@ import axios from "axios";
 import "hammerjs";
 import Widgets from "./Widgets";
 import BarChart from "./BarChart";
+import AdminPage from './AdminPage'
 
 
 ChartJS.register(
@@ -173,7 +174,7 @@ export default function AdminCharts(){
     };
 
     return(
-        <div>
+        <div className='dark-border' >
             <Widgets data = {datas }/>
             <div style={{marginTop:30}} sx={{minWidth: 560}} className="pie">
                 <Doughnut data={data} options={{
@@ -195,7 +196,7 @@ export default function AdminCharts(){
 
             </div>
 
-
+            <AdminPage />
 
         </div>
 
