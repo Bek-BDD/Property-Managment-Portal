@@ -39,6 +39,11 @@ public class ApplicationController {
         return findApplicationByDate(date);
     }
 
+    @GetMapping("/customers/{id}")
+    public List<Application> customerApplication(@PathVariable int id){
+        return applicationService.customerApplications(id);
+    }
+
     //////////////////
     /////api fetch by user id
     //////////////////

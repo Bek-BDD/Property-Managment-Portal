@@ -17,10 +17,11 @@ import {useState} from 'react'
 
 function ApplicationDetail(props) {
 
-  
+    console.log("this",props)
     const [open, setOpen] = useState(false);
   
     return (
+      
       <React.Fragment>
         <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
           <TableCell>
@@ -33,47 +34,45 @@ function ApplicationDetail(props) {
             </IconButton>
           </TableCell>
           <TableCell component="th" scope="row">
-            {props.row.name}
+            {props.row.property.name}
           </TableCell>
-          <TableCell align="right">{props.row.calories}</TableCell>
-          <TableCell align="right">{props.row.fat}</TableCell>
-          <TableCell align="right">{props.row.carbs}</TableCell>
-          <TableCell align="right">{props.row.protein}</TableCell>
+          <TableCell align="right">{props.row.property.address.city}</TableCell>
+          <TableCell align="right">{props.row.property.numberOfRoom}</TableCell>
+          <TableCell align="right">{props.row.property.type}</TableCell>
+          <TableCell align="right">{'Pending'}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box sx={{ margin: 1 }}>
                 <Typography variant="h6" gutterBottom component="div">
-                  History
+                  Property Detail
                 </Typography>
                 <Table size="small" aria-label="purchases">
                   <TableHead>
                     <TableRow>
                       <TableCell>Submission Date</TableCell>
-                      <TableCell>Owner Name</TableCell>
+                      <TableCell >Owner Name</TableCell>
                       <TableCell align="right">price ($)</TableCell>
                       <TableCell align="right">Action</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {props.row.history.map((historyRow) => (
-                      <TableRow key={historyRow.date}>
+                      <TableRow key={props.row.property.id}>
                         <TableCell >
                         <img
                                    style={{width: '120px', height: '30%'}}
-                                   src='https://engineering.fb.com/wp-content/uploads/2016/04/yearinreview.jpg'
+                                   src={props.row.property.imageUrls[0].url}
                             />
                         </TableCell>
                         <TableCell component="th" scope="row">
-                          {historyRow.date}
+                          {props.date}
                         </TableCell>
-                        <TableCell>{historyRow.customerId}</TableCell>
+                        <TableCell align="right">{props.row.property.price}</TableCell>
                         <TableCell align="right">
                         <DeleteIcon />
                         </TableCell>
                       </TableRow>
-                    ))}
                   </TableBody>
                 </Table>
               </Box>

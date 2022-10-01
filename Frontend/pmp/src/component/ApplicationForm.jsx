@@ -2,16 +2,14 @@ import CardActions from '@mui/material/CardActions';
 import {Button,Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { useState } from "react";
-import { instance } from '../index';
 import Box from '@mui/material/Box';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { SettingsInputCompositeSharp } from '@mui/icons-material';
+
 
 const ApplicationForm =(props)=>{
     const  {show, hide,fullWidth,propertyid}=props;
