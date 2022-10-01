@@ -10,7 +10,6 @@ import java.util.List;
 @Repository
 public interface ApplicationRepo extends JpaRepository<Application, Integer> {
         List<Application> findAllByPropertyUserId(int id);
-
         List<Application> findAllByUserId(int id);
     public List<Application> findApplicationByProperty_Address_City(String city);
     public List<Application> findApplicationByProperty_Name(String name);

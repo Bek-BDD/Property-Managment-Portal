@@ -35,7 +35,7 @@ export default function(){
         email    : data.get('email'),
         password : ""
     }
-      instance.post("/uaa/resetpassword",loginRequestObj)
+      instance().post("/uaa/resetpassword",loginRequestObj)
             .then((response)=>{
                 setSentEmail(true);
             });

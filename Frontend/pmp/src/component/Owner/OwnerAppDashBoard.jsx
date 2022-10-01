@@ -10,7 +10,7 @@ import OwnerApplication from './OwnerApplications';
 
 function OwnerAppDashBoard() {
 
-    const[selectedProperty,setSelectedProperty] = useState([])
+    const[selectedProperty,setSelectedProperty] = useState('')
     const[data,setData]= useState([])
     const[input,setInput] = useState({
       location : null,
@@ -18,13 +18,13 @@ function OwnerAppDashBoard() {
 
 })
     useEffect(()=>{
-        
-            instance.get("/ownersx/15")
+            const ownerId = JSON.parse(localStorage.getItem('loggedUser')).id
+            instance().get(`/ownersx/${ownerId}`)
             .then((response)=>{
                 setData(response.data);
     })},[])
     function x(para){
-        return para.property.name === selectedProperty.name
+        return para.property.type === selectedProperty
     }
     useEffect(()=>{
         setData(data.filter(x))
@@ -50,12 +50,13 @@ function OwnerAppDashBoard() {
             <TableRow>
                   <FormGroup>
                   <div  style={{display : 'flex' }}>
-                {data.map((da) =>{
-                     return(
-                    <FormControlLabel id={da.property.id} control={<Checkbox  onChange={()=>setSelectedProperty(da.property)}/>} label={da.property.name} />
-                     )
+                {/* {data.map((da) =>{
+                     return( */}
+                    <FormControlLabel id={'Sell'} control={<Checkbox  onChange={()=>setSelectedProperty('Sell')}/>} label={'Sell'} />
+                    <FormControlLabel id={'Rent'} control={<Checkbox  onChange={()=>setSelectedProperty('Rent')}/>} label={'Rent'} />
+                     {/* )
 
-                })}
+                })} */}
           </div>
                 </FormGroup>
             </TableRow>

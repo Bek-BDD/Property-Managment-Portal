@@ -71,3 +71,8 @@ insert into users_role(user_id,role_id) values (102,2);
 insert into users_role(user_id,role_id) values (103,2);
 insert into users_role(user_id,role_id) values (104,3);
 insert into users_role(user_id,role_id) values (104,3);
+
+
+insert into application(date,user_id,property_id) values ('2021-10-10',102,100);
+insert into application(date,user_id,property_id) values ('2021-10-10',102,200);
+insert into application(date,user_id,property_id) values ('2021-10-10',102,300);

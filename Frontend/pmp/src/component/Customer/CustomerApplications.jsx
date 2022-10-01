@@ -23,7 +23,7 @@ const [loggedUser,setLoggedUser] = useState([])
 const [appData,setAppData] = useState([])
 useEffect(()=>{
   const id = JSON.parse(localStorage.getItem('loggedUser')).id
-  instance.get(`/application/customers/${id}`)
+  instance().get(`/application/customers/${id}`)
         .then((response)=> {
             console.log(response.data)
             setAppData(response.data)

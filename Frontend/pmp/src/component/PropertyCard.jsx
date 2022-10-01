@@ -27,7 +27,7 @@ export default function PropertyCard() {
 
 
     const handleClickOpen = (id) => {  
-    instance.get(`/properties/${id}`)
+    instance().get(`/properties/${id}`)
         .then(response => {
         setProperty(response.data)      
         })
@@ -57,7 +57,7 @@ export default function PropertyCard() {
     const [PropertyData, setPropertyData] = useState(initialState);
 
     const getProperty = async () => {
-        const result = await instance.get('/properties');
+        const result = await instance().get('/properties');
         setPropertyData(result.data);
     }
 

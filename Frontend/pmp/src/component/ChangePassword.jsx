@@ -25,7 +25,7 @@ const [ verify,setVerify]= useState(false);
     useEffect(()=>{
         const queryParams = new URLSearchParams(window.location.search)
         const token = queryParams.get("token")
-        instance.get(`reset_pwd?token=${token}`)
+        instance().get(`reset_pwd?token=${token}`)
              .then((response)=>{
                 setVerify(true);
              })
@@ -45,7 +45,7 @@ const [ verify,setVerify]= useState(false);
         email : localStorage.getItem('resetPwd')
     }
 
-      instance.post("/uaa/changePassword",newPass)
+      instance().post("/uaa/changePassword",newPass)
             .then((response)=>{
                 localStorage.setItem("loggedUser",JSON.stringify(response.data))
                  navigate("/customer")

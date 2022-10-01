@@ -7,7 +7,7 @@ export default function () {
   let userId = JSON.parse(localStorage.getItem("loggedUser"));
   userId = userId?.id;
   useEffect(() => {
-    instance
+    instance()
       .get("/favorites/" + userId)
       .then((response) => setPropertyState(response.data))
       .catch((err) => console.log(err));

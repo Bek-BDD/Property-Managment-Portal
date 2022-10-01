@@ -29,7 +29,7 @@ export default function () {
     if (validateEmail(data.get("email"))) {
         setSubmited(true) 
         
-        instance.post('/uaa/resetpassword',{
+        instance().post('/uaa/resetpassword',{
             email:data.get("email")
         })
         .then(response => console.log(response.data))
