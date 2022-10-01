@@ -13,6 +13,7 @@ public interface ApplicationRepo extends JpaRepository<Application, Integer> {
     public List<Application> findApplicationByProperty_Address_City(String city);
     public List<Application> findApplicationByProperty_Name(String name);
     public List<Application> findByDate(LocalDate date);
+    List<Application> findAllByUserId(int id);
 
 
 }

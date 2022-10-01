@@ -99,6 +99,9 @@ public class ApplicationServiceImpl implements ApplicationService {
        return applicationRepo.findByDate(date);
     }
 
-
+    @Override
+    public List<Application> customerApplications(int id){
+        return applicationRepo.findAllByUserId(id);
+    }
 
 }

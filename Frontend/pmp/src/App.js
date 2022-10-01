@@ -50,6 +50,8 @@ function App() {
         <Route path="/customer" element={<CustomerDashBoard />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/changePassword/reset_pwd" element={<ChangePassword />} />
+        <Route path="/customerdashboard"         element={<CustomerDashBoard/>} />
+        <Route path="/ownerapplications" element={<OwnerAppDashBoard/>}/>
         <Route path="ownerapplications" element={<OwnerAppDashBoard/>}/>
         <Route
           path="/customerapplications"

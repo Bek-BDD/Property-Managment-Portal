@@ -6,51 +6,42 @@ import { useState,useEffect } from 'react';
 import {FormGroup,FormControlLabel,Checkbox} from '@mui/material'
 import axios from 'axios'
 import { Filter } from '@mui/icons-material';
-function createData(name, calories, fat, carbs, protein) {
-    return {
-      name,
-      calories,
-      fat,
-      carbs,
-      protein,
-    };
-  }
-  
-  const rows = [
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Donut', 452, 25.0, 51, 4.9),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-    createData('Honeycomb', 408, 3.2, 87, 6.5),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Jelly Bean', 375, 0.0, 94, 0.0),
-    createData('KitKat', 518, 26.0, 65, 7.0),
-    createData('Lollipop', 392, 0.2, 98, 0.0),
-    createData('Marshmallow', 318, 0, 81, 2.0),
-    createData('Nougat', 360, 19.0, 9, 37.0),
-    createData('Oreo', 437, 18.0, 63, 4.0),
-  ];
+import OwnerApplication from './OwnerApplications';
+
 function OwnerAppDashBoard() {
-    const[selectedProperty,setSelectedProperty] = useState([])
+
+    const[selectedProperty,setSelectedProperty] = useState('')
     const[data,setData]= useState([])
+    const[input,setInput] = useState({
+      location : null,
+      submissionDate : null
+
+})
     useEffect(()=>{
-        
-            instance.get("/ownersx/15")
+            const ownerId = JSON.parse(localStorage.getItem('loggedUser')).id
+            instance.get(`/ownersx/${ownerId}`)
             .then((response)=>{
                 setData(response.data);
     })},[])
     function x(para){
-        console.log('this is para',para)
-        console.log('this is selected',selectedProperty)
-        console.log( para.property.name === selectedProperty.name)
-        return para.property.name === selectedProperty.name
+        return para.property.type === selectedProperty
     }
     useEffect(()=>{
         setData(data.filter(x))
         console.log(data.property)
     },[selectedProperty])
 
+    const changeInput = (e) => {
+        setInput({...input,[e.target.name] : e.target.value})
+    }
+    const filterData =()=>{
+          if(input.location != null){
+            setData(data.filter((property)=> property.property.address.state === input.location))
+          }else if(input.submissionDate != null){
+            setData(data.filter((property)=> property.date == input.submissionDate))
+          }
+    }
+    
   return (
     <div style={{display : 'flex', justifyContent:'space-between'}}>
         <div className='sideBar'>
@@ -59,32 +50,31 @@ function OwnerAppDashBoard() {
             <TableRow>
                   <FormGroup>
                   <div  style={{display : 'flex' }}>
-                {data.map((da) =>{
-                    
-                     return(
-                    
-                    <FormControlLabel id={da.property.id} control={<Checkbox  onChange={()=>setSelectedProperty(da.property)}/>} label={da.property.name} />
-                    
-                     )
+                {/* {data.map((da) =>{
+                     return( */}
+                    <FormControlLabel id={'Sell'} control={<Checkbox  onChange={()=>setSelectedProperty('Sell')}/>} label={'Sell'} />
+                    <FormControlLabel id={'Rent'} control={<Checkbox  onChange={()=>setSelectedProperty('Rent')}/>} label={'Rent'} />
+                     {/* )
 
-                })}
-                </div>
+                })} */}
+          </div>
                 </FormGroup>
             </TableRow>
             <TableRow>
                 <TableCell>
-                <TextField id="standard-basic" label="Location" variant="standard" />    
+                <TextField id="standard-basic" label="Location" variant="standard" name="location" onChange={changeInput} />    
             </TableCell>
             </TableRow>
             <TableRow>
                 <TableCell>
-                <TextField id="standard-basic" label="Property" variant="standard" />    
+                <TextField id="standard-basic" label="Submission Date" variant="standard" name="submissionDate" onChange={changeInput}/>    
                 </TableCell>
             </TableRow>
+            <button style={{float : 'right'}} onClick={filterData}>Filter</button>
            </Table>
         </div>
          <div style={{width : '85%'}}>
-        <EnhancedTable rows={data}/>
+        <OwnerApplication rows={data}/>
         </div>
     </div>
   )

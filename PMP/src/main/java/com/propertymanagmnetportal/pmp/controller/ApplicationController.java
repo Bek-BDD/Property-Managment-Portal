@@ -10,6 +10,7 @@ import java.util.List;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping("/application")
 public class ApplicationController {
     private ApplicationService applicationService;
@@ -35,6 +36,11 @@ public class ApplicationController {
     @GetMapping("/filter/date/")
     public List<Application> findApplicationByDate(@RequestParam LocalDate date){
         return findApplicationByDate(date);
+    }
+
+    @GetMapping("/customers/{id}")
+    public List<Application> customerApplication(@PathVariable int id){
+        return applicationService.customerApplications(id);
     }
 
     //////////////////
