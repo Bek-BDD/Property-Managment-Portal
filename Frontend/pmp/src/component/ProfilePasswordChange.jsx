@@ -34,7 +34,7 @@ const [ verify,setVerify]= useState(false);
         email : JSON.parse(localStorage.getItem('loggedUser')).username
     }
 
-      instance.post("uaa/changePassword",newPass)
+      instance().post("uaa/changePassword",newPass)
             .then((response)=>{
                 setVerify()
              });

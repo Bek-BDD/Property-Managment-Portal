@@ -93,6 +93,10 @@ public class ApplicationServiceImpl implements ApplicationService {
         return applicationRepo.findAll();
     }
 
+    @Override
+    public List<Application> customerApplications(int id){
+        return applicationRepo.findAllByUserId(id);
+    }
     public List<Application> findApplicationByProperty_Address_City(String city){
         return applicationRepo.findApplicationByProperty_Address_City(city);
     }

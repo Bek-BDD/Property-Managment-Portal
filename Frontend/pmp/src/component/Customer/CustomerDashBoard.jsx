@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect,useState } from 'react';
+import axios from 'axios';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -10,10 +11,18 @@ import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import HomeIcon from '@mui/icons-material/Home';
+import IconButton from '@mui/material/IconButton';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import CustomerHeader from './CustomerHeader';
+import CollapsibleTable from './CustomerApplications';
 import CustomerApplications from './CustomerApplications';
 import Divider from '@mui/material/Divider';
+import MuiImageSlider from 'mui-image-slider';
+import FotterCards from './FotterCards';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import DescriptionIcon from '@mui/icons-material/Description';
+import PhoneIcon from '@mui/icons-material/Phone';
+import EmailIcon from '@mui/icons-material/Email';
 function CustomerDashBoard() {
 const [user,setUser] = useState();
 const [isLoggedIn ,setIsLoggedIn] = useState(false);

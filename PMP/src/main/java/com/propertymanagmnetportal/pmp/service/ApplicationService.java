@@ -9,6 +9,7 @@ import java.util.List;
 public interface ApplicationService {
     public Boolean saveApplication(int userid, int propertyid,ApplicationDto application) throws Exception;
     public List<Application> findAll();
+    List<Application> customerApplications(int id);
     public List<Application> findApplicationByProperty_Address_City(String city);
     public List<Application> findApplicationByProperty_Name(String name);
     public List<Application> findApplicationByDate(LocalDate date);

@@ -15,7 +15,8 @@ import ImageInformation from "./ImageInformation";
 import Alert from '@mui/material/Alert';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { instance } from "../../index";
+import axios from "axios";
+import {instance} from '../../index'
 const theme = createTheme();
 
 export default function PropertyStepper(props) {

@@ -18,14 +18,14 @@ export default function () {
   
    useEffect(()=>{
     if(JSON.parse(localStorage.getItem("loggedUser"))?.role[0].role == "customer"){
-      instance.get('/properties')
+      instance().get('/properties')
       .then(r => setPropertyState(r.data)).catch(err=>console.log(err))
-      instance.get('/favorites/'+loggedUser.id)
+      instance().get('/favorites/'+loggedUser.id)
       .then(r=> setUserFavourite(r.data))
       .catch(err=>console.log(err))
     }
     else{
-      instance.get('/properties')
+      instance().get('/properties')
       .then(response => {
         setPropertyState(response.data)
         setUserFavourite(null)
@@ -35,7 +35,7 @@ export default function () {
   },[])
 
   function search(e){
-    instance.post('/properties/search?keyword='+searchState)
+    instance().post('/properties/search?keyword='+searchState)
     .then(response=> setPropertyState(response.data))
     .catch(err => console.log(err))
    

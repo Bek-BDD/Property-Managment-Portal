@@ -7,7 +7,7 @@ export default function(){
     const navigator = useNavigate();
     const user = JSON.parse(localStorage.getItem('loggedUser'));
     const token = localStorage.getItem('tokens');
-    const role = user ? user.role[0].role:null;
+    const role = user ? user.role[0]?.role:null;
 
     return(
         <div className="container">
@@ -19,8 +19,8 @@ export default function(){
 
             <div>
             {token && role == 'customer' ?  <Link to={"/customerdashboard"}><Button variant="text">View Applications</Button></Link>:null}
-            {token && role == 'owner' ?  <Link to={"/ownerapplications"}><Button variant="text">Manage Application</Button> </Link>:null}
             {token && role == 'customer' ?  <Link to={"/favourites"}><Button variant="text">Favorite</Button></Link>:null}
+            {token && role == 'owner' ?  <Link to={"/ownerapplications"}><Button variant="text">Manage Application</Button> </Link>:null}
             {token && role == 'owner' ? <Link to={"/properties"}> <Button variant="text">Manage property</Button> </Link>:null}
             {token && role == 'admin' ? <Link to={"/dashboard"}> <Button variant="text">Dashboard</Button> </Link>:null}
                         {/* {token && role == 'owner' ? <Link to={"/property-detail"}>  <Button variant="text">Property Details</Button> </Link>:null} */}

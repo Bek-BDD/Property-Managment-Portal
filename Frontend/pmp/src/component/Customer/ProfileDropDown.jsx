@@ -95,7 +95,10 @@ export default function AccountMenu() {
       >
         
         <MenuItem>
-          <Avatar /> <span>{JSON.parse(localStorage.getItem('loggedUser')).firstname}</span>
+        {(JSON.parse(localStorage.getItem('loggedUser')).role[0].role == 'customer') ? 
+          <Link to='/customerdashboard'><Avatar /> <span>{JSON.parse(localStorage.getItem('loggedUser')).firstname}</span></Link> :
+          <><Avatar /> <span>{JSON.parse(localStorage.getItem('loggedUser')).firstname}</span> </>
+        }
         </MenuItem>
         <Divider />
         <MenuItem onClick={editAccount}>

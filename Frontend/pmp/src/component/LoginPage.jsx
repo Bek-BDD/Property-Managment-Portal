@@ -15,7 +15,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { userActions } from './Redux/UserSlice';
 import { instance } from '../index';
 import {setLoggedIn} from '../Redux/loggedUserSlice'
-
+import axios from 'axios'
 
 const theme = createTheme();
 
@@ -43,18 +43,15 @@ useEffect(()=>{
       "email" : data.get('email'),
       "password" : data.get('password')
     }
-      instance.post("/uaa/login",loginRequestObj)
+      instance().post("/uaa/login",loginRequestObj)
             .then((response)=>{
-              
                   localStorage.setItem("tokens",JSON.stringify(response.data))
-                  instance.get(`/users/${data.get('email')}`)
+                  instance().get(`/users/${data.get('email')}`)
                   .then((response)=> {
                       localStorage.setItem("loggedUser",JSON.stringify(response.data))
-                      // window.location.reload(false);
                       dispatch(setLoggedIn(true))
                       navigate("/")
                       })
-               
              })
             .catch((error) =>{
                 setLoginError(true);
@@ -82,7 +79,7 @@ useEffect(()=>{
           <Typography component="h1" variant="h5">
             
             Sign in
-           
+
           </Typography>
           { loginError && <p style={{color : 'red'}}>Username or Password incorrect !</p>}
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -115,7 +112,6 @@ useEffect(()=>{
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              
             >
               Sign In
             </Button>

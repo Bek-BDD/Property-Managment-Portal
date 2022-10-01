@@ -141,7 +141,7 @@ public class UaaController {
         UserDTO userDTO = new UserDTO(images,firstname,lastname,email,password,roletype,city,state,street_number,zip_code);
         return uaaService.signUpImg(userDTO);
     }
-    @GetMapping("/reset_pwd")
+    @GetMapping("/uaa/reset_pwd")
     public String validateToken(@Param(value = "token") String token, HttpServletResponse response){
 
         if(uaaService.getUserFromResetToken(token)== null)

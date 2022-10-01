@@ -26,6 +26,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String header = request.getHeader("Authorization");
+        System.out.println(header);
         String username = "";
         String token = "";
         if( header != null){
@@ -38,7 +39,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
-
         } else{
             throw new AuthorizationHeaderNotPresent("Can not find authorization header!");
         }
@@ -46,6 +46,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     }
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return new AntPathMatcher().match("/**", request.getServletPath());
+        return new AntPathMatcher()
+                .match("/uaa/**", request.getServletPath())
+                ||
+                new AntPathMatcher()
+                        .match("/properties/**", request.getServletPath());
     }
 }

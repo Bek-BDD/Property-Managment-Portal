@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/application")
+@CrossOrigin
 public class ApplicationController {
     private ApplicationService applicationService;
     public ApplicationController(ApplicationService applicationService){
@@ -43,7 +44,6 @@ public class ApplicationController {
     public List<Application> customerApplication(@PathVariable int id){
         return applicationService.customerApplications(id);
     }
-
     //////////////////
     /////api fetch by user id
     //////////////////

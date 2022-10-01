@@ -2,6 +2,7 @@ package com.propertymanagmnetportal.pmp.controller;
 
 import com.propertymanagmnetportal.pmp.entity.Application;
 import com.propertymanagmnetportal.pmp.service.OwnerService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/ownersx")
 @CrossOrigin
+@PreAuthorize("hasAuthority('owner')")
 public class OwnerController {
 
     private OwnerService ownerService;

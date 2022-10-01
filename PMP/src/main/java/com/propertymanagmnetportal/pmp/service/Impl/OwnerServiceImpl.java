@@ -11,10 +11,13 @@ import java.util.List;
 public class OwnerServiceImpl implements OwnerService {
     private ApplicationRepo applicationRepo;
     public  OwnerServiceImpl(ApplicationRepo applicationRepo){
+
         this.applicationRepo = applicationRepo;
     }
     @Override
     public List<Application> applications(int id) {
         return applicationRepo.findAllByPropertyUserId(id);
     }
+
+
 }

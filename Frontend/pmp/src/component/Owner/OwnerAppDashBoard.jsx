@@ -19,7 +19,7 @@ function OwnerAppDashBoard() {
 })
     useEffect(()=>{
             const ownerId = JSON.parse(localStorage.getItem('loggedUser')).id
-            instance.get(`/ownersx/${ownerId}`)
+            instance().get(`/ownersx/${ownerId}`)
             .then((response)=>{
                 setData(response.data);
     })},[])

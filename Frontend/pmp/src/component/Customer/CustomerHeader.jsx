@@ -15,7 +15,7 @@ function CustomerHeader() {
                 </div>
                     <Link to={"/"}>  <img src="https://s.zillowstatic.com/pfs/static/z-logo-default.svg" /></Link> 
                 <div className="">
-                    <Link to={"/customerapplications"}><Button variant="text">Manage Application</Button> </Link>
+                    <Link to={"/customerapplications"}><Button variant="text">Sent Applications</Button> </Link>
                     <Link to={"/Favourites"}><Button variant="text">Favorite</Button></Link>
                     <AccountMenu />
                 </div>
