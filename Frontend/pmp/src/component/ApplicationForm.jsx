@@ -30,7 +30,7 @@ const ApplicationForm =(props)=>{
     const handleSubmit = (event) => {
         const token=JSON.parse(localStorage.getItem("tokens"))
    
-        if(token.jwtToken){
+        if(token!==null){
             event.preventDefault();
             const user=JSON.parse(localStorage.getItem("loggedUser"))
             axios({
