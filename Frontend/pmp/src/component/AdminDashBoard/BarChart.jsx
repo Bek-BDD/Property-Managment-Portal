@@ -53,8 +53,8 @@ export default function BarChart(props){
 
     // console.log(stateData);
     console.log(props.data);
-    for (let index = 0; index < props.data.length; index++) {
-        const element = props.data[index].address.state;
+    for (let index = 0; index < props?.data?.length; index++) {
+        const element = props?.data[index]?.address.state;
 
         if (count2[element]) {
             count2[element] += 1;

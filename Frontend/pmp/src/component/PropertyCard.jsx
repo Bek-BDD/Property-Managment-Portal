@@ -36,9 +36,14 @@ export default function PropertyCard() {
     setOpen(false);
   };
 
+  // debugger;
+  var user = JSON.parse(localStorage.getItem("loggedUser"));
+
+  console.log(user.id);
+
   const getProperty = () => {
     axios
-      .get("http://localhost:8080/properties/")
+      .get(`http://localhost:8080/properties/owner/${user.id}`)
       .then((res) => setPropertyData(res.data));
   };
   const handleClickOpen = (id) => {

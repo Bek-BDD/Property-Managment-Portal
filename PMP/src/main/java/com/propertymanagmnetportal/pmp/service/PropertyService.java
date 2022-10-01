@@ -14,6 +14,8 @@ public interface PropertyService {
 
     Property getPropertyById(int id);
 
+    List<Property> getPropertiesByOwnerId(long id);
+
     Property saveProperty(Property property);
 
     Property createProperty(Property property, List<MultipartFile> images, String userId);
@@ -22,7 +24,7 @@ public interface PropertyService {
 
     List<Application> getPropertiesRented(int number);
 
-    List<Property> getPropertiesByOwnerId();
+
 
     Property UpdateProperty(Property property, List<MultipartFile> images);
 

@@ -113,7 +113,6 @@ public class UaaController {
     public void deleteOwnerById(@PathVariable int id){
         uaaService.deleteOwnerById(id);
     }
-
     @PostMapping("/uaa/resetpassword")
     public String resetPassword(HttpServletRequest request, @RequestBody LoginRequest email){
         System.out.println(email.getEmail());

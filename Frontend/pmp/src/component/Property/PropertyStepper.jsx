@@ -19,7 +19,7 @@ import { instance } from "../../index";
 const theme = createTheme();
 
 export default function PropertyStepper(props) {
-  debugger;
+
   const [IsSuccess, setIsSuccess] = useState(false);
   const [IsError, setIsError] = useState(false);
   const [ErrorMessage, setErrorMessage] = useState("");
@@ -71,7 +71,7 @@ export default function PropertyStepper(props) {
     instance
       .post(url, formData, config)
       .then((response) => {
-        debugger;
+
         setIsSuccess(true);
         console.log(response);
         setTimeout(function(){
@@ -79,7 +79,7 @@ export default function PropertyStepper(props) {
        }, 3000);
       })
       .catch((error) => {
-        debugger;
+
         console.log(error);
         setIsError(true);
       });

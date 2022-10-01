@@ -78,11 +78,16 @@ public class PropertyController {
         return propertyService.getPropertiesRented(number);
     }
 
-    @GetMapping("/owner")
-    public List<Property> getPropertiesByOwner() {
-        return propertyService.getPropertiesByOwnerId();
-    }
+//    @GetMapping("/owner")
+//    public List<Property> getPropertiesByOwner() {
+//        return propertyService.getPropertiesByOwnerId();
+//    }
+//
 
+    @GetMapping("/owner/{id}")
+    public List<Property> getPropertiesByOwner(@PathVariable long id) {
+        return propertyService.getPropertiesByOwnerId(id);
+    }
     @PutMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})
     public Property UpdateProperty(
             @RequestPart("id") String id
