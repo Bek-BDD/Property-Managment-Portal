@@ -38,7 +38,7 @@ export default function PropertyCard() {
 
   const getProperty = () => {
     axios
-      .get("http://localhost:8080/properties/owner")
+      .get("http://localhost:8080/properties/")
       .then((res) => setPropertyData(res.data));
   };
   const handleClickOpen = (id) => {
