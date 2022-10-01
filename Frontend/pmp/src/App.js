@@ -65,6 +65,7 @@ useEffect(()=>{
           path="/customerapplications"
           element={<CustomerApplications />}
         />
+
         <Route path="/CustomizedDialogs" element={<CustomizedDialogs />} />
       </Routes>
       <Footer />

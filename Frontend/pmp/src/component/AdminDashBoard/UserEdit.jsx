@@ -39,7 +39,7 @@ export default function (props) {
             .then((response) => {
                 console.log(response.data)
                 window.alert('updated')
-
+                window.location.reload(false);
                 setUserState(updatedUser);
 
             })
@@ -129,7 +129,7 @@ export default function (props) {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                defaultValue={userState.address}
+                defaultValue={userState.address.street}
                 id="address"
                 name="address"
                 label="Address line "
@@ -138,7 +138,7 @@ export default function (props) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                defaultValue={userState.city}
+                defaultValue={userState.address.city}
                 id="city"
                 name="city"
                 label="City"
@@ -147,7 +147,7 @@ export default function (props) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                defaultValue={userState.state}
+                defaultValue={userState.address.state}
                 id="state"
                 name="state"
                 label="State/Province/Region"
@@ -156,7 +156,7 @@ export default function (props) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                defaultValue={userState.zipcode}
+                defaultValue={userState.address.zip}
                 id="zip"
                 name="zip"
                 label="Zip / Postal code"
