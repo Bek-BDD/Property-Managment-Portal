@@ -29,6 +29,7 @@ import ProflieChangePassword from "./component/ProflieChangePassword";
 import ApplicationList from "./component/ApplicationList";
 import FavouriteList from "./component/FavouriteList";
 import AdminCharts from './component/AdminDashBoard/AdminCharts'
+
 function App() {
   return (
     <BrowserRouter>
@@ -60,7 +61,7 @@ function App() {
           element={<CustomerApplications />}
         />
 
-        <Route path="/CustomizedDialogs" element={<CustomizedDialogs />} />
+        {/* <Route path="/CustomizedDialogs" element={<CustomizedDialogs />} /> */}
       </Routes>
       <Footer />
     </BrowserRouter>

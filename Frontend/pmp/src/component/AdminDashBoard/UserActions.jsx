@@ -34,7 +34,7 @@ export default function (props) {
                     onClick={ ()=> {
 
 
-                        instance.get("/users/deactivate/"+props.theRow.id).then(()=>{
+                        instance().get("/users/deactivate/"+props.theRow.id).then(()=>{
 
                             window.alert("deactivate")
 
@@ -82,7 +82,7 @@ export default function (props) {
                     onClick={ ()=> {
 
 
-                        instance.get("/users/activate/"+props.theRow.id)
+                        instance().get("/users/activate/"+props.theRow.id)
                             .then((r)=>{
 
                                 window.alert('activate')

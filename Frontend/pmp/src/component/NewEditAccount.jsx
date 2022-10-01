@@ -21,7 +21,7 @@ export default function () {
   const lastCharacters = url.slice(-4);
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("loggedUser"));
-    instance
+    instance()
       .get("/users/" + user.email)
       .then((response) => {
         setUserState(response.data);
@@ -47,7 +47,7 @@ export default function () {
       },
     };
 
-    instance
+    instance()
       .put("/users/" + userState.id, updatedUser)
       .then((response) => {
         console.log(response.data);

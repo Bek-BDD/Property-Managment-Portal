@@ -47,7 +47,7 @@ export default function PropertyCard() {
       .then((res) => setPropertyData(res.data));
   };
   const handleClickOpen = (id) => {
-    instance
+    instance()
       .get(`/properties/${id}`)
       .then((response) => {
         setProperty(response.data);
@@ -70,7 +70,7 @@ export default function PropertyCard() {
   };
 
   const DeleteProperty = async (id, e) => {
-    const result = await instance.delete("/properties/" + `${id}`);
+    const result = await instance().delete("/properties/" + `${id}`);
     window.location.reload(false);
   };
 

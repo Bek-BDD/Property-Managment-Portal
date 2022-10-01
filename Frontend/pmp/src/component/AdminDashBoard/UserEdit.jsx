@@ -34,7 +34,7 @@ export default function (props) {
             },
         };
 
-        instance
+        instance()
             .put("/users/" + userState.id, updatedUser)
             .then((response) => {
                 console.log(response.data)

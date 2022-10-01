@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 const PropertyInformation = forwardRef((props, ref) => { 
   const dispatch = useDispatch()
 
-  debugger
+
   const counter = useSelector((state) => state);
   let prevInfo = counter.propertyInformation.data;
   const [propertyData, setPropertyData] = useState({

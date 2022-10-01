@@ -13,15 +13,15 @@ spring:
           auth: true
           starttls:
             enable: true
-    protocol:
+    protocol: smtp
     test-connection: false
   datasource:
-    password:
-    url: jdbc:postgresql://localhost:5432/pmpDB
+    password: Incorrect@7
+    url: jdbc:postgresql://localhost:9090/pmpDB
     username: postgres
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
 
     properties:
       hibernate:

@@ -82,7 +82,7 @@ export default function DataTable() {
 
     const getUserData = async () => {
 
-        const data = await instance.get('/users')
+        const data = await instance().get('/users')
         setUserData(data.data);
 
     }
@@ -99,7 +99,7 @@ export default function DataTable() {
 
                 if (conformation) {
 
-                    instance.delete('/users/' + row)
+                    instance().delete('/users/' + row)
                         .then(r=> window.location.reload())
                         .catch(e=> console.log(e))
 

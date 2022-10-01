@@ -99,7 +99,7 @@ const PropertyDetails=(props)=>{
       else {
         if (!liked) {
           // send to database liked
-          instance
+          instance()
             .post('/favorites?user_id='+userId+'&'+'property_id='+propertyId)
             .then((response) => {
               setLiked(true);
@@ -111,7 +111,7 @@ const PropertyDetails=(props)=>{
         } else {
           console.log("remove");
           // remove from datatbase
-          instance
+          instance()
             .delete('/favorites?user_id='+userId+'&&'+'property_id='+propertyId)
             .then((response) => {
               setLiked(false);

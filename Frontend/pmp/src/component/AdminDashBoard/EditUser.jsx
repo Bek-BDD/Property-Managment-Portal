@@ -34,7 +34,7 @@ const BootstrapDialogTitle = (props) => {
 
     const getUserData=async ()=>{
 
-        const data=await instance.get('/users')
+        const data=await instance().get('/users')
         setUserData(data.data);
 
     }
