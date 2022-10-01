@@ -81,7 +81,7 @@ export default function () {
 
     if (validateEmail(data.get('email'))) {
       setValidEmail(true);
-      instance
+      instance()
         .post("/uaa/signupimg",data,config)
         .then((response) => {
           navigator('/login') 

@@ -49,11 +49,23 @@ export default function () {
 </Alert>)
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
 
     // fetch api check if old password matches
     // true store new password
+    console.log("data");
+
+    // instance().post('/users/changepassword',{
+    //   "id" : JSON.parse(localStorage.getItem('userlogged')).id,
+    //   "newPassword" : data.get('newPassword'),
+    //   "oldPassword" :  data.get('oldPassword')
+    // })
+    // .then(r=>{
+    //   setSuccessState(true)
+    // }).catch(e=>{
+    //   setSuccessState(false)
+    //   console.log(e)
+    // })
+
   };
 
   return (
@@ -75,8 +87,6 @@ export default function () {
             Change password
           </Typography>
           <Box
-            component="form"
-            onSubmit={handleSubmit}
             noValidate
             sx={{ mt: 1 }}
           >
@@ -91,11 +101,13 @@ export default function () {
               type="password"
               id="newPassword"
             />
+      
             {successState ? alert : null }
            
 
             <Button
               type="submit"
+              onClick={handleSubmit}
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}

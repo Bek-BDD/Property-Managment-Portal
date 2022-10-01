@@ -25,7 +25,7 @@ const [ verify,setVerify]= useState(false);
     useEffect(()=>{
         const queryParams = new URLSearchParams(window.location.search)
         const token = queryParams.get("token")
-        instance().get(`reset_pwd?token=${token}`)
+        instance().get(`/uaa/reset_pwd?token=${token}`)
              .then((response)=>{
                 setVerify(true);
              })
@@ -48,7 +48,7 @@ const [ verify,setVerify]= useState(false);
       instance().post("/uaa/changePassword",newPass)
             .then((response)=>{
                 localStorage.setItem("loggedUser",JSON.stringify(response.data))
-                 navigate("/customer")
+                 navigate("/")
              });
   }
 
@@ -80,17 +80,19 @@ const [ verify,setVerify]= useState(false);
               fullWidth
               id="password"
               label="new Password"
+              type="password"
               name="password"
               //autoComplete="email"
               autoFocus
             />
             <TextField
               margin="normal"
+    
               required
               fullWidth
               name="confirmpassword"
               label="Confirm Password"
-              type="confirmpassword"
+              type="password"
               id="confirmpassword"
               autoComplete="current-password"
             />

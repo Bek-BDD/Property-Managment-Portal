@@ -39,14 +39,14 @@ function ApplicationDetail(props) {
           <TableCell align="right">{props.row.property.address.city}</TableCell>
           <TableCell align="right">{props.row.property.numberOfRoom}</TableCell>
           <TableCell align="right">{props.row.property.type}</TableCell>
-          <TableCell align="right">{props.row.property.status}</TableCell>
+          <TableCell align="right">{'Pending'}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box sx={{ margin: 1 }}>
                 <Typography variant="h6" gutterBottom component="div">
-                  History
+                  Property Detail
                 </Typography>
                 <Table size="small" aria-label="purchases">
                   <TableHead>
@@ -62,7 +62,7 @@ function ApplicationDetail(props) {
                         <TableCell >
                         <img
                                    style={{width: '120px', height: '30%'}}
-                                   src='https://engineering.fb.com/wp-content/uploads/2016/04/yearinreview.jpg'
+                                   src={props.row.property.imageUrls[0].url}
                             />
                         </TableCell>
                         <TableCell component="th" scope="row">

@@ -16,13 +16,11 @@ export default function(){
             <img src="https://s.zillowstatic.com/pfs/static/z-logo-default.svg" type="image/svg+xml" alt="Zillow logo"  height="25" width="120"></img>
             </div>
             </Link>
+
             <div>
-            {token && role == 'customer' ?  <Link to={"/customerapplications"}><Button variant="text">View Applications</Button></Link>:null}
+            {token && role == 'customer' ?  <Link to={"/customerdashboard"}><Button variant="text">View Applications</Button></Link>:null}
             {token && role == 'customer' ?  <Link to={"/favourites"}><Button variant="text">Favorite</Button></Link>:null}
-            {token && role == 'owner' ?  <Link to={ JSON.parse(localStorage.getItem('loggedUser')).role[0].role != 'owner' ? 
-                    "/customerapplications" : "/ownerapplications"
-                    }>
-            <Button variant="text">Manage Application</Button> </Link>:null}
+            {token && role == 'owner' ?  <Link to={"/ownerapplications"}><Button variant="text">Manage Application</Button> </Link>:null}
             {token && role == 'owner' ? <Link to={"/properties"}> <Button variant="text">Manage property</Button> </Link>:null}
             {/* {token && role == 'owner' ? <Link to={"/property-detail"}>  <Button variant="text">Property Details</Button> </Link>:null} */}
             {token && role == 'owner' ?  <Link to={"/create-property"} >  <Button variant="text">Create Property</Button> </Link>:null}

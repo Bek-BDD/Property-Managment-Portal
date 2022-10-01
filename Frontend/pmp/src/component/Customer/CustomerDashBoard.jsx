@@ -39,7 +39,7 @@ const images = [
 ];
   return (
     <div >
-        {isLoggedIn &&
+       
         <div style={{display : 'flex', justifyContent:'space-between'}}>
           <div style={{width:'20%' , marginTop : '40px' , borderRight : '2px black solid'}}>
           <List>
@@ -59,53 +59,11 @@ const images = [
         ))}
       </List>
           </div>
-          <div style={{width : '50%'}}>   
-            < div style={{marginLeft : '20%'}}>       
-             <MuiImageSlider images={images} />
-              <div style = {{display : 'grid', gridTemplateColumns : '1fr 1fr 1fr'}}>
-                <div style={{width : '350px'}}>
-                <p>Town Houses</p>
-                  <img src='https://www.rocketmortgage.com/resources-cmsassets/RocketMortgage.com/Article_Images/Large_Images/TypesOfHomes/types-of-homes-hero.jpg' style={{width : '250px'}} />
-                  
-                </div>
-                <div style={{width : '350px'}}>
-                 <p> Apartments</p>
-                  <img src='https://images.squarespace-cdn.com/content/v1/55467dc6e4b0ebaf8fab24a0/38d5834c-d9b0-40fe-b46b-85a1afa96ebb/Rendering.jpg' style={{width : '250px'}} />
-                </div>
-              </div>
-            </div>
+          <div style={{width : '76%'}}>   
+          <CustomerApplications />
           </div>
-          <div style={{width : '20%' ,  marginTop : '180px'}}>
-          <List>
-          <>
-          <ListItem  disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <PhoneIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Call Center'} />
-            </ListItemButton>
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          24 hr available call center for any questions
-          </>
-          <>
-          <ListItem  disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <MailIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Call Center'} />
-            </ListItemButton>
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          24 hr available call center for any questions
-          </>
       
-      </List>
-          </div>
-        </div>
-        }
+    </div>
     </div>
   )
 }
