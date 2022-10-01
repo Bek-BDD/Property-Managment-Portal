@@ -23,7 +23,7 @@ insert into users(deleted,email,firstname,imageurl,lastname,password,resetpasswo
 
 
 insert into users(deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
-    (false,'bereket@gmail.com','bereket','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975645768_jpeg','daniel','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true,3);
+    (false,'berek.dnl@gmail.com','bereket','https://propertymanagmentportal.s3.us-east-2.amazonaws.com/1663975645768_jpeg','daniel','$2a$10$SRDI40/FTaDnEZlkOZisuO2om9Ner.2IRxIquKGJqDpNFhoi6Ub26','',true,3);
 
 
 insert into users(deleted,email,firstname,imageurl,lastname,password,resetpasswordtoken,active, address_id) values
@@ -99,3 +99,6 @@ insert into users_role(user_id,role_id) values (4,2);
 insert into users_role(user_id,role_id) values (5,2);
 insert into users_role(user_id,role_id) values (6,1);
 
+insert into application(date,user_id,property_id) values ('2021-10-10',4,3);
+insert into application(date,user_id,property_id) values ('2021-10-10',4,9);
+insert into application(date,user_id,property_id) values ('2021-10-10',5,9);

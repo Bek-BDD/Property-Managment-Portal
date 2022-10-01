@@ -87,20 +87,22 @@ public class PropertyServiceImpl implements PropertyService {
                 .collect(Collectors.toList());
     }
 
+
+
     @Override
-    public List<Property> getPropertiesByOwnerId() {
-        Integer id ;
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public List<Property> getPropertiesByOwnerId(long id) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (!(authentication instanceof AnonymousAuthenticationToken)) {
-            String currentUserName = authentication.getName();
-            User user = userBaseRepository.findByEmail(currentUserName);
-            id = user.getId();
-        } else throw new UserNotFoundException("user id not found!");
+//        Integer id = 2;
+//        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+//            String currentUserName = authentication.getName();
+//            User user = userBaseRepository.findByEmail(currentUserName);
+//            id = user.getId();
+//        } else throw new UserNotFoundException("user id not found!");
 
-        Integer finalId = id;
+//        Integer finalId = id;
         List<Property> listofProperty = propertyRepo.findAll().stream()
-                .filter(a -> a.getUser().getId().equals(finalId))
+                .filter(a -> a.getUser().getId()==id)
                 .collect(Collectors.toList());
 
         return listofProperty;
