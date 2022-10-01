@@ -152,14 +152,29 @@ public class UaaController {
 
     @PostMapping("/uaa/changePassword")
     @CrossOrigin
-    public User changePassword(@RequestBody LoginRequest request){
-        return uaaService.changePassword(request.getEmail(),request.getPassword());
+    public User changePassword(@RequestBody LoginRequest request) {
+        return uaaService.changePassword(request.getEmail(), request.getPassword());
     }
 
     @PostMapping("/uaa/logout")
-    public String logout(HttpServletRequest request){
+    public String logout(HttpServletRequest request) {
         uaaService.logout(request.getHeader("Authorization"));
         return null;
+    }
+
+    @GetMapping("/users/activate/{id}")
+    public void userActivate(@PathVariable int id) {
+        userBaseRepository.userActivate(id);
+
+
+    }
+
+    @GetMapping("/users/deactivate/{id}")
+    public void userDeactivate(@PathVariable int id) {
+
+        userBaseRepository.userDeactivate(id);
+
+
     }
 }
 

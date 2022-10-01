@@ -258,10 +258,10 @@ public class UaaServiceImpl implements UaaService {
     public void deleteOwnerById(int id) {
         User u = userBaseRepository.findAll()
                 .stream()
-                .filter(s->s.getId()==id)
-                .filter(user->user.getRole()
-                        .contains( new Role("owner")))
-                .filter(us->us.isDeleted()==true)
+                .filter(s -> s.getId() == id)
+                .filter(user -> user.getRole()
+                        .contains(new Role("owner")))
+                .filter(us -> us.isDeleted() == true)
                 .collect(Collectors.toList()).stream().findAny().get();
         userBaseRepository.updateDeleteStatus(id);
 //        userBaseRepository.delete(u);

@@ -8,7 +8,7 @@ import {
     Typography,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import {orange, yellow} from "@mui/material/colors";
 import {instance} from "../../index";
 
@@ -16,26 +16,41 @@ export default function (props) {
 
 
 
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        const data = new FormData(event.currentTarget);
+
+        const updatedUser = {
+            ...userState,
+            firstname: data.get("firstname"),
+            lastname: data.get("lastname"),
+            email: data.get("email"),
+            address: {
+                state: data.get("state"),
+                city: data.get("city"),
+                zip: data.get("zip"),
+                street: data.get("address"),
+            },
+        };
+
+        instance
+            .put("/users/" + userState.id, updatedUser)
+            .then((response) => {
+                console.log(response.data)
+                window.alert('updated')
+                window.location.reload(false);
+                setUserState(updatedUser);
+
+            })
+            .catch((err) => console.log(err));
+    }
 
 
+    const user = props.theRow.row
 
-  const [userState, setUserState] = useState({
 
-
-    firstname:'',
-    lastname: "Shiferaw",
-    email: "zedshif123@gmail.com",
-    address: "100N 4th St",
-    city:"Fairfield",
-    zipcode: "52557",
-    state: "Iowa",
-  });
-
-  function handleSubmit(event){
-    event.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    // console.log(data.get('city'));
-  }
+  const [userState, setUserState] = useState({...user});
 
   return (
     <div>
@@ -106,20 +121,15 @@ export default function (props) {
                 autoComplete="email"
               />
             </Grid>
+>
 
-            <Grid item xs={12}>
-              <Button variant="outlined" component="label" fullWidth>
-                Upload Image
-                <input type="file" hidden name="images" />
-              </Button>
-            </Grid>
           </Grid>
         </Grid>
         <Grid item xs={5}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                defaultValue={userState.address}
+                defaultValue={userState.address.street}
                 id="address"
                 name="address"
                 label="Address line "
@@ -128,7 +138,7 @@ export default function (props) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                defaultValue={userState.city}
+                defaultValue={userState.address.city}
                 id="city"
                 name="city"
                 label="City"
@@ -137,7 +147,7 @@ export default function (props) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                defaultValue={userState.state}
+                defaultValue={userState.address.state}
                 id="state"
                 name="state"
                 label="State/Province/Region"
@@ -146,7 +156,7 @@ export default function (props) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                defaultValue={userState.zipcode}
+                defaultValue={userState.address.zip}
                 id="zip"
                 name="zip"
                 label="Zip / Postal code"
@@ -163,11 +173,7 @@ export default function (props) {
           alignItems: "center",
         }}
       >
-        <Button type="submit" onClick={()=>{
-
-
-
-        }} variant="contained" sx={{ mt: 3, mb: 2 }}>
+        <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
          Save
         </Button>
         </Box>

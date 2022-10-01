@@ -4,15 +4,11 @@ import com.propertymanagmnetportal.pmp.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import java.util.List;
-
 @Repository
-public interface UserBaseRepository extends JpaRepository<User,Integer> {
+public interface UserBaseRepository extends JpaRepository<User, Integer> {
     User findByEmail(String username);
 
     User findByResetpasswordtoken(String resetPaswordToken);
@@ -33,7 +29,7 @@ public interface UserBaseRepository extends JpaRepository<User,Integer> {
     void userActivate(int id);
 
     @Transactional
-    @Query("update User u set u.active = true where u.id=:id")
+    @Query("update User u set u.active = false where u.id=:id")
     @Modifying
     void userDeactivate(int id);
 

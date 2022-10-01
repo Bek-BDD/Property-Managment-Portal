@@ -6,20 +6,11 @@ import {CircularProgress} from "@mui/joy";
 import axios from 'axios';
 import {element} from "prop-types";
 import {instance} from "../../index";
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 export default function (props) {
 
 
-    let [flag,setflag]=useState(false);
-
-
-
-    useEffect(() => {
-
-
-
-    },[flag]);
+    let [flag,setflag]=useState(props.theRow.row.active);
 
 
 
@@ -38,14 +29,26 @@ export default function (props) {
                         width: 40,
                         height: 40,
                         bgcolor: green[500],
-                       '&:hover': { bgcolor: green[700] }? {bgcolor: [red]}:{bgcolor: green[700]},
+                        '&:hover': { bgcolor: green[700] }? {bgcolor: [red]}:{bgcolor: green[700]},
                     }}
                     onClick={ ()=> {
-                         window.alert('deacivated')
-                        instance.delete("/users/activate/"+props.theRow.id)
+
+
+                        instance.get("/users/deactivate/"+props.theRow.id).then(()=>{
+
+                            window.alert("deactivate")
+
+                        }).catch((e)=>{
+
+                            console.log(e)
+
+                        })
+
+
+
                         setflag(flag === false)
                     }}
-                    disabled={flag}
+                    disabled={!flag}
                 >
                     <Check />
                 </Fab>
@@ -61,9 +64,8 @@ export default function (props) {
                     onClick={ ()=> {
                         setflag(flag === false)
 
-
                     }}
-                    disabled={flag}
+                    disabled={!flag}
                 >
                     <Check />
                 </Fab>
@@ -80,10 +82,17 @@ export default function (props) {
                     onClick={ ()=> {
 
 
-                        instance.delete("/users/deactivate/"+props.theRow.id)
-                        window.alert("activated")
-                        setflag(flag === false)}
-                }
+                        instance.get("/users/activate/"+props.theRow.id)
+                            .then((r)=>{
+
+                                window.alert('activate')
+                            } ).catch((e)=>{
+                            console.log(e)
+                        })
+
+                        setflag(flag === false)
+
+                    }}
                 />
             )}
         </Box>

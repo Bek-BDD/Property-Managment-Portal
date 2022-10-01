@@ -12,10 +12,9 @@ import UserEdit from "./UserEdit";
 import {Fab} from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import {yellow} from "@mui/material/colors";
-import axios from "axios";
 import {instance} from "../../index";
 import {useEffect, useState} from "react";
-import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
+;
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
     '& .MuiDialogContent-root': {
@@ -41,6 +40,8 @@ const BootstrapDialogTitle = (props) => {
     }
 
     useEffect(()=>{
+
+        // console.log(props)
         getUserData().then(r => console.log(' axios request getUserData() successful'))
             .catch(e=>console.log("Exception thrown by axios request getUserData() "));
 
@@ -90,9 +91,16 @@ export default function (props) {
     return (
         <div>
 
-            
-                <BorderColorRoundedIcon style={{coursor:"pointer"}}  onClick={handleClickOpen}/>
-           
+            <Fab
+                sx={{
+                    width: 40,
+                    height: 40,
+                    bgcolor: yellow[700],
+                    '&:hover': {bgcolor: yellow[900]},
+                }}
+                color="secondary" aria-label="edit">
+                <EditIcon onClick={handleClickOpen}/>
+            </Fab>
             <BootstrapDialog
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
@@ -102,6 +110,7 @@ export default function (props) {
 
                 </BootstrapDialogTitle>
                 <DialogContent dividers>
+
 
                     <UserEdit {...props}/>
 
